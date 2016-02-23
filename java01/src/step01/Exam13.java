@@ -23,6 +23,11 @@ public class Exam13 {
     System.out.println(Integer.toHexString(a)); // 41
     System.out.println(Integer.toHexString(b)); // 61
     System.out.println(Integer.toHexString(c)); // ac00
+
+    // 특수 명령 \ u
+    System.out.println('\uac00');
+    System.out.println('\uac01');
+
   }
 }
 
@@ -76,7 +81,9 @@ ABCabc각가간똘똠똥 ==> 41 42 43 61 62 63 EABO80 EAB081 EAB084 ...
 -       10만자 이상되는 중국 한자를 모두 표현할 수 있다.
 - 단점: 한글의 경우 3바이트로 저장되기 때문에 용량이 50% 증가하는 문제가 있다.
 
-
+* \ u를 이용한 문자 표현
+- 문법: '\ u유니코드'
+  예) '\uac00', '\u0041'
 
 
 */
