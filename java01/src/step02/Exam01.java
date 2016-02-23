@@ -1,4 +1,6 @@
 /* 주제: 값을 저장할 메모리 준비하기 - 변수 선언 */
+package step02;
+
 public class Exam01 {
   public static void main(String[] args) {
     // 정수 값을 저장할 메모리를 준비하는 명령어
