@@ -3,45 +3,36 @@ package step04;
 
 public class Exam07 {
   public static void main(String[] args) {
-    // 비트 연산자 사용 전
-    // 1) 낱개 변수 사용
-    boolean c = true;
-    boolean cpp = false;
-    boolean python = true;
-    boolean php = false;
-    boolean javascript = false;
-    boolean java = true;
-    boolean cs = false;
-    boolean go = false;
-    boolean scala = false;
+    // 왼쪽으로 비트를 이동시키기
+    int a = 0b0000_1100; // 0x0c = 12
+    System.out.println(a << 1); // 0001_100x => 빈 자리는 0으로 채워진다.
+    System.out.println(a << 2); // 0011_00xx => 0011_0000
+    System.out.println(a << 3); // 0110_0xxx => 0110_0000
 
-    // 값 조사
-    if (java == true)
-      System.out.println("자바사용가능!");
+    // 왼쪽으로 x 비트만큼 이동 ==> 값 * 2^x 배 한 것과 같다.
+    // 곱하기를 하는 것 보다 실행 속도가 더 빠르다.
 
-    // 2) 배열 사용
-    boolean[] languages  = {true, false, true, false,
-                           false, true, false, false, false};
-    if (languages[5] == true)
-      System.out.println("자바사용가능!");
+    // 오른쪽으로 비트를 이동시키기
+    int b = 0b1100_0000; // 0xc0 == 128 + 64 = 192
+    System.out.println(b);
+    System.out.println(b >> 1); // x110_0000|0  => 넘어간 비트는 버린다.
+    System.out.println(b >> 2); // xx11_0000|00 => 빈자리는 부호 비트로 채운다.
+    System.out.println(b >> 3); // xxx1_1000|000 => 즉 +는 0, -는 1
 
-    // 비트 연산자 사용 후
-    int mylanguage = 0b1_0100_1000;
+    // x 비트만큼 오른쪽으로 이동 => 값 / 2^x
+    // 나눗셈을 수행한 것보다 더 계산 속도가 빠르다.
 
-    // 각 언어의 값이 무엇인지 알아낼 때 사용할 마스크 선언
-    int C_LANG = 0b1_0000_0000; // 8번 비트의 값만 추출하는 마스크로 사용
-    int CPP_LANG = 0b0_1000_0000; // 7번 비트의 값만 추출하는 마스크로 사용
-    int PY_LANG = 0b0_0100_0000;  // 6번 비트의 값만 추출하는 마스크로 사용
-    int J_LANG = 0b0_0000_1000;   // 3번 비트의 값만 추출하는 마스크로 사용
+    // 음수의 이동
+    b = -3;
+    System.out.printf("%s ===> %d\n", Integer.toBinaryString(b), b);
+    System.out.printf("%s ===> %d\n", Integer.toBinaryString(b >> 1), b >> 1);
 
-    // 비교를 수행한다. => 비교할 값에 마스크를 씌운다.
-    // 그래서 통과된 값이 마스크 값과 일치하는지 검사한다.
-    if ((mylanguage & J_LANG) == J_LANG)
-      System.out.println("자바사용가능!");
-    if ((mylanguage & C_LANG) == C_LANG)
-      System.out.println("C사용가능!");
-    if ((mylanguage & CPP_LANG) == CPP_LANG)
-      System.out.println("C++사용가능!");
+    // 오른쪽으로 이동시키는 특별한 연산 >>>
+    // => 빈자리를 무조건 0으로 채운다.
+    // => 양수를 오른쪽으로 이동하는 경우 >> 와 결과가 같다.
+    // => 그러나 음수의 경우 양수로 바뀐다.
+    System.out.printf("%s ===> %d\n", Integer.toBinaryString(b), b);
+    System.out.printf("%s ===> %d\n", Integer.toBinaryString(b >>> 1), b >>> 1);
 
   }
 }
