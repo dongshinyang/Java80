@@ -9,9 +9,4 @@ public class Exam16 {
       }
     }
   }
-
-
-
-
-
 }
