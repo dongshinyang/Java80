@@ -4,12 +4,12 @@ package step01;
 public class Exam07 {
   public static void main(String[] args) {
     System.out.println("문자열");  // object
-    System.out.println(20);       // 4byte
-    System.out.println(20L);      // 8byte (이 표현을 많이 사용)
+    System.out.println(20);       // 4byte (정수는 이 표현을 많이 사용)
+    System.out.println(20L);      // 8byte
     System.out.println(20l);      // 8byte
     System.out.println(3.14159F); // 4byte
-    System.out.println(3.14159f); // 4byte (이 표현을 많이 사용)
-    System.out.println(3.14159);  // 8byte
+    System.out.println(3.14159f); // 4byte
+    System.out.println(3.14159);  // 8byte (부동소수점은 이 표현을 많이 사용)
     System.out.println(true);     // 1byte
     System.out.println(false);    // 1byte
     System.out.println('A');      // 2byte
