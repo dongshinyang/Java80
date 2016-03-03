@@ -9,9 +9,9 @@ package quiz;
 public class Test08 {
   static int maxFraction(int[] numerators, int[] denominators) {
     int maxFractionIndex = 0;
-    for (int i = 1; i < numerators.length; i++) {
+    for (int i = 1; i < numerators.length; i++) {=
       if (numerators[i] * denominators[maxFractionIndex] >
-        denominators[maxFractionIndex] * numerators[i]) {
+        denominators[i] * numerators[maxFractionIndex]) {
         maxFractionIndex = i;
       }
     }
