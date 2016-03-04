@@ -22,7 +22,7 @@ public class Exam04 {
     }
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) 
     Score[] scores = new Score[] {
       new Score("홍길동", 100, 100, 100),
       new Score("임꺽정", 90, 90, 90),
