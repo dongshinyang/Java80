@@ -21,5 +21,6 @@ public class Exam10 {
     System.out.printf("%d, %s, %s, %d, %d\n",
       c3.getNo(), c3.getModel(), c3.getMaker(), c3.getCc(), c3.getCapacity());
 
+    System.out.println(c3.toString());
   }
 }
