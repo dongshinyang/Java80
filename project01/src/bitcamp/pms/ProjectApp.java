@@ -14,6 +14,17 @@
 1, 홍길동, hong@test.com, 1111, 1111-2222
 2, 홍길동, hong@test.com, 1111, 1111-2222
 3, 홍길동, hong@test.com, 1111, 1111-2222
+명령> delete
+삭제할 회원의 번호는? 2
+정말로 삭제하시겠습니까?(y/n) y
+삭제하였습니다.
+정말로 삭제하시겠습니까?(y/n) n
+삭제를 취소하였습니다.
+명령> list
+0, 홍길동, hong@test.com, 1111, 1111-2222
+1, 홍길동, hong@test.com, 1111, 1111-2222
+2, 
+3, 홍길동, hong@test.com, 1111, 1111-2222
 명령> quit
 안녕히 가세요!
 명령> xxx
@@ -30,6 +41,10 @@ import bitcamp.pms.domain.Member;
 public class ProjectApp {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
+
+
+
+    /*
     Member[] members = new Member[1000];
     int count = 0;
 
@@ -62,6 +77,7 @@ public class ProjectApp {
       if (!confirm("계속하시겠습니까?", false)) {
         break;
       }
+
     }
 
     System.out.println("--------------------------------");
@@ -69,6 +85,7 @@ public class ProjectApp {
     for (int i = 0; i < count; i++) {
       System.out.println(members[i]);
     }
+    */
   }
 
   static boolean confirm(String message, boolean strictMode) {
