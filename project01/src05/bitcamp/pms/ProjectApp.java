@@ -15,7 +15,6 @@ public class ProjectApp {
     Member[] members = new Member[5];
 
     Member member = null;
-    String input = null;
     for (int i = 0; i < members.length; i++) {
       member = new Member();
 
@@ -31,21 +30,7 @@ public class ProjectApp {
       System.out.print("전화? ");
       member.setTel(keyScan.nextLine());
 
-      do {
-        System.out.print("저장하시겠습니까?(y/n) ");
-        input = keyScan.nextLine().toLowerCase();
-        if (input.equals("y")) {
-          members[i] = member;
-          System.out.println("저장하였습니다.");
-          break;
-        } else if (input.equals("n")) {
-          i--;
-          System.out.println("저장을 취소하였습니다.");
-          break;
-        } else {
-          System.out.println("잘못된 명령어입니다.");
-        }
-      } while(true);
+      members[i] = member;
     }
 
     System.out.println("--------------------------------");
