@@ -84,6 +84,7 @@ public class ProjectApp {
         System.out.print("전화? ");
         member.setTel(keyScan.nextLine());
 
+
         if (confirm("저장하시겠습니까?", true)) {
           members[count++] = member;
           System.out.println("저장하였습니다.");
@@ -91,44 +92,18 @@ public class ProjectApp {
           System.out.println("저장을 취소하였습니다.");
         }
       } else if (input.equals("update")) {
-        System.out.print("변경할 회원 번호는? ");
-        no = Integer.parseInt(keyScan.nextLine());
-
-        member = new Member();
-
-        System.out.printf("이름(%s)? ", members[no].getName());
-        member.setName(keyScan.nextLine());
-
-        System.out.printf("이메일(%s)? ", members[no].getEmail());
-        member.setEmail(keyScan.nextLine());
-
-        System.out.printf("암호(%s)? ", members[no].getPassword());
-        member.setPassword(keyScan.nextLine());
-
-        System.out.printf("전화(%s)? ", members[no].getTel());
-        member.setTel(keyScan.nextLine());
-
-        if (confirm("변경하시겠습니까?", true)) {
-          members[no] = member;
-          System.out.println("변경하였습니다.");
-        } else {
-          System.out.println("변경을 취소하였습니다.");
-        }
+        System.out.println(input);
       } else if (input.equals("list")) {
         for (int i = 0; i < count; i++) {
           System.out.printf("%d, %s\n", i,
-            (members[i] != null)?members[i].toString():"");
+            (members[i] != null) ? members[i].toString() : "");
         }
 
       } else if (input.equals("delete")) {
-        System.out.print("삭제할 회원 번호는? ");
+        System.out.print("삭제할 회원의 번호는? ");
         no = Integer.parseInt(keyScan.nextLine());
         if (confirm("정말 삭제하시겠습니까?", true)) {
           members[no] = null;
-          for (int i = no + 1; i < count; i++) {
-            members[i-1] = members[i];
-          }
-          count--;
           System.out.println("삭제하였습니다.");
         } else {
           System.out.println("삭제를 취소하였습니다.");
@@ -137,6 +112,7 @@ public class ProjectApp {
       } else {
         System.out.println("올바르지 않은 명령어입니다.");
       }
+
     }
   }
 

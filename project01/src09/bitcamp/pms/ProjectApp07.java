@@ -125,15 +125,10 @@ public class ProjectApp {
         no = Integer.parseInt(keyScan.nextLine());
         if (confirm("정말 삭제하시겠습니까?", true)) {
           members[no] = null;
-          for (int i = no + 1; i < count; i++) {
-            members[i-1] = members[i];
-          }
-          count--;
           System.out.println("삭제하였습니다.");
         } else {
           System.out.println("삭제를 취소하였습니다.");
         }
-
       } else {
         System.out.println("올바르지 않은 명령어입니다.");
       }

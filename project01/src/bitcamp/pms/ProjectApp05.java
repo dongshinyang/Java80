@@ -25,6 +25,21 @@
 1, 홍길동, hong@test.com, 1111, 1111-2222
 2,
 3, 홍길동, hong@test.com, 1111, 1111-2222
+명령> update
+변경할 회원 번호는? 1
+이름(홍길동)? 임꺽정
+이메일(hong@test.com)? leem@test.com
+암호(1111)? 1112
+전화(1111-2222)? 1111-1234
+변경하시겠습니까?(y/n) y
+변경하였습니다.
+변경하시겠습니까?(y/n) n
+변경을 취소하였습니다.
+명령> list
+0, 홍길동, hong@test.com, 1111, 1111-2222
+1, 임꺽정, leem@test.com, 1112, 1111-1234
+2,
+3, 홍길동, hong@test.com, 1111, 1111-2222
 명령> quit
 안녕히 가세요!
 명령> xxx
@@ -41,11 +56,54 @@ import bitcamp.pms.domain.Member;
 public class ProjectApp {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
+
+    Member[] members = new Member[1000];
+    Member member = null;
+    int count = 0;
     String input;
+    int no = 0;
+
     while (true) {
       System.out.print("명령> ");
       input = keyScan.nextLine();
-      System.out.println(input);
+      if (input.equals("quit")) {
+        System.out.println("안녕히 가세요!");
+        break;
+      } else if (input.equals("add")) {
+        member = new Member();
+
+        System.out.print("이름? ");
+        member.setName(keyScan.nextLine());
+
+        System.out.print("이메일? ");
+        member.setEmail(keyScan.nextLine());
+
+        System.out.print("암호? ");
+        member.setPassword(keyScan.nextLine());
+
+        System.out.print("전화? ");
+        member.setTel(keyScan.nextLine());
+
+
+        if (confirm("저장하시겠습니까?", true)) {
+          members[count++] = member;
+          System.out.println("저장하였습니다.");
+        } else {
+          System.out.println("저장을 취소하였습니다.");
+        }
+      } else if (input.equals("update")) {
+        System.out.println(input);
+      } else if (input.equals("list")) {
+        for (int i = 0; i < count; i++) {
+          System.out.printf("%d, %s\n", i, members[i].toString());
+        }
+
+      } else if (input.equals("delete")) {
+        System.out.println(input);
+      } else {
+        System.out.println("올바르지 않은 명령어입니다.");
+      }
+
     }
   }
 
