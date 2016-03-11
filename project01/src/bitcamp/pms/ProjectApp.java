@@ -10,10 +10,12 @@
 회원관리>      <--- 프롬프트 아니다. 그냥 출력하라.
 명령> go project
 프로젝트관리>    <--- 프롬프트 아니다. 그냥 출력하라.
-
-2) 명령어의 옵션을 처리하는 기능을 추가한다.
+2) go 명령어의 옵션을 처리하는 기능을 추가한다.
 3) 명령어 처리 부분을 별도의 메서드로 분리한다.
-   => processCommand() 메서드 추가
+  => processCommand() 메서드 추가
+4) member 관련 명령 처리는 MemberController에게 맡긴다.
+  => MemberController에 명령어 처리 기능을 추가한다.
+     -> service() 메서드 추가
 */
 package bitcamp.pms;
 
@@ -22,14 +24,12 @@ import bitcamp.pms.controller.MemberController;
 
 public class ProjectApp {
   static Scanner keyScan = new Scanner(System.in);
+  static MemberController memberController = new MemberController();
 
   public static void main(String[] args) {
-    // 멤버 관리 객체 생성
-    MemberController memberController = new MemberController();
     memberController.setScanner(keyScan); // <-- 의존 객체 주입
 
     String input;
-
     do {
       input = prompt();
       processCommand(input);
@@ -78,7 +78,7 @@ public class ProjectApp {
 
     switch (cmds[1]) {
       case "member":
-        System.out.println("회원관리>");
+        memberController.service();
         break;
       case "project":
         System.out.println("프로젝트관리>");

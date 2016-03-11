@@ -10,10 +10,8 @@
 회원관리>      <--- 프롬프트 아니다. 그냥 출력하라.
 명령> go project
 프로젝트관리>    <--- 프롬프트 아니다. 그냥 출력하라.
+2) go 명령어의 옵션을 처리하는 기능을 추가한다.
 
-2) 명령어의 옵션을 처리하는 기능을 추가한다.
-3) 명령어 처리 부분을 별도의 메서드로 분리한다.
-   => processCommand() 메서드 추가
 */
 package bitcamp.pms;
 
@@ -28,28 +26,24 @@ public class ProjectApp {
     MemberController memberController = new MemberController();
     memberController.setScanner(keyScan); // <-- 의존 객체 주입
 
-    String input;
+    String[] cmds;
 
-    do {
-      input = prompt();
-      processCommand(input);
-    } while (!input.equals("quit"));
+    while (true) {
+      cmds = prompt().split(" ");
+
+      if (cmds[0].equals("quit")) {
+        doQuit();
+        break;
+      } if (cmds[0].equals("about")) {
+        doAbout();
+      } else if (cmds[0].equals("go")) {
+        doGo(cmds);
+      } else {
+        doError();
+      }
+    }
 
     keyScan.close(); // 항상 다 쓴 자원은 해제해야 한다.
-  }
-
-  static void processCommand(String input) {
-    String[] cmds = input.split(" ");
-
-    if (cmds[0].equals("quit")) {
-      doQuit();
-    } if (cmds[0].equals("about")) {
-      doAbout();
-    } else if (cmds[0].equals("go")) {
-      doGo(cmds);
-    } else {
-      doError();
-    }
   }
 
   static String prompt() {
