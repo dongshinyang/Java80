@@ -33,7 +33,7 @@ public class ProjectApp {
       if (input.equals("quit")) {
         doQuit();
         break;
-      } if (input.equals("about")) {
+      } else if (input.equals("about")) {
         doAbout();
       } else if (input.equals("go member")) {
         doGoMember();

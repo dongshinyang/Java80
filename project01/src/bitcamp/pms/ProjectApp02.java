@@ -34,7 +34,7 @@ public class ProjectApp {
       if (cmds[0].equals("quit")) {
         doQuit();
         break;
-      } if (cmds[0].equals("about")) {
+      } else if (cmds[0].equals("about")) {
         doAbout();
       } else if (cmds[0].equals("go")) {
         doGo(cmds);

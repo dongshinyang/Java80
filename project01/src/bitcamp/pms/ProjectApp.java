@@ -24,20 +24,32 @@
      - description:String
      - state:int
   => bitcamp.pms.controller.ProjectController 클래스 추가
-  => "go project" 명령을 처리할 수 있도록 ProjectApp 클래스를 변경 
-
+  => "go project" 명령을 처리할 수 있도록 ProjectApp 클래스를 변경
+6) 프로젝트의 작업 정보를 다루는 클래스를 추가한다.
+  => bitcamp.pms.domain.Task 클래스 추가
+    - title:String
+    - description:String
+    - memberNo:int
+    - projectNo:int
+    - state:int
+  => bitcamp.pms.controller.TaskController 클래스 추가
+  => "go task" 명령을 처리할 수 있도록 ProjectApp 클래스를 변경
 */
 package bitcamp.pms;
 
 import java.util.Scanner;
 import bitcamp.pms.controller.MemberController;
-
+import bitcamp.pms.controller.ProjectController;
+ystem.out.print("저장하였습니다.");
+      System.out.println(project);
 public class ProjectApp {
   static Scanner keyScan = new Scanner(System.in);
   static MemberController memberController = new MemberController();
+  static ProjectController projectController = new ProjectController();
 
   public static void main(String[] args) {
     memberController.setScanner(keyScan); // <-- 의존 객체 주입
+    projectController.setScanner(keyScan);
 
     String input;
     do {
@@ -53,7 +65,7 @@ public class ProjectApp {
 
     if (cmds[0].equals("quit")) {
       doQuit();
-    } if (cmds[0].equals("about")) {
+    } else if (cmds[0].equals("about")) {
       doAbout();
     } else if (cmds[0].equals("go")) {
       doGo(cmds);
@@ -91,7 +103,7 @@ public class ProjectApp {
         memberController.service();
         break;
       case "project":
-        System.out.println("프로젝트관리>");
+        projectController.service();
         break;
       default:
         System.out.println("없는 메뉴입니다.");
