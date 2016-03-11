@@ -4,15 +4,11 @@ import java.util.Scanner;
 import bitcamp.pms.domain.Member;
 
 public class MemberController {
-  private Scanner keyScan;
-  private Member[] members = new Member[1000];
-  private int count = 0;
+  public static Scanner keyScan;
+  private static Member[] members = new Member[1000];
+  private static int count = 0;
 
-  public void setScanner(Scanner keyScan) {
-    this.keyScan = keyScan;
-  }
-
-  public void doAdd() {
+  public static void doAdd() {
     Member member = new Member();
 
     System.out.print("이름? ");
@@ -35,7 +31,7 @@ public class MemberController {
     }
   }
 
-  public void doUpdate() {
+  public static void doUpdate() {
     System.out.print("변경할 회원 번호는? ");
     int no = Integer.parseInt(keyScan.nextLine());
 
@@ -61,14 +57,14 @@ public class MemberController {
     }
   }
 
-  public void doList() {
+  public static void doList() {
     for (int i = 0; i < count; i++) {
       System.out.printf("%d, %s\n", i,
         (members[i] != null) ? members[i].toString() : "");
     }
   }
 
-  public void doDelete() {
+  public static void doDelete() {
     System.out.print("삭제할 회원 번호는? ");
     int no = Integer.parseInt(keyScan.nextLine());
 
@@ -84,7 +80,7 @@ public class MemberController {
     }
   }
 
-  boolean confirm(String message, boolean strictMode) {
+  static boolean confirm(String message, boolean strictMode) {
     String input = null;
     do {
       System.out.printf("%s(y/n) ", message);
