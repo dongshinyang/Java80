@@ -40,8 +40,7 @@ package bitcamp.pms;
 import java.util.Scanner;
 import bitcamp.pms.controller.MemberController;
 import bitcamp.pms.controller.ProjectController;
-ystem.out.print("저장하였습니다.");
-      System.out.println(project);
+
 public class ProjectApp {
   static Scanner keyScan = new Scanner(System.in);
   static MemberController memberController = new MemberController();

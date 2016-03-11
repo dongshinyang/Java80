@@ -6,6 +6,8 @@ import bitcamp.pms.domain.Project;
 
 public class ProjectController {
   private Scanner keyScan;
+  private Project[] projects = new Project[1000];
+  private int count;
 
   public void setScanner(Scanner keyScan) {
     this.keyScan = keyScan;
@@ -49,13 +51,25 @@ public class ProjectController {
     System.out.print("설명? ");
     project.setDescription(keyScan.nextLine());
 
-    System.out.print("저장하시겠습니까?(y/n) ");
-    String input = keyScan.nextLine().toLowerCase();
-    if (input.equals("y")) {
-      System.out.print("저장하였습니다.");
-      System.out.println(project);
+    if (confirm("저장하시겠습니까?")) {
+      projects[count++] = project;
+      System.out.println("저장하였습니다.");
     } else {
-      System.out.print("저장을 취소하였습니다.");
+      System.out.println("저장을 취소하였습니다.");
+    }
+  }
+
+  private boolean confirm(String message) {
+    while (true) {
+      System.out.printf("%s(y/n) ", message);
+      String input = keyScan.nextLine().toLowerCase();
+      if (input.equals("y")) {
+        return true;
+      } else if (input.equals("n")) {
+        return false;
+      } else {
+        System.out.println("잘못된 명령어입니다.");
+      }
     }
   }
 
