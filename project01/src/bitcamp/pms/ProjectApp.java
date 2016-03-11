@@ -16,6 +16,16 @@
 4) member 관련 명령 처리는 MemberController에게 맡긴다.
   => MemberController에 명령어 처리 기능을 추가한다.
      -> service() 메서드 추가
+5) 프로젝트 정보를 다루는 클래스를 추가한다.
+  => bitcamp.pms.domain.Project 클래스 추가
+     - title:String
+     - startDate:java.sql.Date
+     - endDate:java.sql.Date
+     - description:String
+     - state:int
+  => bitcamp.pms.controller.ProjectController 클래스 추가
+  => "go project" 명령을 처리할 수 있도록 ProjectApp 클래스를 변경 
+
 */
 package bitcamp.pms;
 
