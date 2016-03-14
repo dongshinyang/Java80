@@ -44,6 +44,20 @@ LinkedList 클래스 다음 필드 및 생성자를 준비한다.
 #06
 - 목록 중간에 값을 삽입하는 insert()를 추가하라.
   public void add(int index, Object value)
+  => index < 0 또는 index > size() 인 경우, 무시한다.
+
+#07
+- 목록에서 인덱스로 지정한 항목을 삭제하라.
+  public Object remove(int index)
+  => 리턴 값은 삭제된 값이다.
+  => index < 0 또는 index >= size() 인 경우, null을 리턴한다.
+
+#08
+- 목록에서 인덱스로 지정한 항목을 다른 값으로 교체한다.
+  public Object set(int index, Object value)
+  => 리턴 값은 변경 전 값이다.
+  => index < 0 또는 index >= size() 인 경우, null을 리턴한다.
+
 
 
 

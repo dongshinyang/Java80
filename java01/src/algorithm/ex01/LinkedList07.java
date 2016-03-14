@@ -57,6 +57,9 @@ public class LinkedList {
     Bucket cursor = start;
 
     for (int i = 1 ; i <= index; i++) {
+        if (cursor.next == null) { // 목록의 끝이라면,
+          return null;
+        }
         cursor = cursor.next;
     }
 
@@ -77,7 +80,7 @@ public class LinkedList {
     if (index == 0) {
       Object value = start.value;
       start = start.next;
-      return value;
+      return ob;
     }
 
     Bucket cursor = start;
@@ -88,20 +91,5 @@ public class LinkedList {
     cursor.next = cursor.next.next;
 
     return value;
-  }
-
-  public Object set(int index, Object value) {
-    if (index < 0 || index >= count) {
-      return null;
-    }
-
-    Bucket cursor = start;
-    for (int i = 1; i <= index; i++) {
-      cursor = cursor.next;
-    }
-    
-    Object oldValue = cursor.value;
-    cursor.value = value;
-    return oldValue;
   }
 }

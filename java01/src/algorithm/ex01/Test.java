@@ -10,7 +10,13 @@ public class Test {
     list.add("김원봉"); // index = 4
     list.add("김구"); // index = 5
 
-    list.add(5, null); // 안창호
+    list.set(-1, "민경훈");
+
+    for (int i = 0; i < list.size(); i++) {
+      System.out.println(list.get(i));
+    }
+
+    System.out.println("------------------------");
 
   }
 }
