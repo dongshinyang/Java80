@@ -10,13 +10,12 @@ public class Test {
     list.add("김원봉"); // index = 4
     list.add("김구"); // index = 5
 
-    list.add(-10, "안중근");
+    System.out.println(list.set(1, "안중근"));
+    System.out.println(list.set(0, "윤봉길"));
+    System.out.println("-----------------------");
 
-    Bucket cursor = list.start;
     for (int i = 0; i < list.size(); i++) {
-      System.out.println(cursor.value);
-      cursor = cursor.next;
+      System.out.println(list.get(i));
     }
-
   }
 }
