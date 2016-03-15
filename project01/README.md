@@ -151,8 +151,19 @@
 - 프로젝트 정보 또는 회원 정보를 등록할 때 개수에 제한을 두지 않게 한다.
 - 사용문법:
   => Linked List 도입
-  => java01의 LinkedList와 Bucket 클래스를 사용한다.
+  => java01/src/algorithm/ex01/ 의 LinkedList와 Bucket 클래스를 사용한다.
 - MemberController와 ProjectController에 적용한다.  
+
+#14
+- 제네릭을 적용한 LinkedList를 사용하여 회원 정보 및 프로젝트 정보를 관리하라!
+- 사용문법:
+  => Generic을 적용한 LinkedList
+  => java01/src/algorithm/ex04/ 의 LinkedList와 Bucket 클래스를 사용한다.
+
+
+
+
+
 
 
 
