@@ -151,7 +151,8 @@
 - 프로젝트 정보 또는 회원 정보를 등록할 때 개수에 제한을 두지 않게 한다.
 - 사용문법:
   => Linked List 도입
-  => java01
+  => java01의 LinkedList와 Bucket 클래스를 사용한다.
+- MemberController와 ProjectController에 적용한다.  
 
 
 
