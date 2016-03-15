@@ -1,13 +1,13 @@
 package algorithm.ex04;
 
-public class Bucket {
-  Object value;
-  Bucket next;
+public class Bucket<T> {
+  T value;
+  Bucket<T> next;
 
   public Bucket() {
   }
 
-  public Bucket(Object value, Bucket next) {
+  public Bucket(T value, Bucket<T> next) {
     this.value = value;
     this.next = next;
   }

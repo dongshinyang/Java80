@@ -1,3 +1,4 @@
+//주제: LinkedList에 제네릭(Generic)을 적용한다.
 package algorithm.ex04;
 
 public class Test {
@@ -11,7 +12,7 @@ public class Test {
     list.add("안창호"); // index = 3
     list.add("김원봉"); // index = 4
     list.add("김구"); // index = 5
-    list.add(new Integer(20)); // is Error?
+    //list.add(new Integer(20)); // is Error?
 
     for (int i = 0; i < list.size(); i++) {
       System.out.println(list.get(i));
