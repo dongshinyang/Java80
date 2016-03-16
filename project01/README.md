@@ -160,7 +160,13 @@
   => Generic을 적용한 LinkedList
   => java01/src/algorithm/ex04/ 의 LinkedList와 Bucket 클래스를 사용한다.
 
+#15
+- LinkedList에 예외 적용.
+- 사용문법:
+  => try ~ catch ~
+  => throw ~
 
+  
 
 
 
