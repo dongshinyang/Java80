@@ -1,10 +1,10 @@
 // 주제: Collection API - 해시코드와 HashSet
-//=> hashCode(), equals() 재정의하기 전
+//=> hashCode(), equals() 재정의한 후
 package step21;
 
 import java.util.HashSet;
 
-public class Exam10 {
+public class Exam11 {
   static class Member {
     String name;
     int age;
@@ -17,6 +17,22 @@ public class Exam10 {
     @Override
     public String toString() {
       return name + "," + age;
+    }
+
+    @Override
+    public int hashCode() {
+      return this.toString().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+      if (other == null || other.getClass() != this.getClass()) {
+        return false;
+      }
+      Member m = (Member)other;
+      if (!this.name.equals(m.name)) return false;
+      if (this.age != m.age) return false;
+      return true;
     }
   }
 
@@ -45,8 +61,8 @@ public class Exam10 {
     set.add(m1);
     set.add(m2);
     set.add(m3);
-    set.add(m4); // 저장된다.
-    set.add(m5); // 저장된다.
+    set.add(m4); // 저장 거부! 비록 인스턴스는 다르지만, 같다고 결론남.
+    set.add(m5); // 저장 거부! 비록 인스턴스는 다르지만, 내용은 같음.
 
     printList(set);
   }
@@ -54,16 +70,9 @@ public class Exam10 {
 }
 
 /*
-# HashSet이 데이터를 저장하는 방법
-- 값을 저장하기 전에 기존에 저장된 객체 중에 같은 값을 가진 객체 있는지
-  검사한다.
-  => 검사 방법?
-     1) hashCode()의 값을 비교
-     2) 해시값이 같으면 한 번 더 equals()로 값을 비교한다.
-     => equals() 마저 같다고 나오면 중복 데이터로 간주하여 저장하지 않는다.
-
-
-
+# Member를 HashSet에 저장할 때 주의할 점!
+- 같은 값을 갖는 경우 중복저장하지 않도록 hashCode()와 equals()를
+  재정의(overriding)하라!
 
 
 */
