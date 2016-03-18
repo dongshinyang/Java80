@@ -3,7 +3,7 @@ package step20.exam05;
 public class Outer1 {
   //1) top level inner Class
   static class Inner1 {}
-    
+
   //2) member inner class
   class Inner2 {}
 
@@ -14,9 +14,4 @@ public class Outer1 {
     //4) annonymous inner class
     Object obj =new Object() {};
   }
-
-
-
-
-
 }
