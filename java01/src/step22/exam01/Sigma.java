@@ -16,25 +16,10 @@ public class Sigma {
   }
 
   static int computeSigma(int value) {
-    // 메서드 호출 상황 출력
-    System.out.printf("%s computeSignam(%d)\n", printIndent(value), value);
-
     if (value == 1) {
       return value;
     } else {
       return value + computeSigma(value - 1);
     }
   }
-
-  static String printIndent(int value) {
-    StringBuffer buf = new StringBuffer();
-    for (int i = 0; i < (10 - value); i++)
-      buf.append(" ");
-    return buf.toString();
-  }
-
-
-
-
-
 }

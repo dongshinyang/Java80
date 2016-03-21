@@ -170,6 +170,8 @@
 - Bucket 클래스를 LinkedList의 중첩 클래스로 만든다.
 - 왜? Bucket은 LinkedList에서만 사용하기 때문이다.
 
+#17
+- ArrayList 클래스를 적용하라!
 
 
 
