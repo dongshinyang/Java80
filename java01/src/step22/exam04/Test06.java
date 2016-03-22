@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-public class Test06 {
+public class Test07 {
   public static void main(String[] args) throws IOException {
     MyDataOutputStream4 out = new MyDataOutputStream4("exam04.Test06.data");
 

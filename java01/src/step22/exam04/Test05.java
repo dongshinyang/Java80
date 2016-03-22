@@ -9,6 +9,7 @@ import java.io.OutputStream;
 public class Test05 {
   public static void main(String[] args) throws IOException {
     FileOutputStream out = new FileOutputStream("exam04.Test05.data");
+    //ByteArrayOutputStream out = new ByteArrayOutputStream();
 
     short no = 17;
     int kor = 100;
