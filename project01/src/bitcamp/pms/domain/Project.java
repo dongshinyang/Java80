@@ -10,7 +10,6 @@ public class Project {
   private int state;
 
   public Project() {
-
   }
 
   public Project(String title, Date startDate, Date endDate) {
@@ -22,7 +21,7 @@ public class Project {
   @Override
   public String toString() {
     return this.title + "," + this.startDate + "," +
-    this.endDate + "," + this.state;
+    this.endDate + "," + this.state + "," + this.description;
   }
 
   public String getTitle() {

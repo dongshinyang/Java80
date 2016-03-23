@@ -42,8 +42,8 @@ public class Member {
 
   @Override
   public String toString() {
-    return this.name + ", " + this.email + ", " +
-            this.password + ", " + this.tel;
+    return this.name + "," + this.email + "," +
+            this.password + "," + this.tel;
   }
 
 

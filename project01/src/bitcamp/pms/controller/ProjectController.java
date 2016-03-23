@@ -4,13 +4,31 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.sql.Date;
 import bitcamp.pms.domain.Project;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
 
 public class ProjectController {
+  private static final String filename = "project.data";
   private Scanner keyScan;
   ArrayList<Project> projects;
 
   public ProjectController() {
     projects = new ArrayList<>();
+  }
+
+  public void save() throws Exception {
+    FileWriter out0 = new FileWriter(filename);
+    BufferedWriter out1 = new BufferedWriter(out0);
+    PrintWriter out = new PrintWriter(out1);
+
+    for (Project project : projects) {
+      out.println(project);
+    }
+
+    out.close();
+    out1.close();
+    out0.close();
   }
 
   public void setScanner(Scanner keyScan) {

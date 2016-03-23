@@ -79,6 +79,14 @@ public class ProjectApp {
   }
 
   static void doQuit() {
+    try {
+      memberController.save();
+      projectController.save();
+      System.out.println("데이터를 저장했습니다.");
+      
+    } catch (Exception e) {
+      System.out.println("데이터 저장에 실패했습니다!");
+    }
     System.out.println("안녕히 가세요!");
   }
 

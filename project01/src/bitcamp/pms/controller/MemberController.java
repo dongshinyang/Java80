@@ -3,13 +3,31 @@ package bitcamp.pms.controller;
 import java.util.Scanner;
 import java.util.ArrayList;
 import bitcamp.pms.domain.Member;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
 
 public class MemberController {
+  private static final String filename = "member.data";
   private Scanner keyScan;
   private ArrayList<Member> members;
 
   public MemberController() {
     members = new ArrayList<>();
+  }
+
+  public void save() throws Exception {
+    FileWriter out0 = new FileWriter(filename);
+    BufferedWriter out1 = new BufferedWriter(out0);
+    PrintWriter out = new PrintWriter(out1);
+
+    for (Member member : members) {
+      out.println(member);
+    }
+
+    out.close();
+    out1.close();
+    out0.close();
   }
 
   public void setScanner(Scanner keyScan) {
