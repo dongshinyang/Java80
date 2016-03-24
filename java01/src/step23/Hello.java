@@ -1,4 +1,4 @@
-package step23.exam02;
+package step23;
 
 public class Hello extends AbstractHello {
   @Override
