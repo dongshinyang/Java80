@@ -1,16 +1,14 @@
-// 주제: 상속을 이용하여 호출 규칙을 정의한다.
-// => Hello, HelloEn의 공통 메서드인 greet()를 뽑아서,
-//    AbstractHello라는 추상 클래스를 정의한다.
-// => 이제 인사말을 생성하는 클래스는 반드시 AbstractHello의
-//    서브 클래스가 되도록 강제한다.
-//    이유?
-//    AbstractHello의 서브 클래스는 greet() 메서드를 가질 것이기 때문이다.
-// => 작업순서
-// 1) Hello와 HelloEn 클래스의 공통점을 식별하여 수퍼 클래스로 정의한다.
-//   => AbstractHello 추상 클래스 작성
-//   => Hello, HelloEn을 이 클래스의 서브 클래스로 만든다.
-// 2) AbstractHello의 서브 클래스만 사용하려면,
-//   => 레퍼런스 변수를 AbstractHello로 선언하라!
+// 주제: HelloJp 처럼 이미 다른 클래스를 상속 받는 경우 해결책!
+// => 기존에 상속 받는 클래스 대신 AbstractHello를 상속 받게 한다.
+//    그리고 기존에 상속받았던 기능은 다른 방식으로 처리한다.
+// => HelloJp 클래스 개편!
+//
+// # 문제점
+// => 그나마 HelloJp처럼 클래스의 크기가 작을 때는 소스 코드 개편이 가능하지만,
+//    실무에서는 이렇게 간단치가 않다.
+// => 기존의 클래스를 상속 받은 후 많은 코드가 추가된 경우에는,
+//   HelloJp처럼 기존 상속을 포기할 수 없다.
+//
 package step23;
 
 public class Test {
@@ -23,12 +21,10 @@ public class Test {
     if ("en".equals(lang)) {
       obj = new HelloEn();
 
-    } /*else if ("jp".equals(lang)) {
-      obj = new HelloJp(); // AbstraceHello의 서브 클래스가 아니면 컴파일 오류!
-      // 즉, AbstractHello의 규칙을 따르지 않은 클래스를 사용하려 한다면
-      // 컴파일 오류가 발생한다!
-      // => 이런 방식(수퍼 클래스를 통한)으로 호출 규칙을 제어할 수 있다.
-    } */else {
+    } else if ("jp".equals(lang)) {
+      obj = new HelloJp(); // 새로 개편은 HelloJp 사용하기 
+
+    } else {
       obj = new Hello();
 
     }

@@ -11,6 +11,12 @@
 //   => Hello, HelloEn을 이 클래스의 서브 클래스로 만든다.
 // 2) AbstractHello의 서브 클래스만 사용하려면,
 //   => 레퍼런스 변수를 AbstractHello로 선언하라!
+//
+// # 문제점
+// => HelloJp는 이미 ArrayList를 상속받고 있기 때문에
+//    이 구조로 개편할 수 없다.
+// => 해결책?
+//    step04를 참고하라!
 package step23;
 
 public class Test {
