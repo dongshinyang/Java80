@@ -9,14 +9,13 @@ import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-public class MemberController {
+public class MemberController implements MenuController {
   private static final String filename = "member.data";
   private Scanner keyScan;
   private ArrayList<Member> members;
 
-  public MemberController() throws Exception {
+  public MemberController() {
     members = new ArrayList<>();
-    load();
   }
 
   public void load() throws Exception {
@@ -54,6 +53,16 @@ public class MemberController {
     this.keyScan = keyScan;
   }
 
+  @Override
+  public void init() {
+    try {
+      this.load();
+    } catch (Exception e) {
+      throw new RuntimeException("회원 데이터 로딩 실패!", e);
+    }
+  }
+
+  @Override
   public void service() {
     String input = null;
     do {
@@ -72,6 +81,13 @@ public class MemberController {
         System.out.println("유효하지 않은 인덱스입니다.");
       }
     } while (!input.equals("main"));
+  }
+
+  @Override
+  public void destroy() {
+    try {
+      this.save();
+    } catch (Exception e) {}
   }
 
   private String prompt() {

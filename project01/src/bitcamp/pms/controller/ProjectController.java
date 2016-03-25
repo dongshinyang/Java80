@@ -10,14 +10,13 @@ import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-public class ProjectController {
+public class ProjectController implements MenuController {
   private static final String filename = "project.data";
   private Scanner keyScan;
   ArrayList<Project> projects;
 
-  public ProjectController() throws Exception {
+  public ProjectController() {
     projects = new ArrayList<>();
-    load();
   }
 
   public void load() throws Exception {
@@ -59,6 +58,16 @@ public class ProjectController {
     this.keyScan = keyScan;
   }
 
+  @Override
+  public void init() {
+    try {
+      this.load();
+    } catch (Exception e) {
+      throw new RuntimeException("프로젝트 데이터 로딩 실패!", e);
+    }
+  }
+
+  @Override
   public void service() {
     String input = null;
     while (true) {
@@ -83,6 +92,13 @@ public class ProjectController {
         System.out.println("오류 발생! 다시 작업해 주세요.");
       }
     }
+  }
+
+  @Override
+  public void destroy() {
+    try {
+      this.save();
+    } catch (Exception e) {}
   }
 
   private String prompt() {

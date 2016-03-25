@@ -1,61 +1,53 @@
 /* 목표
-- 프로젝트 정보를 등록, 목록조회, 변경, 삭제하는 기능을 추가한다.
-- 사용 문법:
-  => 클래스 정의
-  => 여러 클래스의 인스턴스를 다루는 방법
-
-1) 멤버관리와 프로젝트 관리를 선택할 수 있는 메뉴 기능을 추가한다.
-- 기존에 동작하던 add, list, update, delete 명령을 막아라!
-명령> go member
-회원관리>      <--- 프롬프트 아니다. 그냥 출력하라.
-명령> go project
-프로젝트관리>    <--- 프롬프트 아니다. 그냥 출력하라.
-2) go 명령어의 옵션을 처리하는 기능을 추가한다.
-3) 명령어 처리 부분을 별도의 메서드로 분리한다.
-  => processCommand() 메서드 추가
-4) member 관련 명령 처리는 MemberController에게 맡긴다.
-  => MemberController에 명령어 처리 기능을 추가한다.
-     -> service() 메서드 추가
-5) 프로젝트 정보를 다루는 클래스를 추가한다.
-  => bitcamp.pms.domain.Project 클래스 추가
-     - title:String
-     - startDate:java.sql.Date
-     - endDate:java.sql.Date
-     - description:String
-     - state:int
-  => bitcamp.pms.controller.ProjectController 클래스 추가
-  => "go project" 명령을 처리할 수 있도록 ProjectApp 클래스를 변경
-6) 프로젝트의 작업 정보를 다루는 클래스를 추가한다.
-  => bitcamp.pms.domain.Task 클래스 추가
-    - title:String
-    - description:String
-    - memberNo:int
-    - projectNo:int
-    - state:int
-  => bitcamp.pms.controller.TaskController 클래스 추가
-  => "go task" 명령을 처리할 수 있도록 ProjectApp 클래스를 변경
+- 코드 구조를 개선하기
+- 메뉴를 처리하기 위해 호출하는 service() 메서드를 규칙으로 정의한다.
+  => 향후 메뉴를 처리하는 모든 클래스는 이 인터페이스의 규칙에 따라 작성해야 한다.
+- 작업
+1) MenuController 인터페이스 정의
+2) 기존의 컨트롤러 클래스를 변경한다.
+  - MenuController 인터페이스를 구현한다.
+3) 메뉴 처리 객체를 맵으로 관리한다.
+  - 메뉴 이름을 메뉴를 처리하는 컨트롤러를 보관한다.
+  - 사용할 때는 맵에서 찾아 꺼내 쓴다.
+4) 작업을 종료 후 메뉴 처리기에게 자원 해제의 기회를 준다.
+  - destroy() 호출.
+5) 작업을 시작하기 전에 메뉴 처리기에게 준비할 수 있는 기회를 준다.
+  - init() 호출
 */
 package bitcamp.pms;
 
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Collection;
+import bitcamp.pms.controller.MenuController;
 import bitcamp.pms.controller.MemberController;
 import bitcamp.pms.controller.ProjectController;
 
 public class ProjectApp {
+  static HashMap<String,MenuController> menuMap = new HashMap<>();
   static Scanner keyScan = new Scanner(System.in);
-  static MemberController memberController;
-  static ProjectController projectController;
 
   public static void main(String[] args) {
-    try {
-      memberController = new MemberController();
-      projectController = new ProjectController();
-    } catch (Exception e) {
-      System.out.println("데이터 파일을 읽는데 오류가 발생했습니다.");
-    }
+    MemberController memberController = new MemberController();
+    ProjectController projectController = new ProjectController();
 
     memberController.setScanner(keyScan); // <-- 의존 객체 주입
     projectController.setScanner(keyScan);
+
+    // 메뉴 처리기를 menuMap에 등록한다.
+    menuMap.put("member", memberController);
+    menuMap.put("project", projectController);
+
+    Collection<MenuController> controllers = menuMap.values();
+
+    for (MenuController controller : controllers) {
+      try {
+        controller.init();
+      } catch (RuntimeException e) {
+        System.out.println(e.getMessage());
+        //e.printStackTrace();
+      }
+    }
 
     String input;
     do {
@@ -86,13 +78,9 @@ public class ProjectApp {
   }
 
   static void doQuit() {
-    try {
-      memberController.save();
-      projectController.save();
-      System.out.println("데이터를 저장했습니다.");
-
-    } catch (Exception e) {
-      System.out.println("데이터 저장에 실패했습니다!");
+    Collection<MenuController> controllers = menuMap.values();
+    for (MenuController controller : controllers) {
+      controller.destroy();
     }
     System.out.println("안녕히 가세요!");
   }
@@ -112,16 +100,11 @@ public class ProjectApp {
       return ;
     }
 
-    switch (cmds[1]) {
-      case "member":
-        memberController.service();
-        break;
-      case "project":
-        projectController.service();
-        break;
-      default:
-        System.out.println("없는 메뉴입니다.");
+    MenuController controller = menuMap.get(cmds[1]);
+    if (controller != null) {
+      controller.service();
+    } else {
+      System.out.println("없는 메뉴입니다.");
     }
-
   }
 }
