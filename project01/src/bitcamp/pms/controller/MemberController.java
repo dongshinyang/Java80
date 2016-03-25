@@ -2,11 +2,13 @@ package bitcamp.pms.controller;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Map;
 import bitcamp.pms.domain.Member;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;
+
 import java.io.BufferedReader;
 
 public class MemberController implements MenuController {
@@ -49,10 +51,6 @@ public class MemberController implements MenuController {
     out0.close();
   }
 
-  public void setScanner(Scanner keyScan) {
-    this.keyScan = keyScan;
-  }
-
   @Override
   public void init() {
     try {
@@ -63,7 +61,9 @@ public class MemberController implements MenuController {
   }
 
   @Override
-  public void service() {
+  public void service(Map<String,Object> paramMap) {
+    keyScan = (Scanner)paramMap.get("stdin");
+
     String input = null;
     do {
       input = prompt();

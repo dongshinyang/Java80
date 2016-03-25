@@ -13,6 +13,9 @@
   - destroy() 호출.
 5) 작업을 시작하기 전에 메뉴 처리기에게 준비할 수 있는 기회를 준다.
   - init() 호출
+6) 작업에 필요한 재료를 service() 메서드의 파라미터로 넘기도록 한다.
+  - service() --> service(Map paramMap) 으로 변경
+
 */
 package bitcamp.pms;
 
@@ -28,15 +31,9 @@ public class ProjectApp {
   static Scanner keyScan = new Scanner(System.in);
 
   public static void main(String[] args) {
-    MemberController memberController = new MemberController();
-    ProjectController projectController = new ProjectController();
-
-    memberController.setScanner(keyScan); // <-- 의존 객체 주입
-    projectController.setScanner(keyScan);
-
     // 메뉴 처리기를 menuMap에 등록한다.
-    menuMap.put("member", memberController);
-    menuMap.put("project", projectController);
+    menuMap.put("member", new MemberController());
+    menuMap.put("project", new ProjectController());
 
     Collection<MenuController> controllers = menuMap.values();
 
@@ -100,9 +97,13 @@ public class ProjectApp {
       return ;
     }
 
+    // 작업에 필요한 재료를 준비
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("stdin", keyScan);
+
     MenuController controller = menuMap.get(cmds[1]);
     if (controller != null) {
-      controller.service();
+      controller.service(paramMap);
     } else {
       System.out.println("없는 메뉴입니다.");
     }
