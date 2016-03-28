@@ -1,40 +1,64 @@
 /* 목표
-- 코드 구조를 개선하기
-- 메뉴를 처리하기 위해 호출하는 service() 메서드를 규칙으로 정의한다.
-  => 향후 메뉴를 처리하는 모든 클래스는 이 인터페이스의 규칙에 따라 작성해야 한다.
-- 작업
-1) MenuController 인터페이스 정의
-2) 기존의 컨트롤러 클래스를 변경한다.
-  - MenuController 인터페이스를 구현한다.
-3) 메뉴 처리 객체를 맵으로 관리한다.
-  - 메뉴 이름을 메뉴를 처리하는 컨트롤러를 보관한다.
-  - 사용할 때는 맵에서 찾아 꺼내 쓴다.
-4) 작업을 종료 후 메뉴 처리기에게 자원 해제의 기회를 준다.
-  - destroy() 호출.
-5) 작업을 시작하기 전에 메뉴 처리기에게 준비할 수 있는 기회를 준다.
-  - init() 호출
-6) 작업에 필요한 재료를 service() 메서드의 파라미터로 넘기도록 한다.
-  - service() --> service(Map paramMap) 으로 변경
+- 리플랙션(Reflection) API를 사용하여 메뉴 컨트롤러를 객체를 자동 생성하라!
+  => 인스턴스 생성을 자동화시킨다.
+- 즉 메뉴 처리기 생성을 자동화시킨다.
 
 */
 package bitcamp.pms;
 
-import java.util.Scanner;
-import java.util.HashMap;
+import java.io.File;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Scanner;
+
 import bitcamp.pms.controller.MenuController;
-import bitcamp.pms.controller.MemberController;
-import bitcamp.pms.controller.ProjectController;
 
 public class ProjectApp {
   static HashMap<String,MenuController> menuMap = new HashMap<>();
   static Scanner keyScan = new Scanner(System.in);
 
+  static void prepareObject(String packageName) {
+    String path = "./bin/" + packageName.replace(".", "/");
+    createObject(new File(path));
+  }
+  
+  static void createObject(File file) {
+    if (file.isFile() && file.getName().endsWith(".class")) {
+      String classNameWithPackage = file.getPath()  // ex) ./bin/bitcamp/pms/controller/MemberController.class
+                        .replace("./bin/", "") // --> bitcamp/pms/controller/MemberController.class
+                        .replace(".class","") // --> bitcamp/pms/controller/MemberController
+                        .replace("/", "."); // --> bitcamp.pms.controller.MemberController
+      try {
+        Class<?> clazz = Class.forName(classNameWithPackage);
+        if (!clazz.isInterface()) {
+          Object obj = clazz.newInstance();
+          if (MenuController.class.isInstance(obj)) {
+            menuMap.put(obj.toString(), (MenuController)obj);
+          }
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      return;
+    } 
+    
+    File[] subfiles = file.listFiles();
+    for (File subfile : subfiles) {
+      createObject(subfile);
+    }
+  }
+  
   public static void main(String[] args) {
-    // 메뉴 처리기를 menuMap에 등록한다.
-    menuMap.put("member", new MemberController());
-    menuMap.put("project", new ProjectController());
-
+    // bitcamp.controller 패키지를 뒤져서 메뉴 처리기 객체를 생성하고,
+    // 그 메뉴 처리기 객체를 menuMap에 등록한다.
+    
+    // 1) 현재 폴더 밑에 있는 bin 폴더에서 bitcamp/pms/controller 패키지에 있는
+    // 모든 클래스의 이름을 알아낸다.
+    // 2) MenuController의 구현체를 찾아 인스턴스를 생성한다.
+    // 3) 그 인스턴스를 menuMap에 보관한다.
+    prepareObject("bitcamp.pms.controller");
+    
+    
     Collection<MenuController> controllers = menuMap.values();
 
     for (MenuController controller : controllers) {

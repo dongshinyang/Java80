@@ -19,6 +19,11 @@ public class ProjectController implements MenuController {
   public ProjectController() {
     projects = new ArrayList<>();
   }
+  
+  @Override
+  public String toString() {
+    return "project";
+  }
 
   public void load() throws Exception {
     FileReader in0 = new FileReader(filename);

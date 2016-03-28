@@ -20,6 +20,11 @@ public class MemberController implements MenuController {
     members = new ArrayList<>();
   }
 
+  @Override
+  public String toString() {
+    return "member";
+  }
+
   public void load() throws Exception {
     FileReader in0 = new FileReader(filename);
     BufferedReader in = new BufferedReader(in0);
