@@ -5,47 +5,54 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import bitcamp.pms.annotation.Component;
-import bitcamp.pms.domain.Member;
+import bitcamp.pms.domain.Board;
 
-@Component("member/update.do")
-public class MemberUpdateController implements MenuController {
-  private static final String filename = "member.data";
+@Component("board/update.do")
+public class BoardUpdateController implements MenuController {
+  private static final String filename = "board.data";
   private Scanner keyScan;
 
-  public List<Member> load() throws Exception {
-    ArrayList<Member> members = new ArrayList<>();
+  public List<Board> load() throws Exception {
+    ArrayList<Board> boards = new ArrayList<>();
     
     FileReader in0 = new FileReader(filename);
     BufferedReader in = new BufferedReader(in0);
 
     String line;
     String[] values;
-    Member member;
+    Board board;
     while ((line = in.readLine()) != null) {
       values = line.split(",");
-      member = new Member(values[0], values[1], values[2], values[3]);
-      members.add(member);
+      board = new Board();
+      board.setTitle(values[0]);
+      board.setContent(values[1]);
+      board.setViews(Integer.parseInt(values[2]));
+      board.setPassword(values[3]);
+      board.setCreatedDate(Date.valueOf(values[4]));
+
+      boards.add(board);
     }
 
     in.close();
     in0.close();
     
-    return members;
+    return boards;
   }
 
-  public void save(List<Member> members) throws Exception {
+  public void save(List<Board> boards) throws Exception {
     FileWriter out0 = new FileWriter(filename);
     BufferedWriter out1 = new BufferedWriter(out0);
     PrintWriter out = new PrintWriter(out1);
 
-    for (Member member : members) {
-      out.println(member);
+    for (Board board : boards) {
+      out.println(board.toCSV());
     }
 
     out.close();
@@ -61,35 +68,31 @@ public class MemberUpdateController implements MenuController {
     keyScan = (Scanner)paramMap.get("stdin");
 
     try {
-      List<Member> members = this.load();
+      List<Board> boards = this.load();
       
-      System.out.print("변경할 회원 번호는? ");
+      System.out.print("변경할 게시물 번호?");
       int no = Integer.parseInt(keyScan.nextLine());
+      
+      Board oldBoard = boards.get(no);
+      Board board = new Board();
   
-      Member oldMember = members.get(no);
-      Member member = new Member();
+      System.out.printf("제목(%s)? ", oldBoard.getTitle());
+      board.setTitle(keyScan.nextLine());
+      System.out.printf("내용(%s)? ", oldBoard.getContent());
+      board.setContent(keyScan.nextLine());
+      System.out.printf("암호? ", oldBoard.getPassword());
+      board.setPassword(keyScan.nextLine());
+      board.setCreatedDate(new Date(System.currentTimeMillis()));
   
-      System.out.printf("이름(%s)? ", oldMember.getName());
-      member.setName(keyScan.nextLine());
-  
-      System.out.printf("이메일(%s)? ", oldMember.getEmail());
-      member.setEmail(keyScan.nextLine());
-  
-      System.out.printf("암호(%s)? ", oldMember.getPassword());
-      member.setPassword(keyScan.nextLine());
-  
-      System.out.printf("전화(%s)? ", oldMember.getTel());
-      member.setTel(keyScan.nextLine());
-  
-      if (confirm("변경하시겠습니까?", true)) {
-        members.set(no, member);
+      if (confirm("변경하시겠습니까?")) {
+        boards.set(no, board);
         System.out.println("변경하였습니다.");
       } else {
         System.out.println("변경을 취소하였습니다.");
       }
       
-      this.save(members);
-
+      this.save(boards);
+      
     } catch (IndexOutOfBoundsException e) {
       System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {
@@ -100,22 +103,17 @@ public class MemberUpdateController implements MenuController {
   @Override
   public void destroy() {}
 
-  private boolean confirm(String message, boolean strictMode) {
-    String input = null;
-    do {
+  private boolean confirm(String message) {
+    while (true) {
       System.out.printf("%s(y/n) ", message);
-      input = keyScan.nextLine().toLowerCase();
-
+      String input = keyScan.nextLine().toLowerCase();
       if (input.equals("y")) {
         return true;
       } else if (input.equals("n")) {
         return false;
       } else {
-        if (!strictMode) {
-          return false;
-        }
         System.out.println("잘못된 명령어입니다.");
       }
-    } while(true);
+    }
   }
 }

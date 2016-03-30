@@ -13,8 +13,8 @@ import java.util.Scanner;
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.domain.Member;
 
-@Component("member/update.do")
-public class MemberUpdateController implements MenuController {
+@Component("member/delete.do")
+public class MemberDeleteController implements MenuController {
   private static final String filename = "member.data";
   private Scanner keyScan;
 
@@ -63,33 +63,18 @@ public class MemberUpdateController implements MenuController {
     try {
       List<Member> members = this.load();
       
-      System.out.print("변경할 회원 번호는? ");
+      System.out.print("삭제할 회원 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
   
-      Member oldMember = members.get(no);
-      Member member = new Member();
-  
-      System.out.printf("이름(%s)? ", oldMember.getName());
-      member.setName(keyScan.nextLine());
-  
-      System.out.printf("이메일(%s)? ", oldMember.getEmail());
-      member.setEmail(keyScan.nextLine());
-  
-      System.out.printf("암호(%s)? ", oldMember.getPassword());
-      member.setPassword(keyScan.nextLine());
-  
-      System.out.printf("전화(%s)? ", oldMember.getTel());
-      member.setTel(keyScan.nextLine());
-  
-      if (confirm("변경하시겠습니까?", true)) {
-        members.set(no, member);
-        System.out.println("변경하였습니다.");
+      if (confirm("정말 삭제하시겠습니까?", true)) {
+        members.remove(no);
+        System.out.println("삭제하였습니다.");
       } else {
-        System.out.println("변경을 취소하였습니다.");
+        System.out.println("삭제를 취소하였습니다.");
       }
       
       this.save(members);
-
+      
     } catch (IndexOutOfBoundsException e) {
       System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {
