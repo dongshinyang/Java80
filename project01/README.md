@@ -216,6 +216,9 @@
 - Information Expert 패턴에 따라 XxxDao 클래스가 데이터 처리를
   완전히 담당하게 개선하라!
 
+#26
+- 객체 공유와 의존 객체 주입(Dependency Injection) 적용
+
 
 
 
