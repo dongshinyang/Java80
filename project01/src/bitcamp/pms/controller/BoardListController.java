@@ -17,7 +17,7 @@ public class BoardListController implements MenuController {
   @Override
   public void service(Map<String,Object> paramMap) {
     try {
-      List<Board> boards = boardDao.load();
+      List<Board> boards = boardDao.selectList();
       
       for (int i = 0; i < boards.size(); i++) {
         System.out.printf("%d, %s\n", i, boards.get(i).toString());

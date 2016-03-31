@@ -1,7 +1,6 @@
 package bitcamp.pms.controller;
 
 import java.sql.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -23,12 +22,10 @@ public class ProjectUpdateController implements MenuController {
     keyScan = (Scanner)paramMap.get("stdin");
     
     try {
-      List<Project> projects = projectDao.load();
-      
       System.out.print("변경할 프로젝트 번호?");
       int no = Integer.parseInt(keyScan.nextLine());
 
-      Project oldProject = projects.get(no);
+      Project oldProject = projectDao.selectOne(no);
       Project project = new Project();
 
       System.out.printf("프로젝트명(%s)? ", oldProject.getTitle());
@@ -41,14 +38,11 @@ public class ProjectUpdateController implements MenuController {
       project.setDescription(keyScan.nextLine());
 
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
-        projects.set(no, project);
+        projectDao.update(no, project);
         System.out.println("변경하였습니다.");
       } else {
         System.out.println("변경을 취소하였습니다.");
       }
-      
-      projectDao.save(projects);
-      
     } catch (IndexOutOfBoundsException e) {
       System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {

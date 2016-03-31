@@ -1,6 +1,5 @@
 package bitcamp.pms.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -23,12 +22,10 @@ public class MemberUpdateController implements MenuController {
     keyScan = (Scanner)paramMap.get("stdin");
 
     try {
-      List<Member> members = memberDao.load();
-      
       System.out.print("변경할 회원 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
   
-      Member oldMember = members.get(no);
+      Member oldMember = memberDao.selectOne(no);
       Member member = new Member();
   
       System.out.printf("이름(%s)? ", oldMember.getName());
@@ -44,14 +41,11 @@ public class MemberUpdateController implements MenuController {
       member.setTel(keyScan.nextLine());
   
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
-        members.set(no, member);
+        memberDao.update(no, member);
         System.out.println("변경하였습니다.");
       } else {
         System.out.println("변경을 취소하였습니다.");
       }
-      
-      memberDao.save(members);
-
     } catch (IndexOutOfBoundsException e) {
       System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {

@@ -17,7 +17,7 @@ public class ProjectListController implements MenuController {
   @Override
   public void service(Map<String,Object> paramMap) {
     try {
-      List<Project> projects = projectDao.load();
+      List<Project> projects = projectDao.selectList();
       for (int i = 0; i < projects.size(); i++) {
         System.out.printf("%d, %s\n", i, projects.get(i).toString());
       }

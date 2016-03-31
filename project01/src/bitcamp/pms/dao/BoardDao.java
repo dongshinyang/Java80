@@ -14,7 +14,7 @@ import bitcamp.pms.domain.Board;
 public class BoardDao {
   private static final String filename = "board.data";
   
-  public List<Board> load() throws Exception {
+  public List<Board> selectList() throws Exception {
     ArrayList<Board> boards = new ArrayList<>();
     
     FileReader in0 = new FileReader(filename);
@@ -68,13 +68,19 @@ public class BoardDao {
   }
   
   public Board selectOne(int no) throws Exception {
-    List<Board> boards = this.load();
+    List<Board> boards = this.selectList();
     return boards.get(no);
   }
   
   public void update(int no, Board board) throws Exception {
-    List<Board> boards = this.load();
+    List<Board> boards = this.selectList();
     boards.set(no, board);
+    this.save(boards);
+  }
+  
+  public void delete(int no) throws Exception {
+    List<Board> boards = this.selectList();
+    boards.remove(no);
     this.save(boards);
   }
   

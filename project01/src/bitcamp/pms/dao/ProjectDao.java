@@ -14,7 +14,7 @@ import bitcamp.pms.domain.Project;
 public class ProjectDao {
   private static final String filename = "project.data";
   
-  public List<Project> load() throws Exception {
+  public List<Project> selectList() throws Exception {
     ArrayList<Project> projects = new ArrayList<>();
     
     FileReader in0 = new FileReader(filename);
@@ -63,5 +63,22 @@ public class ProjectDao {
     out.close();
     out1.close();
     out0.close();
+  }
+  
+  public Project selectOne(int no) throws Exception {
+    List<Project> projects = this.selectList();
+    return projects.get(no);
+  }
+  
+  public void update(int no, Project project) throws Exception {
+    List<Project> projects = this.selectList();
+    projects.set(no, project);
+    this.save(projects);
+  }
+  
+  public void delete(int no) throws Exception {
+    List<Project> projects = this.selectList();
+    projects.remove(no);
+    this.save(projects);
   }
 }

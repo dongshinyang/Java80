@@ -17,7 +17,7 @@ public class MemberListController implements MenuController {
   @Override
   public void service(Map<String,Object> paramMap) {
     try {
-      List<Member> members = memberDao.load();
+      List<Member> members = memberDao.selectList();
       
       Member member = null;
       for (int i = 0; i < members.size(); i++) {

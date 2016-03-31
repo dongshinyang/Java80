@@ -13,7 +13,7 @@ import bitcamp.pms.domain.Member;
 public class MemberDao {
   private static final String filename = "member.data";
   
-  public List<Member> load() throws Exception {
+  public List<Member> selectList() throws Exception {
     ArrayList<Member> members = new ArrayList<>();
     
     FileReader in0 = new FileReader(filename);
@@ -58,5 +58,22 @@ public class MemberDao {
     out.close();
     out1.close();
     out0.close();
+  }
+  
+  public Member selectOne(int no) throws Exception {
+    List<Member> members = this.selectList();
+    return members.get(no);
+  }
+  
+  public void update(int no, Member member) throws Exception {
+    List<Member> members = this.selectList();
+    members.set(no, member);
+    this.save(members);
+  }
+  
+  public void delete(int no) throws Exception {
+    List<Member> members = this.selectList();
+    members.remove(no);
+    this.save(members);
   }
 }

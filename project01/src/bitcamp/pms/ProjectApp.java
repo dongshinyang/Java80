@@ -59,8 +59,6 @@ public class ProjectApp {
       doQuit();
     } else if (cmds[0].equals("about")) {
       doAbout();
-    } else if (cmds[0].equals("go")) {
-      doGo(cmds);
     } else {
       MenuController controller = (MenuController)appContext.getBean(cmds[0]);
       if (controller != null) {
@@ -99,22 +97,4 @@ public class ProjectApp {
     System.out.println("비트캠프 80기 프로젝트 관리 시스템!");
   }
 
-  static void doGo(String[] cmds) {
-    if (cmds.length < 2) {
-      System.out.println("메뉴 이름을 지정하세요.");
-      System.out.println("예) go member");
-      return ;
-    }
-
-    // 작업에 필요한 재료를 준비
-    HashMap<String,Object> paramMap = new HashMap<>();
-    paramMap.put("stdin", keyScan);
-
-    MenuController controller = (MenuController)appContext.getBean(cmds[1]);
-    if (controller != null) {
-      controller.service(paramMap);
-    } else {
-      System.out.println("없는 메뉴입니다.");
-    }
-  }
 }
