@@ -7,6 +7,7 @@ import java.util.Scanner;
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.domain.Member;
+import bitcamp.pms.util.CommandUtil;
 
 @Component("member/delete.do")
 public class MemberDeleteController implements MenuController {
@@ -27,7 +28,7 @@ public class MemberDeleteController implements MenuController {
       System.out.print("삭제할 회원 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
   
-      if (confirm("정말 삭제하시겠습니까?", true)) {
+      if (CommandUtil.confirm(keyScan, "정말 삭제하시겠습니까?")) {
         members.remove(no);
         System.out.println("삭제하였습니다.");
       } else {
@@ -46,22 +47,4 @@ public class MemberDeleteController implements MenuController {
   @Override
   public void destroy() {}
 
-  private boolean confirm(String message, boolean strictMode) {
-    String input = null;
-    do {
-      System.out.printf("%s(y/n) ", message);
-      input = keyScan.nextLine().toLowerCase();
-
-      if (input.equals("y")) {
-        return true;
-      } else if (input.equals("n")) {
-        return false;
-      } else {
-        if (!strictMode) {
-          return false;
-        }
-        System.out.println("잘못된 명령어입니다.");
-      }
-    } while(true);
-  }
 }

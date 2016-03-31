@@ -7,6 +7,7 @@ import java.util.Scanner;
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.domain.Member;
+import bitcamp.pms.util.CommandUtil;
 
 @Component("member/update.do")
 public class MemberUpdateController implements MenuController {
@@ -42,7 +43,7 @@ public class MemberUpdateController implements MenuController {
       System.out.printf("전화(%s)? ", oldMember.getTel());
       member.setTel(keyScan.nextLine());
   
-      if (confirm("변경하시겠습니까?", true)) {
+      if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
         members.set(no, member);
         System.out.println("변경하였습니다.");
       } else {
@@ -61,22 +62,4 @@ public class MemberUpdateController implements MenuController {
   @Override
   public void destroy() {}
 
-  private boolean confirm(String message, boolean strictMode) {
-    String input = null;
-    do {
-      System.out.printf("%s(y/n) ", message);
-      input = keyScan.nextLine().toLowerCase();
-
-      if (input.equals("y")) {
-        return true;
-      } else if (input.equals("n")) {
-        return false;
-      } else {
-        if (!strictMode) {
-          return false;
-        }
-        System.out.println("잘못된 명령어입니다.");
-      }
-    } while(true);
-  }
 }

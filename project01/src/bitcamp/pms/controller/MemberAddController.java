@@ -6,6 +6,7 @@ import java.util.Scanner;
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.domain.Member;
+import bitcamp.pms.util.CommandUtil;
 
 @Component("member/add.do")
 public class MemberAddController implements MenuController {
@@ -34,7 +35,7 @@ public class MemberAddController implements MenuController {
     System.out.print("전화? ");
     member.setTel(keyScan.nextLine());
 
-    if (confirm("저장하시겠습니까?", true)) {
+    if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
       try {
         memberDao.insert(member);
         System.out.println("저장하였습니다.");
@@ -48,23 +49,5 @@ public class MemberAddController implements MenuController {
 
   @Override
   public void destroy() {}
-
-  private boolean confirm(String message, boolean strictMode) {
-    String input = null;
-    do {
-      System.out.printf("%s(y/n) ", message);
-      input = keyScan.nextLine().toLowerCase();
-
-      if (input.equals("y")) {
-        return true;
-      } else if (input.equals("n")) {
-        return false;
-      } else {
-        if (!strictMode) {
-          return false;
-        }
-        System.out.println("잘못된 명령어입니다.");
-      }
-    } while(true);
-  }
+  
 }

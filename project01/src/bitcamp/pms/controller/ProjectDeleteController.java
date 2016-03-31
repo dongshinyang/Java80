@@ -7,6 +7,7 @@ import java.util.Scanner;
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.dao.ProjectDao;
 import bitcamp.pms.domain.Project;
+import bitcamp.pms.util.CommandUtil;
 
 @Component("project/delete.do")
 public class ProjectDeleteController implements MenuController {
@@ -26,7 +27,7 @@ public class ProjectDeleteController implements MenuController {
       System.out.print("삭제할 프로젝트 번호?");
       int no = Integer.parseInt(keyScan.nextLine());
 
-      if (confirm("정말 삭제하시겠습니까?")) {
+      if (CommandUtil.confirm(keyScan, "정말 삭제하시겠습니까?")) {
         projects.remove(no);
         System.out.println("삭제하였습니다.");
       } else {
@@ -44,18 +45,5 @@ public class ProjectDeleteController implements MenuController {
 
   @Override
   public void destroy() {}
-  
-  private boolean confirm(String message) {
-    while (true) {
-      System.out.printf("%s(y/n) ", message);
-      String input = keyScan.nextLine().toLowerCase();
-      if (input.equals("y")) {
-        return true;
-      } else if (input.equals("n")) {
-        return false;
-      } else {
-        System.out.println("잘못된 명령어입니다.");
-      }
-    }
-  }
+ 
 }

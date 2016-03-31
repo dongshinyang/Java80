@@ -12,6 +12,8 @@
    MemberDao 클래스로 옮긴다.   
 4) BoardXxxController와 ProjectXxxController에 대해서도 
    동일하게 처리한다.
+5) XxxController에 공통적으로 있는 confirm()을 
+   CommandUtil 클래스를 생성하여 여기로 옮긴다.
 */
 package bitcamp.pms;
 

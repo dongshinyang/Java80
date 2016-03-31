@@ -7,6 +7,7 @@ import java.util.Scanner;
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.domain.Board;
+import bitcamp.pms.util.CommandUtil;
 
 @Component("board/add.do")
 public class BoardAddController implements MenuController {
@@ -31,7 +32,7 @@ public class BoardAddController implements MenuController {
     board.setPassword(keyScan.nextLine());
     board.setCreatedDate(new Date(System.currentTimeMillis()));
     
-    if (confirm("저장하시겠습니까?")) {
+    if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
       try {
         boardDao.insert(board);
         System.out.println("저장하였습니다.");
@@ -45,19 +46,5 @@ public class BoardAddController implements MenuController {
 
   @Override
   public void destroy() {}
-
-  private boolean confirm(String message) {
-    while (true) {
-      System.out.printf("%s(y/n) ", message);
-      String input = keyScan.nextLine().toLowerCase();
-      if (input.equals("y")) {
-        return true;
-      } else if (input.equals("n")) {
-        return false;
-      } else {
-        System.out.println("잘못된 명령어입니다.");
-      }
-    }
-  }
 
 }

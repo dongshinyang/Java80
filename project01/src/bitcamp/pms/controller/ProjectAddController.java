@@ -7,6 +7,7 @@ import java.util.Scanner;
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.dao.ProjectDao;
 import bitcamp.pms.domain.Project;
+import bitcamp.pms.util.CommandUtil;
 
 @Component("project/add.do")
 public class ProjectAddController implements MenuController {
@@ -32,7 +33,7 @@ public class ProjectAddController implements MenuController {
       System.out.print("설명? ");
       project.setDescription(keyScan.nextLine());
 
-      if (confirm("저장하시겠습니까?")) {
+      if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
         projectDao.insert(project);
         System.out.println("저장하였습니다.");
       } else {
@@ -45,18 +46,5 @@ public class ProjectAddController implements MenuController {
 
   @Override
   public void destroy() {}
-  
-  private boolean confirm(String message) {
-    while (true) {
-      System.out.printf("%s(y/n) ", message);
-      String input = keyScan.nextLine().toLowerCase();
-      if (input.equals("y")) {
-        return true;
-      } else if (input.equals("n")) {
-        return false;
-      } else {
-        System.out.println("잘못된 명령어입니다.");
-      }
-    }
-  }
+
 }
