@@ -212,7 +212,9 @@
   => "DAO"라 부른다. Data Access Object
   => Data Persistence 객체 
   
-
+#25
+- Information Expert 패턴에 따라 XxxDao 클래스가 데이터 처리를
+  완전히 담당하게 개선하라!
 
 
 

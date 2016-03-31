@@ -66,26 +66,4 @@ public class BoardDao {
     out1.close();
     out0.close();
   }
-  
-  public Board selectOne(int no) throws Exception {
-    List<Board> boards = this.load();
-    return boards.get(no);
-  }
-  
-  public void update(int no, Board board) throws Exception {
-    List<Board> boards = this.load();
-    boards.set(no, board);
-    this.save(boards);
-  }
-  
 }
-
-
-
-
-
-
-
-
-
-
