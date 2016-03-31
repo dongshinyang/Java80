@@ -1,15 +1,21 @@
 /* 목표
-- 여러 컨트롤러에 중복되어 있는 기능을 한 클래스로 만든다.
-- Data를 처리하는 전문 클래스를 도입한다. 
-  => "DAO"라 부른다. Data Access Object
-  => Data Persistence 객체 
-  
+- 커맨드 패턴을 적용하여 명령어 당 한 개의 처리 클래스로 구성하라. 
+예)
+[이전 방식]
+명령> go member
+프로젝트관리> list
+
+[변경 방식]
+명령> member/list.do
+.....
+명령> member/add.do
+.....
 
 - 작업절차
-1) dao 패키지 생성 
-2) MemberDao 클래스 생성
-3) MemberXxxController에 있는 데이터 처리 메서드를 
-   MemberDao 클래스로 옮긴다.   
+1) MemberController 클래스를 다음 클래스들로 분리한다.
+   MemberListController, MemberAddController, MemberUpdateController, 
+   MemberDeleteController
+   
 
 */
 package bitcamp.pms;

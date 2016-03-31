@@ -206,6 +206,12 @@
 명령> member/add.do
 .....
 
+#24
+- 여러 컨트롤러에 중복되어 있는 기능을 한 클래스로 만든다.
+- Data를 처리하는 전문 클래스를 도입한다. 
+  => "DAO"라 부른다. Data Access Object
+  => Data Persistence 객체 
+  
 
 
 
