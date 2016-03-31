@@ -1,31 +1,18 @@
 package bitcamp.pms.controller;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Map;
 import java.util.Scanner;
 
 import bitcamp.pms.annotation.Component;
+import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.domain.Board;
 
 @Component("board/add.do")
 public class BoardAddController implements MenuController {
-  private static final String filename = "board.data";
+  BoardDao boardDao = new BoardDao();
+  
   private Scanner keyScan;
-
-  public void insert(Board board) throws Exception {
-    FileWriter out0 = new FileWriter(filename, true);
-    BufferedWriter out1 = new BufferedWriter(out0);
-    PrintWriter out = new PrintWriter(out1);
-
-    out.println(board.toCSV());
-
-    out.close();
-    out1.close();
-    out0.close();
-  }
 
   @Override
   public void init() {}
@@ -46,7 +33,7 @@ public class BoardAddController implements MenuController {
     
     if (confirm("저장하시겠습니까?")) {
       try {
-        this.insert(board);
+        boardDao.insert(board);
         System.out.println("저장하였습니다.");
       } catch (Exception e) {
         System.out.println("데이터를 저장할 수 없습니다.");

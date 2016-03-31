@@ -10,7 +10,8 @@
 2) MemberDao 클래스 생성
 3) MemberXxxController에 있는 데이터 처리 메서드를 
    MemberDao 클래스로 옮긴다.   
-
+4) BoardXxxController와 ProjectXxxController에 대해서도 
+   동일하게 처리한다.
 */
 package bitcamp.pms;
 
