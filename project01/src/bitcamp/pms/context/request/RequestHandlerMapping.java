@@ -44,15 +44,25 @@ public class RequestHandlerMapping {
         //3) RequestHandler 객체에 메서드와 객체 정보를 저장한다.
         //4) requestMap에 RequestHandler 객체를 보관한다.
         handlerMap.put(anno.value(), new RequestHandler(m, controller));
-        System.out.printf("%s --> %s\n", 
-            controller.getClass().getName(), m.getName());
+        //System.out.printf("%s --> %s\n", 
+        //    controller.getClass().getName(), m.getName());
       }
     }
   }
-  
-  
-  
-  
-  
-  
+
+  public RequestHandler getRequestHandler(String name) {
+    return handlerMap.get(name);
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+

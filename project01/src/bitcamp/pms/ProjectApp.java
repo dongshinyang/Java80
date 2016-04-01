@@ -31,13 +31,17 @@
 2) RequestHandlerMapping 클래스 작성
   => ApplicationContext에 보관된 객체 중에서 @Controller 애노테이션이 붙은 
      객체만 꺼내서 @RequestMapping이 붙은 메서드를 추출하여 저장한다.
-  
+3) ProjectApp 클래스 변경
+  => RequestHandlerMapping 클래스를 사용하여 명령어 처리하도록 코드를 변경한다.  
 */
 package bitcamp.pms;
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import bitcamp.pms.context.ApplicationContext;
+import bitcamp.pms.context.request.RequestHandler;
 import bitcamp.pms.context.request.RequestHandlerMapping;
 
 public class ProjectApp {
@@ -66,18 +70,24 @@ public class ProjectApp {
     } else if (cmds[0].equals("about")) {
       doAbout();
     } else {
-      /*
-      MenuController controller = (MenuController)appContext.getBean(cmds[0]);
-      if (controller != null) {
+      
+      RequestHandler requestHandler = 
+          (RequestHandler) requestHandlerMapping.getRequestHandler(cmds[0]);
+      if (requestHandler != null) {
         // 작업에 필요한 재료를 준비
         HashMap<String,Object> paramMap = new HashMap<>();
         paramMap.put("stdin", keyScan);
         
-        controller.service(paramMap);
+        Method method = requestHandler.getMethod();
+        Object obj = requestHandler.getObj();
+        try {
+          method.invoke(obj, paramMap);
+        } catch (Exception e) {
+          System.out.println("명령 처리 중에 오류가 발생했습니다!");
+        }
       } else {
         doError();
       }
-      */
     }
   }
 
