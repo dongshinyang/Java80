@@ -3,23 +3,21 @@ package bitcamp.pms.controller;
 import java.util.List;
 import java.util.Map;
 
-import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.ProjectDao;
 import bitcamp.pms.domain.Project;
 
-@Component("project/list.do")
-public class ProjectListController implements MenuController {
+@Controller
+public class ProjectListController {
   private ProjectDao projectDao;
   
   public void setProjectDao(ProjectDao projectDao) {
     this.projectDao = projectDao;
   }
-  
-  @Override
-  public void init() {}
 
-  @Override
-  public void service(Map<String,Object> paramMap) {
+  @RequestMapping("project/list.do")
+  public void list(Map<String,Object> paramMap) {
     try {
       List<Project> projects = projectDao.selectList();
       for (int i = 0; i < projects.size(); i++) {
@@ -29,7 +27,4 @@ public class ProjectListController implements MenuController {
       System.out.println("데이터 로딩에 실패했습니다.");
     }
   }
-
-  @Override
-  public void destroy() {}
 }

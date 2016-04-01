@@ -4,13 +4,14 @@ import java.sql.Date;
 import java.util.Map;
 import java.util.Scanner;
 
-import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.domain.Board;
 import bitcamp.pms.util.CommandUtil;
 
-@Component("board/update.do")
-public class BoardUpdateController implements MenuController {
+@Controller
+public class BoardUpdateController {
   private BoardDao boardDao;
   private Scanner keyScan;
 
@@ -18,11 +19,8 @@ public class BoardUpdateController implements MenuController {
     this.boardDao = boardDao;
   }
 
-  @Override
-  public void init() {}
-
-  @Override
-  public void service(Map<String,Object> paramMap) {
+  @RequestMapping("board/update.do")
+  public void update(Map<String,Object> paramMap) {
     keyScan = (Scanner)paramMap.get("stdin");
 
     try {
@@ -53,8 +51,4 @@ public class BoardUpdateController implements MenuController {
       System.out.println("데이터 처리에 실패했습니다.");
     }
   }
-
-  @Override
-  public void destroy() {}
-
 }

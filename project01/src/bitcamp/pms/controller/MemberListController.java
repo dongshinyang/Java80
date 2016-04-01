@@ -3,23 +3,21 @@ package bitcamp.pms.controller;
 import java.util.List;
 import java.util.Map;
 
-import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.domain.Member;
 
-@Component("member/list.do")
-public class MemberListController implements MenuController {
+@Controller
+public class MemberListController {
   private MemberDao memberDao;
 
   public void setMemberDao(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
-  
-  @Override
-  public void init() {}
 
-  @Override
-  public void service(Map<String,Object> paramMap) {
+  @RequestMapping("member/list.do")
+  public void list(Map<String,Object> paramMap) {
     try {
       List<Member> members = memberDao.selectList();
       
@@ -32,8 +30,4 @@ public class MemberListController implements MenuController {
       throw new RuntimeException("회원 데이터 로딩 실패!", e);
     }
   }
-
-  @Override
-  public void destroy() {}
-
 }

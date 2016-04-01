@@ -3,12 +3,13 @@ package bitcamp.pms.controller;
 import java.util.Map;
 import java.util.Scanner;
 
-import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.util.CommandUtil;
 
-@Component("board/delete.do")
-public class BoardDeleteController implements MenuController {
+@Controller
+public class BoardDeleteController {
   private BoardDao boardDao;
   private Scanner keyScan;
 
@@ -16,11 +17,8 @@ public class BoardDeleteController implements MenuController {
     this.boardDao = boardDao;
   }
 
-  @Override
-  public void init() {}
-
-  @Override
-  public void service(Map<String,Object> paramMap) {
+  @RequestMapping("board/delete.do")
+  public void delete(Map<String,Object> paramMap) {
     keyScan = (Scanner)paramMap.get("stdin");
     
     try {
@@ -41,8 +39,4 @@ public class BoardDeleteController implements MenuController {
       e.printStackTrace();
     } 
   }
-
-  @Override
-  public void destroy() {}
-
 }

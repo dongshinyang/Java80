@@ -3,13 +3,14 @@ package bitcamp.pms.controller;
 import java.util.Map;
 import java.util.Scanner;
 
-import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.domain.Member;
 import bitcamp.pms.util.CommandUtil;
 
-@Component("member/add.do")
-public class MemberAddController implements MenuController {
+@Controller
+public class MemberAddController {
   private MemberDao memberDao;
   private Scanner keyScan;
 
@@ -17,11 +18,8 @@ public class MemberAddController implements MenuController {
     this.memberDao = memberDao;
   }
 
-  @Override
-  public void init() {}
-
-  @Override
-  public void service(Map<String,Object> paramMap) {
+  @RequestMapping("member/add.do")
+  public void add(Map<String,Object> paramMap) {
     keyScan = (Scanner)paramMap.get("stdin");
 
     Member member = new Member();
@@ -49,8 +47,4 @@ public class MemberAddController implements MenuController {
       System.out.println("저장을 취소하였습니다.");
     }
   }
-
-  @Override
-  public void destroy() {}
-  
 }

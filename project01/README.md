@@ -219,8 +219,13 @@
 #26
 - 객체 공유와 의존 객체 주입(Dependency Injection) 적용
 
-
-
+#27
+- @RequestMapping 애노테이션을 추가한다.
+  => 명령어를 처리하는 메서드를 지정한다.
+  => MenuController 인터페이스가 필요없어 진다.
+- XxxController는 MenuController 인터페이스를 구현하는 대신에
+  @RequestMapping 애노테이션을 사용하여
+  ProjectApp이 호출할 메서드를 지정한다.
 
 
 

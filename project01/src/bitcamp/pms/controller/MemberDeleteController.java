@@ -3,12 +3,13 @@ package bitcamp.pms.controller;
 import java.util.Map;
 import java.util.Scanner;
 
-import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.util.CommandUtil;
 
-@Component("member/delete.do")
-public class MemberDeleteController implements MenuController {
+@Controller
+public class MemberDeleteController {
   private MemberDao memberDao;
   private Scanner keyScan;
 
@@ -16,11 +17,8 @@ public class MemberDeleteController implements MenuController {
     this.memberDao = memberDao;
   }
 
-  @Override
-  public void init() {}
-
-  @Override
-  public void service(Map<String,Object> paramMap) {
+  @RequestMapping("member/delete.do")
+  public void delete(Map<String,Object> paramMap) {
     keyScan = (Scanner)paramMap.get("stdin");
 
     try {
@@ -40,8 +38,4 @@ public class MemberDeleteController implements MenuController {
       System.out.println("데이터 처리에 실패했습니다.");
     }
   }
-
-  @Override
-  public void destroy() {}
-
 }

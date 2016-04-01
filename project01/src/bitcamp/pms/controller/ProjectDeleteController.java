@@ -3,24 +3,22 @@ package bitcamp.pms.controller;
 import java.util.Map;
 import java.util.Scanner;
 
-import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.ProjectDao;
 import bitcamp.pms.util.CommandUtil;
 
-@Component("project/delete.do")
-public class ProjectDeleteController implements MenuController {
+@Controller
+public class ProjectDeleteController {
   private ProjectDao projectDao;
   private Scanner keyScan;
   
   public void setProjectDao(ProjectDao projectDao) {
     this.projectDao = projectDao;
   }
-  
-  @Override
-  public void init() {}
 
-  @Override
-  public void service(Map<String,Object> paramMap) {
+  @RequestMapping("project/delete.do")
+  public void delete(Map<String,Object> paramMap) {
     keyScan = (Scanner)paramMap.get("stdin");
     
     try {
@@ -40,8 +38,4 @@ public class ProjectDeleteController implements MenuController {
       System.out.println("데이터 로딩에 실패했습니다.");
     }
   }
-
-  @Override
-  public void destroy() {}
- 
 }

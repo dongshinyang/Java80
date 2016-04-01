@@ -4,13 +4,14 @@ import java.sql.Date;
 import java.util.Map;
 import java.util.Scanner;
 
-import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.ProjectDao;
 import bitcamp.pms.domain.Project;
 import bitcamp.pms.util.CommandUtil;
 
-@Component("project/add.do")
-public class ProjectAddController implements MenuController {
+@Controller
+public class ProjectAddController {
   private ProjectDao projectDao;
   private Scanner keyScan;
   
@@ -18,11 +19,8 @@ public class ProjectAddController implements MenuController {
     this.projectDao = projectDao;
   }
 
-  @Override
-  public void init() {}
-
-  @Override
-  public void service(Map<String,Object> paramMap) {
+  @RequestMapping("project/add.do")
+  public void add(Map<String,Object> paramMap) {
     keyScan = (Scanner)paramMap.get("stdin");
     
     try {
@@ -47,8 +45,4 @@ public class ProjectAddController implements MenuController {
       System.out.println("데이터 로딩에 실패했습니다.");
     }
   }
-
-  @Override
-  public void destroy() {}
-
 }

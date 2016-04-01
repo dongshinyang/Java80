@@ -1,14 +1,22 @@
-// @Component가 붙은 클래스에 대해서만 인스턴스를 생성하고 관리한다.
+/* 용도
+=> @Component 및 @Controller 가 붙은 클래스에 대해서만 
+   인스턴스를 생성하고 관리한다.
+*/
 package bitcamp.pms.context;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import bitcamp.pms.annotation.Component;
+import bitcamp.pms.annotation.Controller;
 
 public class ApplicationContext {
   HashMap<String,Object> objPool = new HashMap<>();
@@ -67,17 +75,20 @@ public class ApplicationContext {
       try {
         Class<?> clazz = Class.forName(classNameWithPackage);
         
-        // @Component 애노테이션이 붙었는지 알아본다.
-        Component anno = clazz.getAnnotation(Component.class);
+        // @Component 또는 @Controller 애노테이션을 구분하여 처리한다.
+        Annotation[] annos = clazz.getAnnotations();
         
-        if (anno != null) { // @Component 애노테이션이 있다면 
-          Object obj = clazz.newInstance(); // 해당 클래스의 인스턴스를 생성한다.
-          if (anno.value().equals("")) {
-            objPool.put(clazz.getName(), obj);
-          } else {
-            objPool.put(anno.value(), obj); // 애노테이션의 value 값을 이용하여 인스턴스를 저장한다.
-          }
+        for (Annotation anno : annos) {
+          if (anno.annotationType() == Component.class) {
+            //System.out.printf("%s --> %s\n", clazz.getName(), "Component");
+            processComponentAnnotation(clazz);
+            
+          } else if (anno.annotationType() == Controller.class) {
+            //System.out.printf("%s --> %s\n", clazz.getName(), "Controller");
+            processControllerAnnotation(clazz);
+          }  
         }
+        
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -90,6 +101,24 @@ public class ApplicationContext {
     }
   }
   
+  private void processComponentAnnotation(Class<?> clazz) throws Exception {
+    Component anno = clazz.getAnnotation(Component.class);
+    String key = anno.value();
+    if (key.equals("")) {
+      key = clazz.getName();
+    }
+    objPool.put(key, clazz.newInstance());
+  }
+  
+  private void processControllerAnnotation(Class<?> clazz) throws Exception {
+    Controller anno = clazz.getAnnotation(Controller.class);
+    String key = anno.value();
+    if (key.equals("")) {
+      key = clazz.getName();
+    }
+    objPool.put(key, clazz.newInstance());
+  }
+
   public List<Object> getBeans(Class<?> beanType) {
     
     ArrayList<Object> list = new ArrayList<>();
@@ -106,6 +135,26 @@ public class ApplicationContext {
   
   public Object getBean(String name) {
     return objPool.get(name);
+  }
+
+  public Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> annoType) {
+    // 전체 객체 목록 
+    Set<Entry<String,Object>> entrySet = objPool.entrySet();
+    
+    // 특정 애노테이션이 붙은 객체 목록
+    HashMap<String, Object> objMap = new HashMap<>();
+    
+    Object obj = null;
+    for (Entry<String,Object> entry : entrySet) {
+      obj = entry.getValue();
+      
+      if (obj.getClass().getAnnotation(annoType) == null)
+        continue;
+      
+      objMap.put(entry.getKey(), obj);
+    }
+    
+    return objMap;
   }
   
 }
