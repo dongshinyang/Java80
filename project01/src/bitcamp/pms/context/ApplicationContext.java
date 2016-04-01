@@ -76,18 +76,14 @@ public class ApplicationContext {
         Class<?> clazz = Class.forName(classNameWithPackage);
         
         // @Component 또는 @Controller 애노테이션을 구분하여 처리한다.
-        Annotation[] annos = clazz.getAnnotations();
-        
-        for (Annotation anno : annos) {
-          if (anno.annotationType() == Component.class) {
-            //System.out.printf("%s --> %s\n", clazz.getName(), "Component");
-            processComponentAnnotation(clazz);
-            
-          } else if (anno.annotationType() == Controller.class) {
-            //System.out.printf("%s --> %s\n", clazz.getName(), "Controller");
-            processControllerAnnotation(clazz);
-          }  
-        }
+        if (clazz.getAnnotation(Component.class) != null) {
+          //System.out.printf("%s --> %s\n", clazz.getName(), "Component");
+          processComponentAnnotation(clazz);
+          
+        } else if (clazz.getAnnotation(Controller.class) != null) {
+          //System.out.printf("%s --> %s\n", clazz.getName(), "Controller");
+          processControllerAnnotation(clazz);
+        }  
         
       } catch (Exception e) {
         e.printStackTrace();
