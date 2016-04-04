@@ -30,8 +30,18 @@ public class RequestHandlerMapping {
     
     Method[] methods = null;
     RequestMapping anno = null;
+    RequestMapping classAnno = null;
+    String baseName = null;
     
     for (Object controller : controllers) {
+      // 클래스에 @RequestMapping이 붙어 있다면, 기본 이름으로 저장한다.
+      classAnno = controller.getClass().getAnnotation(RequestMapping.class);
+      if (classAnno != null) {
+        baseName = classAnno.value();
+      } else {
+        baseName = "";
+      }
+      
       //2) 각 객체에서 @RequestMapping이 붙은 메서드를 꺼낸다.
       methods = controller.getClass().getMethods();
       
@@ -43,7 +53,7 @@ public class RequestHandlerMapping {
         
         //3) RequestHandler 객체에 메서드와 객체 정보를 저장한다.
         //4) requestMap에 RequestHandler 객체를 보관한다.
-        handlerMap.put(anno.value(), new RequestHandler(m, controller));
+        handlerMap.put(baseName + anno.value(), new RequestHandler(m, controller));
         //System.out.printf("%s --> %s\n", 
         //    controller.getClass().getName(), m.getName());
       }

@@ -1,18 +1,24 @@
 /* 목표
-- 명령어를 처리하는 메서드(RequestHandler)의 파라미터 선언을 자유롭게 하도록 
-  변경한다. 
-- ProjectApp에서는 메서드를 호출하기 전에 파라미터를 분서하여 그에 맞는
-  값을 준비해야 한다.  
-
+- 여러 클래스에 분산되어 있는 CRUD(Create/Read/Update/Delete)관련 
+  메서드를 한 클래스로 합친다.
+- 반드시 합쳐야 하는 것은 아니다.
+- 합치는 것이 유지보수에 낫다고 판단되면 합쳐라! 
+- 컨트롤러 클래스에 @RequestMapping 이 있다면, 메서드를 정보를 저장할 때
+  클래스에 설정된 @RequestMapping 값과 합쳐서 명령어 정보를 저장하라!
+  
 - 작업절차
-[ProjectApp에 메서드의 파라미터를 분석하는 기능 추가]
-1) 메서드를 호출하는 부분 변경
+1) BoardAddController의 클래스 이름을 BoardController로 변경한다.
+2) BoardDeleteController, BoardListController, BoardUpdateController의 
+   메서드를 BoardController 클래스로 옮기고, 
+   기존 클래스들은 삭제한다.
   => 파라미터를 분석하여 메서드에 넘겨 줄 값을 준비하는 코드를 추가한다.
-2) ApplicationContext 변경
-  => 파라미터가 필요로 하는 객체를 타입으로 찾을 수 있도록 getBean(Class<?>) 추가.
-  => 임의적으로 객체를 풀에 넣을 수 있도록 addBean() 추가
-3) Controller 변경
-  => 작업할 때 필요한 객체는 파라미터 변수로 직접 선언한다.
+3) 나머지 MemberXxxController와 ProjectXxxController도 위와 같이 작업한다.
+
+[매핑 정보 합치기]
+1) 컨트롤러 클래스에 @RequestMapping을 붙인다. 
+2) RequestHandlerMapping 클래스를 변경한다.
+  => 만약 클래스에 @RequestMapping이 붙어 있다면, 
+     메서드를 테이블에 저장할 때 이 정보를 포함한다. 
  
 */
 package bitcamp.pms;
