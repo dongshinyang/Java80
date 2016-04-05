@@ -9,6 +9,8 @@ import com.mysql.jdbc.Driver;
 public class Test04 {
 
   public static void main(String[] args) throws Exception {
+    DriverManager.deregisterDriver(new Driver());
+
     try (
       // 여기에 선언한 모든 자원은 try 블록을 벗어나기 전에 자동으로 해제된다.
       // => 따라서 finally 블록에서 close()를 호출할 필요가 없다.
@@ -20,8 +22,6 @@ public class Test04 {
               "java80", /* DBMS 사용자 아이디 */
               "1111")  /* DBMS 사용자 암호 */
     ) {
-      DriverManager.deregisterDriver(new Driver());
-      
       System.out.println("연결 성공!");
       System.out.printf("5 / 0 = %d\n", 5 / 0);
       System.out.println("맑은 날씨입니다."); // <--- 실행 안됨.    

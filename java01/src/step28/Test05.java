@@ -9,14 +9,14 @@ import com.mysql.jdbc.Driver;
 public class Test05 {
 
   public static void main(String[] args) throws Exception {
+    DriverManager.deregisterDriver(new Driver());
+
     try (
       Connection con = DriverManager.getConnection(
               "jdbc:mysql://localhost:3306/java80db",
               "java80",
               "1111")  
     ) {
-      DriverManager.deregisterDriver(new Driver());
-      
       System.out.println("연결 성공!");
       System.out.printf("5 / 0 = %d\n", 5 / 0);
       System.out.println("맑은 날씨입니다."); // <--- 실행 안됨.    
