@@ -1,5 +1,5 @@
 // 주제: 데이터 변경하기 - update 문 보내기
-package step29.exam02;
+package step29.exam03;
 
 public class MemberUpdate {
 

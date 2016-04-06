@@ -1,5 +1,5 @@
 // 주제: 데이터 삭제하기 - delete 문 보내기
-package step29.exam02;
+package step29.exam03;
 
 public class MemberDelete {
 

@@ -1,4 +1,5 @@
-package step29.exam02;
+// PreparedStatement 적용
+package step29.exam03;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
