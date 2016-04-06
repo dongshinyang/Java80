@@ -146,7 +146,7 @@ public class MemberDao {
           "jdbc:mysql://localhost:3306/java80db",
           "java80",
           "1111");
-      stmt = con.prepareStatement("delete from MEMBERS where mno=?");
+      stmt = con.prepareStatement("delete from MEMBERS where MNO=?");
       stmt.setInt(1, no);
       return stmt.executeUpdate();
       

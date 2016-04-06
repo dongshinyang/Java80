@@ -3,20 +3,26 @@ package bitcamp.pms.domain;
 import java.sql.Date;
 
 public class Board {
-  private String title;
-  private String content;
-  private int views;
-  private String password;
-  private Date createdDate;
+  private int     no;
+  private String  title;
+  private String  content;
+  private int     views;
+  private String  password;
+  private Date    createdDate;
   
   @Override
   public String toString() {
-    return title + "," + views + "," + createdDate;
+    return "Board [no=" + no + ", title=" + title + ", content=" + content 
+        + ", views=" + views + ", password="
+        + password + ", createdDate=" + createdDate + "]";
   }
-  
-  public String toCSV() {
-    return String.format("%s,%s,%d,%s,%s", this.title, this.content, 
-        this.views, this.password, this.createdDate.toString());
+
+  public int getNo() {
+    return no;
+  }
+
+  public void setNo(int no) {
+    this.no = no;
   }
 
   public String getTitle() {

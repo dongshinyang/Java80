@@ -1,6 +1,5 @@
 package bitcamp.pms.controller;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,7 +28,6 @@ public class BoardController {
     board.setContent(keyScan.nextLine());
     System.out.print("암호? ");
     board.setPassword(keyScan.nextLine());
-    board.setCreatedDate(new Date(System.currentTimeMillis()));
     
     if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
       try {
@@ -69,8 +67,9 @@ public class BoardController {
     try {
       List<Board> boards = boardDao.selectList();
       
-      for (int i = 0; i < boards.size(); i++) {
-        System.out.printf("%d, %s\n", i, boards.get(i).toString());
+      for (Board board : boards) {
+        System.out.printf("%d, %s, %d, %s\n", 
+          board.getNo(), board.getTitle(), board.getViews(), board.getCreatedDate());
       }
     } catch (Exception e) {
       throw new RuntimeException("게시물 데이터 로딩 실패!", e);
@@ -83,19 +82,15 @@ public class BoardController {
       System.out.print("변경할 게시물 번호?");
       int no = Integer.parseInt(keyScan.nextLine());
       
-      Board oldBoard = boardDao.selectOne(no);
-      Board board = new Board();
+      Board board = boardDao.selectOne(no);
   
-      System.out.printf("제목(%s)? ", oldBoard.getTitle());
+      System.out.printf("제목(%s)? ", board.getTitle());
       board.setTitle(keyScan.nextLine());
-      System.out.printf("내용(%s)? ", oldBoard.getContent());
+      System.out.printf("내용(%s)? ", board.getContent());
       board.setContent(keyScan.nextLine());
-      System.out.printf("암호? ", oldBoard.getPassword());
-      board.setPassword(keyScan.nextLine());
-      board.setCreatedDate(new Date(System.currentTimeMillis()));
   
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
-        boardDao.update(no, board);
+        boardDao.update(board);
         System.out.println("변경하였습니다.");
       } else {
         System.out.println("변경을 취소하였습니다.");
