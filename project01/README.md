@@ -242,6 +242,8 @@
 - 컨트롤러 클래스에 @RequestMapping 이 있다면, 메서드를 정보를 저장할 때
   클래스에 설정된 @RequestMapping 값과 합쳐서 명령어 정보를 저장하라!
 
+#30
+- XxxDao에 JDBC를 적용하라!
 
 
 

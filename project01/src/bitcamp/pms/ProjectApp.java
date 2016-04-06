@@ -1,25 +1,20 @@
 /* 목표
-- 여러 클래스에 분산되어 있는 CRUD(Create/Read/Update/Delete)관련 
-  메서드를 한 클래스로 합친다.
-- 반드시 합쳐야 하는 것은 아니다.
-- 합치는 것이 유지보수에 낫다고 판단되면 합쳐라! 
-- 컨트롤러 클래스에 @RequestMapping 이 있다면, 메서드를 정보를 저장할 때
-  클래스에 설정된 @RequestMapping 값과 합쳐서 명령어 정보를 저장하라!
+- XxxDao에 JDBC를 적용하라!
   
 - 작업절차
-1) BoardAddController의 클래스 이름을 BoardController로 변경한다.
-2) BoardDeleteController, BoardListController, BoardUpdateController의 
-   메서드를 BoardController 클래스로 옮기고, 
-   기존 클래스들은 삭제한다.
-  => 파라미터를 분석하여 메서드에 넘겨 줄 값을 준비하는 코드를 추가한다.
-3) 나머지 MemberXxxController와 ProjectXxxController도 위와 같이 작업한다.
+1) domain 클래스를 변경한다.
+  => no 값을 저장할 수 있는 필드를 추가한다.
+  => getter/setter 추가
+  => toString() 재작성 
 
-[매핑 정보 합치기]
-1) 컨트롤러 클래스에 @RequestMapping을 붙인다. 
-2) RequestHandlerMapping 클래스를 변경한다.
-  => 만약 클래스에 @RequestMapping이 붙어 있다면, 
-     메서드를 테이블에 저장할 때 이 정보를 포함한다. 
- 
+2) dao 클래스 변경
+  => java01/src/step29/exam03/MemberDao.java 참고!
+  => MemberDao 변경 --> 테스트
+  => BoardDao 변경 --> 테스트
+  => ProjectDao 변경 --> 테스트
+  
+
+
 */
 package bitcamp.pms;
 
