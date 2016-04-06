@@ -3,6 +3,7 @@ package step29.exam03;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class MemberDao {
   
   public int insert(Member member) throws Exception {
     Connection con = null;
-    Statement stmt = null;
+    PreparedStatement stmt = null;
     
     try {
       Class.forName("com.mysql.jdbc.Driver");
@@ -54,14 +55,16 @@ public class MemberDao {
           "jdbc:mysql://localhost:3306/java80db",
           "java80",
           "1111");
-      stmt = con.createStatement();
+      
+      stmt = con.prepareStatement("insert into MEMBERS(MNAME,EMAIL,PWD,TEL)"
+          + " values(?,?,?,?)");
 
-      return stmt.executeUpdate("insert into MEMBERS(MNAME,EMAIL,PWD,TEL)"
-          + " values('" + member.getName()
-          + "','" + member.getEmail()
-          + "','" + member.getPassword()
-          + "','" + member.getTel()
-          + "')");
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getTel());
+      
+      return stmt.executeUpdate();
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
@@ -71,7 +74,7 @@ public class MemberDao {
   
   public int update(Member member) throws Exception {
     Connection con = null;
-    Statement stmt = null;
+    PreparedStatement stmt = null;
     
     try {
       Class.forName("com.mysql.jdbc.Driver");
@@ -79,14 +82,16 @@ public class MemberDao {
           "jdbc:mysql://localhost:3306/java80db",
           "java80",
           "1111");
-      stmt = con.createStatement();
+      stmt = con.prepareStatement(
+          "update MEMBERS set MNAME=?, EMAIL=?, PWD=?, TEL=? where MNO=?");
 
-      return stmt.executeUpdate(
-          "update MEMBERS set MNAME='" + member.getName()
-          + "', EMAIL='" + member.getEmail()
-          + "', PWD='" + member.getPassword()
-          + "', TEL='" + member.getTel()
-          + "' where MNO=" + member.getNo());
+      stmt.setString(1, member.getName());
+      stmt.setString(2, member.getEmail());
+      stmt.setString(3, member.getPassword());
+      stmt.setString(4, member.getTel());
+      stmt.setInt(5, member.getNo());
+      
+      return stmt.executeUpdate();
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
@@ -96,7 +101,7 @@ public class MemberDao {
   
   public int delete(int no) throws Exception {
     Connection con = null;
-    Statement stmt = null;
+    PreparedStatement stmt = null;
     
     try {
       Class.forName("com.mysql.jdbc.Driver");
@@ -104,9 +109,9 @@ public class MemberDao {
           "jdbc:mysql://localhost:3306/java80db",
           "java80",
           "1111");
-      stmt = con.createStatement();
-
-      return stmt.executeUpdate("delete from MEMBERS where mno=" + no);
+      stmt = con.prepareStatement("delete from MEMBERS where mno=?");
+      stmt.setInt(1, no);
+      return stmt.executeUpdate();
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
