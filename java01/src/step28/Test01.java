@@ -10,7 +10,7 @@ public class Test01 {
 
   public static void main(String[] args) throws Exception {
     //1) java.sql.Driver 구현체를 JDBC 드라이버 관리자에 등록한다.
-    DriverManager.deregisterDriver(new Driver());
+    DriverManager.registerDriver(new Driver());
     
     //2) JDBC 드라이버 관리자에게 java.sql.Connection 구현체를 달라고 요청한다.
     // => JDBC 드라이버 관리자 ---> com.mysql.jdbc.Driver 객체에게 요구한다.
