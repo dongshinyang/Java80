@@ -1,12 +1,12 @@
 // 주제: 질의하기 - SELECT 문 보내기
-package step28;
+package step29.exam01;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Test09 {
+public class MemberList {
 
   public static void main(String[] args) throws Exception {
     Connection con = null;
