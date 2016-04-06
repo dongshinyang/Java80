@@ -14,6 +14,7 @@ import bitcamp.pms.domain.Board;
 
 @Component
 public class BoardDao {
+  
   private static final String filename = "board.data";
   
   public List<Board> selectList() throws Exception {

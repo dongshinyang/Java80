@@ -9,9 +9,9 @@
 
 2) dao 클래스 변경
   => java01/src/step29/exam03/MemberDao.java 참고!
-  => MemberDao 변경 --> 테스트
-  => BoardDao 변경 --> 테스트
-  => ProjectDao 변경 --> 테스트
+  => MemberDao 변경 --> MemberController 변경 --> 테스트
+  => BoardDao 변경 --> BoardController 변경 --> 테스트
+  => ProjectDao 변경 --> ProjectController 변경 --> 테스트
   
 
 
@@ -90,6 +90,7 @@ public class ProjectApp {
         
       } catch (Exception e) {
         System.out.println("명령 처리 중에 오류가 발생했습니다!");
+        e.printStackTrace();
       }
     }
   }

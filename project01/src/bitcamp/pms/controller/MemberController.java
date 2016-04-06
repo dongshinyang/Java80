@@ -71,10 +71,9 @@ public class MemberController {
     try {
       List<Member> members = memberDao.selectList();
       
-      Member member = null;
-      for (int i = 0; i < members.size(); i++) {
-        member = members.get(i);
-        System.out.printf("%d, %s\n", i, member.toString());
+      for (Member member : members) {
+        System.out.printf("%d, %s, %s, %s\n", member.getNo(),
+            member.getName(), member.getEmail(), member.getTel());
       }
     } catch (Exception e) {
       throw new RuntimeException("회원 데이터 로딩 실패!", e);
@@ -87,23 +86,22 @@ public class MemberController {
       System.out.print("변경할 회원 번호는? ");
       int no = Integer.parseInt(keyScan.nextLine());
   
-      Member oldMember = memberDao.selectOne(no);
-      Member member = new Member();
+      Member member = memberDao.selectOne(no);
   
-      System.out.printf("이름(%s)? ", oldMember.getName());
+      System.out.printf("이름(%s)? ", member.getName());
       member.setName(keyScan.nextLine());
   
-      System.out.printf("이메일(%s)? ", oldMember.getEmail());
+      System.out.printf("이메일(%s)? ", member.getEmail());
       member.setEmail(keyScan.nextLine());
   
-      System.out.printf("암호(%s)? ", oldMember.getPassword());
+      System.out.printf("암호(%s)? ", member.getPassword());
       member.setPassword(keyScan.nextLine());
   
-      System.out.printf("전화(%s)? ", oldMember.getTel());
+      System.out.printf("전화(%s)? ", member.getTel());
       member.setTel(keyScan.nextLine());
   
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
-        memberDao.update(no, member);
+        memberDao.update(member);
         System.out.println("변경하였습니다.");
       } else {
         System.out.println("변경을 취소하였습니다.");
