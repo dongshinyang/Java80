@@ -48,17 +48,18 @@ public class BoardController {
       int no = Integer.parseInt(keyScan.nextLine());
   
       if (CommandUtil.confirm(keyScan, "정말 삭제하시겠습니까?")) {
-        boardDao.delete(no);
-        System.out.println("삭제하였습니다.");
+        int count = boardDao.delete(no);
+        if (count > 0) {
+          System.out.println("삭제하였습니다.");
+        } else {
+          System.out.println("유효하지 않은 번호이거나, 이미 삭제된 항목입니다.");
+        }
       } else {
         System.out.println("삭제를 취소하였습니다.");
       }
       
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {
       System.out.println("데이터 처리에 실패했습니다.");
-      e.printStackTrace();
     } 
   }
   
@@ -83,21 +84,26 @@ public class BoardController {
       int no = Integer.parseInt(keyScan.nextLine());
       
       Board board = boardDao.selectOne(no);
-  
+      if (board == null) {
+        System.out.println("유효하지 않은 번호입니다.");
+        return;
+      }
       System.out.printf("제목(%s)? ", board.getTitle());
       board.setTitle(keyScan.nextLine());
       System.out.printf("내용(%s)? ", board.getContent());
       board.setContent(keyScan.nextLine());
   
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
-        boardDao.update(board);
-        System.out.println("변경하였습니다.");
+        int count = boardDao.update(board);
+        if (count > 0) {
+          System.out.println("변경하였습니다.");
+        } else {
+          System.out.println("유효하지 않은 번호이거나, 이미 삭제된 항목입니다.");
+        }
       } else {
         System.out.println("변경을 취소하였습니다.");
       }
       
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {
       System.out.println("데이터 처리에 실패했습니다.");
     }

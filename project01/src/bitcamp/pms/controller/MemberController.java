@@ -53,14 +53,16 @@ public class MemberController {
       int no = Integer.parseInt(keyScan.nextLine());
   
       if (CommandUtil.confirm(keyScan, "정말 삭제하시겠습니까?")) {
-        memberDao.delete(no);
-        System.out.println("삭제하였습니다.");
+        int count = memberDao.delete(no);
+        if (count > 0) {
+          System.out.println("삭제하였습니다.");
+        } else {
+          System.out.println("유효하지 않은 번호이거나, 이미 삭제된 항목입니다.");
+        }
       } else {
         System.out.println("삭제를 취소하였습니다.");
       }
       
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {
       System.out.println("데이터 처리에 실패했습니다.");
     }
@@ -87,7 +89,11 @@ public class MemberController {
       int no = Integer.parseInt(keyScan.nextLine());
   
       Member member = memberDao.selectOne(no);
-  
+      if (member == null) {
+        System.out.println("유효하지 않은 번호입니다.");
+        return;
+      }
+      
       System.out.printf("이름(%s)? ", member.getName());
       member.setName(keyScan.nextLine());
   
@@ -101,15 +107,27 @@ public class MemberController {
       member.setTel(keyScan.nextLine());
   
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
-        memberDao.update(member);
-        System.out.println("변경하였습니다.");
+        int count = memberDao.update(member);
+        if (count > 0) {
+          System.out.println("변경하였습니다.");
+        } else {
+          System.out.println("유효하지 않은 번호이거나, 이미 삭제된 항목입니다.");
+        }
       } else {
         System.out.println("변경을 취소하였습니다.");
       }
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {
       System.out.println("데이터 처리에 실패했습니다.");
     }
   }
 }
+
+
+
+
+
+
+
+
+
+

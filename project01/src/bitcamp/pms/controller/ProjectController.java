@@ -51,14 +51,16 @@ public class ProjectController {
       int no = Integer.parseInt(keyScan.nextLine());
 
       if (CommandUtil.confirm(keyScan, "정말 삭제하시겠습니까?")) {
-        projectDao.delete(no);
-        System.out.println("삭제하였습니다.");
+        int count = projectDao.delete(no);
+        if (count > 0) {
+          System.out.println("삭제하였습니다.");
+        } else {
+          System.out.println("유효하지 않은 번호이거나, 이미 삭제된 항목입니다.");
+        }
       } else {
         System.out.println("삭제를 취소하였습니다.");
       }
       
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {
       System.out.println("데이터 로딩에 실패했습니다.");
     }
@@ -68,8 +70,13 @@ public class ProjectController {
   public void list() {
     try {
       List<Project> projects = projectDao.selectList();
-      for (int i = 0; i < projects.size(); i++) {
-        System.out.printf("%d, %s\n", i, projects.get(i).toString());
+      for (Project project : projects) {
+        System.out.printf("%d, %s, %s, %s, %d\n", 
+            project.getNo(),
+            project.getTitle(),
+            project.getStartDate(),
+            project.getEndDate(),
+            project.getState());
       }
     } catch (Exception e) {
       System.out.println("데이터 로딩에 실패했습니다.");
@@ -82,26 +89,31 @@ public class ProjectController {
       System.out.print("변경할 프로젝트 번호?");
       int no = Integer.parseInt(keyScan.nextLine());
 
-      Project oldProject = projectDao.selectOne(no);
-      Project project = new Project();
+      Project project = projectDao.selectOne(no);
+      if (project == null) {
+        System.out.println("유효하지 않은 번호입니다.");
+        return;
+      }
 
-      System.out.printf("프로젝트명(%s)? ", oldProject.getTitle());
+      System.out.printf("프로젝트명(%s)? ", project.getTitle());
       project.setTitle(keyScan.nextLine());
-      System.out.printf("시작일(%s)? ", oldProject.getStartDate());
+      System.out.printf("시작일(%s)? ", project.getStartDate());
       project.setStartDate(Date.valueOf(keyScan.nextLine()));
-      System.out.printf("종료일(%s)? ", oldProject.getEndDate());
+      System.out.printf("종료일(%s)? ", project.getEndDate());
       project.setEndDate(Date.valueOf(keyScan.nextLine()));
-      System.out.printf("설명(%s)? ", oldProject.getDescription());
+      System.out.printf("설명(%s)? ", project.getDescription());
       project.setDescription(keyScan.nextLine());
 
       if (CommandUtil.confirm(keyScan, "변경하시겠습니까?")) {
-        projectDao.update(no, project);
-        System.out.println("변경하였습니다.");
+        int count = projectDao.update(project);
+        if (count > 0) {
+          System.out.println("변경하였습니다.");
+        } else {
+          System.out.println("유효하지 않은 번호이거나, 이미 삭제된 항목입니다.");
+        }
       } else {
         System.out.println("변경을 취소하였습니다.");
       }
-    } catch (IndexOutOfBoundsException e) {
-      System.out.println("유효한 번호가 아닙니다.");
     } catch (Exception e) {
       System.out.println("데이터 로딩에 실패했습니다.");
     }
