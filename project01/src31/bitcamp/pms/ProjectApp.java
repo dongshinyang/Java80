@@ -1,18 +1,11 @@
 /* 목표
-- 커넥션풀(ConnectionPool)을 적용하기
-  => 사용할 때 마다 커넥션을 만들지 않는다.
-  => 사용한 커넥션을 재활용하여 커넥션 생성을 줄인다.
+- Connection 객체를 별도로 준비하여 DAO 객체에 주입하라!
   
 - 작업절차
-1) bitcamp.pms.util 패키지에 DataSource 클래스 생성한다.
-  => DataSource 클래스는 DB 커넥션풀 역할을 수행한다.
-  
-2) DAO 클래스 변경
-  => Connection 대신 DataSource를 주입한다.
-  => 기존 메서드를 변경한다.
-  
-3) ProjectApp 클래스 변경
-  => Connection 객체 대신 DataSource 객체를 빈 컨테이너에 담는다. 
+1) DAO 클래스 변경
+  => Connection을 주입 받는 방식으로 변경한다.
+2) ProjectApp 클래스 변경
+  => Connection 객체를 생성하여 빈(bean) 컨테이너(container)에 담는다.  
   
 
 
@@ -21,13 +14,14 @@ package bitcamp.pms;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import bitcamp.pms.context.ApplicationContext;
 import bitcamp.pms.context.request.RequestHandler;
 import bitcamp.pms.context.request.RequestHandlerMapping;
-import bitcamp.pms.util.DataSource;
 
 public class ProjectApp {
   static ApplicationContext appContext;
@@ -42,17 +36,17 @@ public class ProjectApp {
     // ApplicationContext에 추가한다.
     appContext.addBean("stdinScan", keyScan);
     
-    // DB 커넥션풀 객체 생성 및 빈 컨테이너에 담기
+    // 커넥션 객체 생성 및 빈 컨테이너에 담기
     try {
-      DataSource dataSource = new DataSource(
-          "com.mysql.jdbc.Driver",
+      Class.forName("com.mysql.jdbc.Driver");
+      Connection con = DriverManager.getConnection(
           "jdbc:mysql://localhost:3306/java80db",
           "java80",
           "1111");
-      appContext.addBean("dataSource", dataSource);
+      appContext.addBean("con",con);
       
     } catch (Exception e) {
-      System.out.println("DB 커넥션풀 생성 오류!\n시스템을 종료하겠습니다.");
+      System.out.println("DB 커넥션 오류입니다.\n시스템을 종료하겠습니다.");
       e.printStackTrace();
       return;
     }

@@ -9,25 +9,22 @@ import java.util.List;
 
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.domain.Board;
-import bitcamp.pms.util.DataSource;
 
 @Component
 public class BoardDao {
-  private DataSource dataSource;
+  private Connection con;
   
-  public void setDataSource(DataSource dataSource) {
-    this.dataSource = dataSource;
+  public void setConnection(Connection connection) {
+    this.con = connection;
   }
 
   public List<Board> selectList() throws Exception {
     ArrayList<Board> list = new ArrayList<>();
     
-    Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.createStatement();
       rs = stmt.executeQuery("select * from BOARDS");
       Board board = null;
@@ -47,17 +44,14 @@ public class BoardDao {
     } finally {
       try {rs.close();} catch (Exception e) {}
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
   
   public Board selectOne(int no) throws Exception {
-    Connection con = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.prepareStatement("select * from BOARDS where BNO=?");
       stmt.setInt(1, no);
       rs = stmt.executeQuery();
@@ -78,16 +72,13 @@ public class BoardDao {
     } finally {
       try {rs.close();} catch (Exception e) {}
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
   
   public int insert(Board board) throws Exception {
-    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.prepareStatement(
           "insert into BOARDS(TITLE,CONTS,PWD,CDT)"
           + " values(?,?,?,now())");
@@ -100,16 +91,13 @@ public class BoardDao {
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
   
   public int update(Board board) throws Exception {
-    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.prepareStatement(
           "update BOARDS set TITLE=?, CONTS=?, CDT=now() where BNO=?");
 
@@ -121,23 +109,19 @@ public class BoardDao {
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
   
   public int delete(int no) throws Exception {
-    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.prepareStatement("delete from BOARDS where BNO=?");
       stmt.setInt(1, no);
       return stmt.executeUpdate();
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
 }

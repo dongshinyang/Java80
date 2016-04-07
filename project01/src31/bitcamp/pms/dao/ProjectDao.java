@@ -9,25 +9,22 @@ import java.util.List;
 
 import bitcamp.pms.annotation.Component;
 import bitcamp.pms.domain.Project;
-import bitcamp.pms.util.DataSource;
 
 @Component
 public class ProjectDao {
-  private DataSource dataSource;
+  private Connection con;
   
-  public void setDataSource(DataSource dataSource) {
-    this.dataSource = dataSource;
+  public void setConnection(Connection connection) {
+    this.con = connection;
   }
   
   public List<Project> selectList() throws Exception {
     ArrayList<Project> list = new ArrayList<>();
     
-    Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.createStatement();
       rs = stmt.executeQuery("select * from PROJECTS");
       Project project = null;
@@ -47,17 +44,14 @@ public class ProjectDao {
     } finally {
       try {rs.close();} catch (Exception e) {}
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
   
   public Project selectOne(int no) throws Exception {
-    Connection con = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.prepareStatement("select * from PROJECTS where PNO=?");
       stmt.setInt(1, no);
       rs = stmt.executeQuery();
@@ -78,16 +72,13 @@ public class ProjectDao {
     } finally {
       try {rs.close();} catch (Exception e) {}
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
   
   public int insert(Project project) throws Exception {
-    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.prepareStatement(
           "insert into PROJECTS(TITLE,SDT,EDT,DESCT) values(?,?,?,?)");
 
@@ -100,16 +91,13 @@ public class ProjectDao {
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
   
   public int update(Project project) throws Exception {
-    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.prepareStatement(
           "update PROJECTS set TITLE=?, SDT=?, EDT=?, DESCT=?, STAT=? where PNO=?");
 
@@ -124,23 +112,19 @@ public class ProjectDao {
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
   
   public int delete(int no) throws Exception {
-    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
-      con = dataSource.getConnection();
       stmt = con.prepareStatement("delete from PROJECTS where PNO=?");
       stmt.setInt(1, no);
       return stmt.executeUpdate();
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
     }
   }
 }
