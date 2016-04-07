@@ -1,6 +1,7 @@
 package bitcamp.pms.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -12,19 +13,19 @@ import bitcamp.pms.domain.Project;
 
 @Component
 public class ProjectDao {
-  private Connection con;
-  
-  public void setConnection(Connection connection) {
-    this.con = connection;
-  }
-  
   public List<Project> selectList() throws Exception {
     ArrayList<Project> list = new ArrayList<>();
     
+    Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
       stmt = con.createStatement();
       rs = stmt.executeQuery("select * from PROJECTS");
       Project project = null;
@@ -44,14 +45,21 @@ public class ProjectDao {
     } finally {
       try {rs.close();} catch (Exception e) {}
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
   
   public Project selectOne(int no) throws Exception {
+    Connection con = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
       stmt = con.prepareStatement("select * from PROJECTS where PNO=?");
       stmt.setInt(1, no);
       rs = stmt.executeQuery();
@@ -72,13 +80,21 @@ public class ProjectDao {
     } finally {
       try {rs.close();} catch (Exception e) {}
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
   
   public int insert(Project project) throws Exception {
+    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
+      
       stmt = con.prepareStatement(
           "insert into PROJECTS(TITLE,SDT,EDT,DESCT) values(?,?,?,?)");
 
@@ -91,13 +107,20 @@ public class ProjectDao {
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
   
   public int update(Project project) throws Exception {
+    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
       stmt = con.prepareStatement(
           "update PROJECTS set TITLE=?, SDT=?, EDT=?, DESCT=?, STAT=? where PNO=?");
 
@@ -112,19 +135,27 @@ public class ProjectDao {
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
   
   public int delete(int no) throws Exception {
+    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
       stmt = con.prepareStatement("delete from PROJECTS where PNO=?");
       stmt.setInt(1, no);
       return stmt.executeUpdate();
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
 }

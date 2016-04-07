@@ -1,11 +1,17 @@
 /* 목표
-- Connection 객체를 별도로 준비하여 DAO 객체에 주입하라!
+- XxxDao에 JDBC를 적용하라!
   
 - 작업절차
-1) DAO 클래스 변경
-  => Connection을 주입 받는 방식으로 변경한다.
-2) ProjectApp 클래스 변경
-  => Connection 객체를 생성하여 빈(bean) 컨테이너(container)에 담는다.  
+1) domain 클래스를 변경한다.
+  => no 값을 저장할 수 있는 필드를 추가한다.
+  => getter/setter 추가
+  => toString() 재작성 
+
+2) dao 클래스 변경
+  => java01/src/step29/exam03/MemberDao.java 참고!
+  => MemberDao 변경 --> MemberController 변경 --> 테스트
+  => BoardDao 변경 --> BoardController 변경 --> 테스트
+  => ProjectDao 변경 --> ProjectController 변경 --> 테스트
   
 
 
@@ -14,8 +20,6 @@ package bitcamp.pms;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,22 +39,6 @@ public class ProjectApp {
     // 명령을 처리하는 메서드에서 keyScan을 사용할 수 있도록 
     // ApplicationContext에 추가한다.
     appContext.addBean("stdinScan", keyScan);
-    
-    // 커넥션 객체 생성 및 빈 컨테이너에 담기
-    try {
-      Class.forName("com.mysql.jdbc.Driver");
-      Connection con = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/java80db",
-          "java80",
-          "1111");
-      appContext.addBean("con",con);
-      
-    } catch (Exception e) {
-      System.out.println("DB 커넥션 오류입니다.\n시스템을 종료하겠습니다.");
-      e.printStackTrace();
-      return;
-    }
-    
     
     String input;
     do {

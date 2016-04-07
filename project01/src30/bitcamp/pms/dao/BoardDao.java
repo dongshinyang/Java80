@@ -1,6 +1,7 @@
 package bitcamp.pms.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -12,19 +13,19 @@ import bitcamp.pms.domain.Board;
 
 @Component
 public class BoardDao {
-  private Connection con;
-  
-  public void setConnection(Connection connection) {
-    this.con = connection;
-  }
-
   public List<Board> selectList() throws Exception {
     ArrayList<Board> list = new ArrayList<>();
     
+    Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
       stmt = con.createStatement();
       rs = stmt.executeQuery("select * from BOARDS");
       Board board = null;
@@ -44,14 +45,21 @@ public class BoardDao {
     } finally {
       try {rs.close();} catch (Exception e) {}
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
   
   public Board selectOne(int no) throws Exception {
+    Connection con = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
       stmt = con.prepareStatement("select * from BOARDS where BNO=?");
       stmt.setInt(1, no);
       rs = stmt.executeQuery();
@@ -72,13 +80,21 @@ public class BoardDao {
     } finally {
       try {rs.close();} catch (Exception e) {}
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
   
   public int insert(Board board) throws Exception {
+    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
+      
       stmt = con.prepareStatement(
           "insert into BOARDS(TITLE,CONTS,PWD,CDT)"
           + " values(?,?,?,now())");
@@ -91,13 +107,20 @@ public class BoardDao {
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
   
   public int update(Board board) throws Exception {
+    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
       stmt = con.prepareStatement(
           "update BOARDS set TITLE=?, CONTS=?, CDT=now() where BNO=?");
 
@@ -109,19 +132,27 @@ public class BoardDao {
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
   
   public int delete(int no) throws Exception {
+    Connection con = null;
     PreparedStatement stmt = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/java80db",
+          "java80",
+          "1111");
       stmt = con.prepareStatement("delete from BOARDS where BNO=?");
       stmt.setInt(1, no);
       return stmt.executeUpdate();
       
     } finally {
       try {stmt.close();} catch (Exception e) {}
+      try {con.close();} catch (Exception e) {}
     }
   }
 }

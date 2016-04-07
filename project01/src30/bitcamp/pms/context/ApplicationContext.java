@@ -35,15 +35,6 @@ public class ApplicationContext {
     Object dependency = null;
     for (Object obj : objects) {
       clazz = obj.getClass();
-      
-      //우리가 만든 클래스(@Component, @Controller)에 대해서만 의존 객체 주입을 수행한다.
-      //=> 빈 컨테이너가 우리가 만든 객체 외에 다른 객체도 포함하기 때문에
-      //   의존 객체 주입할 때 검사해야 한다.
-      if (!clazz.isAnnotationPresent(Component.class) && 
-          !clazz.isAnnotationPresent(Controller.class)) {
-        continue;
-      }
-      
       //System.out.println(clazz.getName());
       methods = clazz.getMethods();
       for (Method m : methods) {
@@ -175,7 +166,6 @@ public class ApplicationContext {
   // 외부에서 임의로 객체를 추가할 수 있게 한다.
   public void addBean(String name, Object bean) {
     objPool.put(name, bean);
-    injectDependency();
   }
   
 }

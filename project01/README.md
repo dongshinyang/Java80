@@ -245,7 +245,8 @@
 #30
 - XxxDao에 JDBC를 적용하라!
 
-
+#31
+- Connection 객체를 별도로 준비하여 DAO 객체에 주입하라!
 
 
 
