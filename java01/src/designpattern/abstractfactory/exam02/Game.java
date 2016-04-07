@@ -1,11 +1,12 @@
-// 주제: Abstract Factory 적용 전
-package designpattern.abstractfactory.exam01;
+// 주제: Abstract Factory 적용 후
+package designpattern.abstractfactory.exam02;
 
 import java.util.Scanner;
 
 public class Game {
   Scanner keyScan = new Scanner(System.in);
   int selectedRace;
+  HomeFactory factory;
   Home home;
   
   public void service() throws Exception {
@@ -25,16 +26,7 @@ public class Game {
   }
   
   private void doHome() {
-    if (selectedRace == 1) {
-      HumanHomeFactory factory = new HumanHomeFactory();
-      home = factory.createHome();
-    } else if (selectedRace == 2) {
-      AlienHomeFactory factory = new AlienHomeFactory();
-      home = factory.createHome();
-    } else {
-      MonsterHomeFactory factory = new MonsterHomeFactory();
-      home = factory.createHome();
-    }
+    home = factory.createHome();
     System.out.println("집짓기 완료!");
     System.out.print("집정보 --> ");
     System.out.println(home);
@@ -44,6 +36,14 @@ public class Game {
     System.out.println("1)인간족 2)외계족 3)괴물족");
     System.out.print("종족을 선택하시오?");
     selectedRace = Integer.parseInt(keyScan.nextLine());
+    
+    if (selectedRace == 1) {
+      factory = new HumanHomeFactory();
+    } else if (selectedRace == 2) {
+      factory = new AlienHomeFactory();
+    } else {
+      factory = new MonsterHomeFactory();
+    }
   }
   
   public static void main(String[] args) throws Exception {
