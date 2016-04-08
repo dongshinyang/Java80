@@ -7,7 +7,7 @@
      => namespace: SQL을 찾을 때 사용할 패키지명이다. 
      => 가능한 찾고 이해하기 쉽도록 DAO 클래스 이름과 같게하라. 
  -->  
-<mapper namespace="step30.exam01.MemberDao">
+<mapper namespace="MemberDao">
 
   <!-- SQL문을 선언하는 태그
        => mybatis는 이 태그에 선언된 SQL문을 실행할 것이다.

@@ -9,52 +9,34 @@
 package step30.exam01;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 public class MemberDao {
-  DataSource dataSource;
+  SqlSessionFactory sqlSessionFactory;
   
   public MemberDao() {}
   
-  public void setDataSource(DataSource dataSource) {
-    this.dataSource = dataSource;
+  public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+    this.sqlSessionFactory = sqlSessionFactory;
   }
 
   public List<Member> selectList() throws Exception {
-    ArrayList<Member> list = new ArrayList<>();
-    
-    Connection con = null;
-    Statement stmt = null;
-    ResultSet rs = null;
+    SqlSession sqlSession = sqlSessionFactory.openSession();
     
     try {
-      con = dataSource.getConnection();
-      stmt = con.createStatement();
-      rs = stmt.executeQuery("select * from MEMBERS");
-      Member member = null;
-      
-      while (rs.next()) { 
-        member = new Member();
-        member.setNo(rs.getInt("MNO"));
-        member.setName(rs.getString("MNAME"));
-        member.setEmail(rs.getString("EMAIL"));
-        member.setPassword(rs.getString("PWD"));
-        member.setTel(rs.getString("TEL"));
-        list.add(member);
-      }
-      return list;
-    
+      return sqlSession.selectList("MemberDao.selectList");
     } finally {
-      try {rs.close();} catch (Exception e) {}
-      try {stmt.close();} catch (Exception e) {}
-      dataSource.returnConnection(con);
+      sqlSession.close();
     }
   }
   
+  /*
   public int insert(Member member) throws Exception {
     Connection con = null;
     PreparedStatement stmt = null;
@@ -88,7 +70,11 @@ public class MemberDao {
 
       stmt.setString(1, member.getName());
       stmt.setString(2, member.getEmail());
-      stmt.setString(3, member.getPassword());
+      stmt.setString(3, memb
+          public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+        // TODO Auto-generated method stub
+        
+      }er.getPassword());
       stmt.setString(4, member.getTel());
       stmt.setInt(5, member.getNo());
       
@@ -115,6 +101,7 @@ public class MemberDao {
       dataSource.returnConnection(con);
     }
   }
+  */
 }
 
 

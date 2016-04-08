@@ -37,7 +37,7 @@ public class Test01 {
     //5) SQL Mapper 파일에 있는 SQL문을 실행한다.
     //=> SQL Mapper 파일의 namespace 값과 SQL 문의 id 값을 결합하여 
     //   실행시킬 SQL을 지정하라!
-    List<Member> list = sqlSession.selectList("step30.exam01.MemberDao.selectList");
+    List<Member> list = sqlSession.selectList("MemberDao.selectList");
     
     for (Member m : list) {
       System.out.printf("%d,%s,%s,%s,%s\n", 
