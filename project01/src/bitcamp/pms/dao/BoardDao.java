@@ -1,23 +1,10 @@
 package bitcamp.pms.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import bitcamp.pms.annotation.Component;
-import bitcamp.pms.domain.Board;
-import bitcamp.pms.util.DataSource;
 
 @Component
 public class BoardDao {
-  private DataSource dataSource;
-  
-  public void setDataSource(DataSource dataSource) {
-    this.dataSource = dataSource;
-  }
+/*
 
   public List<Board> selectList() throws Exception {
     ArrayList<Board> list = new ArrayList<>();
@@ -140,6 +127,7 @@ public class BoardDao {
       dataSource.returnConnection(con);
     }
   }
+  */
 }
 
 

@@ -1,33 +1,41 @@
 /* 목표
-- 커넥션풀(ConnectionPool)을 적용하기
-  => 사용할 때 마다 커넥션을 만들지 않는다.
-  => 사용한 커넥션을 재활용하여 커넥션 생성을 줄인다.
+- persistence framework "mybatis" 적용
   
 - 작업절차
-1) bitcamp.pms.util 패키지에 DataSource 클래스 생성한다.
-  => DataSource 클래스는 DB 커넥션풀 역할을 수행한다.
-  
-2) DAO 클래스 변경
-  => Connection 대신 DataSource를 주입한다.
-  => 기존 메서드를 변경한다.
-  
-3) ProjectApp 클래스 변경
-  => Connection 객체 대신 DataSource 객체를 빈 컨테이너에 담는다. 
-  
+1) build.gradle 에 mybatis 의존 라이브러리 추가 
+  => "gradle eclipse"를 이클립스 설정 파일을 개정한다. 
 
+2) mybatis 설정 파일과 SQL 맵퍼 파일을 준비한다.
+  => conf/mybatis-config.xml
+  => bitcamp/pms/dao/BoardMapper.xml
+  => bitcamp/pms/dao/MemberMapper.xml
+  => bitcamp/pms/dao/ProjectMapper.xml
+  
+3) DAO 클래스 변경
+  => SqlSessionFactory 의존 객체 주입
+  => SqlSession 사용으로 변경 
+  
+4) ProjectApp 클래스 변경
+  => DataSource 대신 SqlSessionFactory 객체를 빈 컨테이너에 보관한다.
+  => 이렇게 보관된 SqlSessionFactory는 DAO 객체에 주입될 것이다.
+  
+5) DataSource 클래스는 제거한다.
 
 */
 package bitcamp.pms;
 
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
 import bitcamp.pms.context.ApplicationContext;
 import bitcamp.pms.context.request.RequestHandler;
 import bitcamp.pms.context.request.RequestHandlerMapping;
-import bitcamp.pms.util.DataSource;
 
 public class ProjectApp {
   static ApplicationContext appContext;
@@ -42,17 +50,14 @@ public class ProjectApp {
     // ApplicationContext에 추가한다.
     appContext.addBean("stdinScan", keyScan);
     
-    // DB 커넥션풀 객체 생성 및 빈 컨테이너에 담기
+    // mybatis SqlSessionFactory 객체 준비
     try {
-      DataSource dataSource = new DataSource(
-          "com.mysql.jdbc.Driver",
-          "jdbc:mysql://localhost:3306/java80db",
-          "java80",
-          "1111");
-      appContext.addBean("dataSource", dataSource);
-      
+      InputStream inputStream = Resources.getResourceAsStream(
+          "conf/mybatis-config.xml");
+      appContext.addBean("sqlSessionFactory", 
+          new SqlSessionFactoryBuilder().build(inputStream));
     } catch (Exception e) {
-      System.out.println("DB 커넥션풀 생성 오류!\n시스템을 종료하겠습니다.");
+      System.out.println("mybatis 준비 중 오류 발생!\n시스템을 종료하겠습니다.");
       e.printStackTrace();
       return;
     }
