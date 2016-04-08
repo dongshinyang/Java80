@@ -62,7 +62,6 @@ public class ProjectApp {
       return;
     }
     
-    
     String input;
     do {
       input = prompt();

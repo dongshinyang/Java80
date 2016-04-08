@@ -255,7 +255,8 @@
 
 #33
 - persistence framework "mybatis" 적용
-
+- 로그인 기능 추가
+  => req-33.txt 파일 참조 
 
 
 
