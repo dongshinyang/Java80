@@ -22,7 +22,7 @@ import bitcamp.pms.context.ApplicationContext;
 import bitcamp.pms.context.request.RequestHandler;
 import bitcamp.pms.context.request.RequestHandlerMapping;
 
-public class ProjectApp {
+public class ProjectApp08 {
   static ApplicationContext appContext;
   static RequestHandlerMapping requestHandlerMapping;
   static Scanner keyScan = new Scanner(System.in);
@@ -87,23 +87,7 @@ public class ProjectApp {
   }
 
   private static void doSignUp() {
-    System.out.print("이름: ");
-    String name = keyScan.nextLine();
-    
-    String email = null;
-    while (true) {
-      System.out.print("이메일: ");
-      email = keyScan.nextLine();
-      if (email.matches("[a-zA-Z][\\w\\.]*@[a-zA-Z][\\w\\.]*\\.[a-zA-Z][\\w\\.]*"))
-        break;
-      System.out.println("이메일 형식에 맞지 않습니다. 예) aaa.aaa@bbb.com");
-    }
-    
-    System.out.print("암호: ");
-    String password = keyScan.nextLine();
-    
-    System.out.print("전화: ");
-    String tel = keyScan.nextLine();
+    System.out.println("회원가입...");
   }
 
   private static boolean doLogin() {

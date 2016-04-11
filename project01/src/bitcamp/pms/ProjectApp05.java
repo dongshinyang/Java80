@@ -22,7 +22,7 @@ import bitcamp.pms.context.ApplicationContext;
 import bitcamp.pms.context.request.RequestHandler;
 import bitcamp.pms.context.request.RequestHandlerMapping;
 
-public class ProjectApp {
+public class ProjectApp05 {
   static ApplicationContext appContext;
   static RequestHandlerMapping requestHandlerMapping;
   static Scanner keyScan = new Scanner(System.in);
@@ -69,12 +69,10 @@ public class ProjectApp {
       
       switch (input) {
       case "1":
-        if (doLogin()) {
-          return;
-        }
+        System.out.println("로그인...");
         break;
       case "2":
-        doSignUp();
+        System.out.println("회원가입...");
         break;
       case "9":
         System.out.println("안녕히가세요");
@@ -83,41 +81,6 @@ public class ProjectApp {
       default:
         System.out.println("올바르지 않은 번호입니다.");
       }
-    }
-  }
-
-  private static void doSignUp() {
-    System.out.print("이름: ");
-    String name = keyScan.nextLine();
-    
-    String email = null;
-    while (true) {
-      System.out.print("이메일: ");
-      email = keyScan.nextLine();
-      if (email.matches("[a-zA-Z][\\w\\.]*@[a-zA-Z][\\w\\.]*\\.[a-zA-Z][\\w\\.]*"))
-        break;
-      System.out.println("이메일 형식에 맞지 않습니다. 예) aaa.aaa@bbb.com");
-    }
-    
-    System.out.print("암호: ");
-    String password = keyScan.nextLine();
-    
-    System.out.print("전화: ");
-    String tel = keyScan.nextLine();
-  }
-
-  private static boolean doLogin() {
-    System.out.print("이메일: ");
-    String email = keyScan.nextLine();
-    
-    System.out.print("암호: ");
-    String password = keyScan.nextLine();
-    
-    if (email.equals("aaaa") && password.equals("1111")) {
-      return true;
-    } else {
-      System.out.println("이메일 또는 암호가 맞지 않습니다.");
-      return false;
     }
   }
 
