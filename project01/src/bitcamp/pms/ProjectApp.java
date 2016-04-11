@@ -94,13 +94,20 @@ public class ProjectApp {
     while (true) {
       System.out.print("이메일: ");
       email = keyScan.nextLine();
-      if (email.matches("[a-zA-Z][\\w\\.]*@[a-zA-Z][\\w\\.]*\\.[a-zA-Z][\\w\\.]*"))
+      if (email.matches("[a-zA-Z][\\w\\.]*@([\\w]+\\.)?[\\w]+\\.[a-zA-Z]{2,}"))
         break;
       System.out.println("이메일 형식에 맞지 않습니다. 예) aaa.aaa@bbb.com");
     }
     
-    System.out.print("암호: ");
-    String password = keyScan.nextLine();
+    String password = null;
+    while (true) {
+      System.out.print("암호: ");
+      password = keyScan.nextLine();
+      if (password.matches("(.&&[^a-zA-Z])*[a-zA-Z]+(.&&[^a-zA-Z])*"))
+        break;
+      System.out.println("암호는 4 ~ 10자 까지만 가능합니다.\n"
+          + "최소 알파벳1개, 숫자1개, 특수문자(?,!,@)1개 반드시 포함.");
+    }
     
     System.out.print("전화: ");
     String tel = keyScan.nextLine();

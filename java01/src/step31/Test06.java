@@ -2,14 +2,17 @@ package step31;
 
 import java.util.Scanner;
 
-public class Test05 {
+public class Test06 {
 
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
     
-    //String regex = "^a\\d"; // ---> 시작 문자가 a, 0 ~ 9까지 숫자
-    //String regex = "^\\p{Alpha}\\w"; //--> 알파벳 문자로 시작하고 알파벳 또는 숫자 
-    String regex = "\\wx$"; // --> [a-zA-Z_0-9] 한 개 문자와 x 문자로 끝나는 경우
+    //String regex = "a*"; // --> a 문자가 0 개 이상
+    //String regex = "a+"; // --> a 문자가 1 개 이상
+    //String regex = "a?"; // --> a 문자가 1개 또는 0
+    //String regex = "a{3}"; // --> a 문자가 3 개
+    //String regex = "a{3,}"; // --> a 문자가 3 개 이상
+    String regex = "a{3,6}"; // --> a 문자가 3 ~ 6개 
     
     String input = null;
     
