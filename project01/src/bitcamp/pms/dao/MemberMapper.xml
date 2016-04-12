@@ -51,6 +51,12 @@
     from MEMBERS
     where MNO=#{no}
   </select>
+  
+  <select id="isMember" parameterType="map" resultType="int">
+    select count(*) 
+    from MEMBERS
+    where EMAIL=#{email} and PWD=#{password}
+  </select>
 </mapper>
 
 

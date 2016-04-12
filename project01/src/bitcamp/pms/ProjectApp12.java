@@ -23,24 +23,20 @@ import bitcamp.pms.context.request.RequestHandler;
 import bitcamp.pms.context.request.RequestHandlerMapping;
 import bitcamp.pms.controller.AuthController;
 
+public class ProjectApp12 {
+  static ApplicationContext appContext;
+  static RequestHandlerMapping requestHandlerMapping;
+  static Scanner keyScan = new Scanner(System.in);
 
-//=> 정리!
-// static 필드나 메서드를 인스턴스 필드와 메서드로 전환한다.
-public class ProjectApp {
-  ApplicationContext appContext;
-  RequestHandlerMapping requestHandlerMapping;
-  Scanner keyScan = new Scanner(System.in);
-  
   public static void main(String[] args) {
-    ProjectApp projectApp = new ProjectApp();
-    projectApp.run();
-  }
-  
-  public ProjectApp() {
     appContext = new ApplicationContext("bitcamp.pms");
     requestHandlerMapping = new RequestHandlerMapping(appContext);
+
+    // 명령을 처리하는 메서드에서 keyScan을 사용할 수 있도록 
+    // ApplicationContext에 추가한다.
     appContext.addBean("stdinScan", keyScan);
     
+    // mybatis SqlSessionFactory 객체 준비
     try {
       InputStream inputStream = Resources.getResourceAsStream(
           "conf/mybatis-config.xml");
@@ -51,9 +47,7 @@ public class ProjectApp {
       e.printStackTrace();
       return;
     }
-  }
-
-  public void run() {
+    
     AuthController authController = 
         (AuthController)appContext.getBean(AuthController.class);
     authController.service();
@@ -63,11 +57,12 @@ public class ProjectApp {
       input = prompt();
       processCommand(input);
     } while (!input.equals("quit"));
-    
+
     keyScan.close(); // 항상 다 쓴 자원은 해제해야 한다.
   }
+
   
-  void processCommand(String input) {
+  static void processCommand(String input) {
     String[] cmds = input.split(" ");
 
     if (cmds[0].equals("quit")) {
@@ -113,20 +108,20 @@ public class ProjectApp {
     }
   }
 
-  private String prompt() {
+  static String prompt() {
     System.out.print("명령> ");
     return keyScan.nextLine().toLowerCase();
   }
 
-  private void doQuit() {
+  static void doQuit() {
     System.out.println("안녕히 가세요!");
   }
 
-  private void doError() {
+  static void doError() {
     System.out.println("올바르지 않은 명령어입니다.");
   }
 
-  private void doAbout() {
+  static void doAbout() {
     System.out.println("비트캠프 80기 프로젝트 관리 시스템!");
   }
 

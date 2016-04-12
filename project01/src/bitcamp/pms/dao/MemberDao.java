@@ -1,5 +1,6 @@
 package bitcamp.pms.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -75,5 +76,35 @@ public class MemberDao {
       sqlSession.close();
     }
   }
+
+  public boolean isMember(String email, String password) {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      HashMap<String,String> paramMap = new HashMap<>();
+      paramMap.put("email", email);
+      paramMap.put("password", password);
+      
+      int count = sqlSession.selectOne("MemberDao.isMember", paramMap);
+      
+      if (count > 0) 
+        return true;
+      else 
+        return false;
+      
+    } finally {
+      sqlSession.close();
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
 
