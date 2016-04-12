@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import bitcamp.pms.annotation.Controller;
 import bitcamp.pms.dao.MemberDao;
+import bitcamp.pms.domain.Member;
 
 @Controller
 public class AuthController {
@@ -49,38 +50,40 @@ public class AuthController {
   }
   
   private void doSignUp() {
-    System.out.print("이름: ");
-    String name = keyScan.nextLine();
+    Member member = new Member();
     
-    String email = null;
+    System.out.print("이름: ");
+    member.setName(keyScan.nextLine());
+    
+    String value = null;
     while (true) {
       System.out.print("이메일: ");
-      email = keyScan.nextLine();
-      if (email.matches("[a-zA-Z][\\w\\.]*@([\\w]+\\.)?[\\w]+\\.[a-zA-Z]{2,}"))
+      value = keyScan.nextLine();
+      if (value.matches("[a-zA-Z][\\w\\.]*@([\\w]+\\.)?[\\w]+\\.[a-zA-Z]{2,}"))
         break;
       System.out.println("이메일 형식에 맞지 않습니다. 예) aaa.aaa@bbb.com");
     }
+    member.setEmail(value);
     
-    String password = null;
     String regex = null;
     Pattern pattern = null;
     Matcher matcher = null;
     
     while (true) {
       System.out.print("암호: ");
-      password = keyScan.nextLine();
+      value = keyScan.nextLine();
       
-      if (password.length() < 4 || password.length() > 10) {
+      if (value.length() < 4 || value.length() > 10) {
         System.out.println("암호는 4 ~ 10자 까지만 가능합니다.");
         continue;
       }
       
       regex = String.format(
           "(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@?])[0-9a-zA-Z!@?]{%d}", 
-          password.length());
+          value.length());
 
       pattern = Pattern.compile(regex);
-      matcher = pattern.matcher(password); 
+      matcher = pattern.matcher(value); 
       
       if (matcher.find()) {
         break;
@@ -89,16 +92,23 @@ public class AuthController {
       System.out.println(
           "최소 알파벳1개, 숫자1개, 특수문자(?,!,@)1개를 반드시 포함해야 합니다.");
     }
+    member.setPassword(value);
     
-    String tel = null;
     while (true) {
       System.out.print("전화: ");
-      tel = keyScan.nextLine();
-      if (tel.matches("(\\d{2,4}-)?\\d{3,4}-\\d{4}"))
+      value = keyScan.nextLine();
+      if (value.matches("(\\d{2,4}-)?\\d{3,4}-\\d{4}"))
         break;
       System.out.println("전화 형식에 맞지 않습니다. 예) 02-123-1234");
     }
+    member.setTel(value);
     
+    try {
+      memberDao.insert(member);
+      System.out.println("회원 가입되었습니다.");
+    } catch (Exception e) {
+      System.out.println("회원 가입에 실패했습니다.");
+    }
   }
 
   private boolean doLogin() {
@@ -108,11 +118,34 @@ public class AuthController {
     System.out.print("암호: ");
     String password = keyScan.nextLine();
     
-    if (memberDao.isMember(email, password)) {
-      return true;
-    } else {
-      System.out.println("이메일 또는 암호가 맞지 않습니다.");
+    Member member = memberDao.selectOneByEmail(email);
+    
+    if (member == null) {
+      System.out.println("등록되지 않은 사용자입니다.");
+      return false;
+    } else if (!member.getPassword().equals(password)) {
+      System.out.println("암호가 맞지 않습니다.");
       return false;
     }
+    
+    System.out.printf("환영합니다. %s님!\n", member.getName());
+    return true;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -39,6 +39,16 @@ public class MemberDao {
     }
   }
   
+  public Member selectOneByEmail(String email) {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    try {
+      return sqlSession.selectOne("MemberDao.selectOneByEmail", email);
+    } finally {
+      sqlSession.close();
+    }
+  }
+  
   
   public int insert(Member member) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession(true);
@@ -96,6 +106,7 @@ public class MemberDao {
       sqlSession.close();
     }
   }
+
 }
 
 

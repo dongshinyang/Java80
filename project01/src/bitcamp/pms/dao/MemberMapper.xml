@@ -52,6 +52,12 @@
     where MNO=#{no}
   </select>
   
+  <select id="selectOneByEmail" parameterType="string" resultMap="MemberMap">
+    select MNO, MNAME, EMAIL, PWD, TEL 
+    from MEMBERS
+    where EMAIL=#{email}
+  </select>
+  
   <select id="isMember" parameterType="map" resultType="int">
     select count(*) 
     from MEMBERS
