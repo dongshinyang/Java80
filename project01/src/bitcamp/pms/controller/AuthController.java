@@ -5,13 +5,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import bitcamp.pms.annotation.Controller;
+import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.domain.Member;
+import bitcamp.pms.util.CommandUtil;
+import bitcamp.pms.util.Session;
 
 @Controller
 public class AuthController {
   Scanner keyScan;
   MemberDao memberDao;
+  Session session;
   
   public void setScanner(Scanner keyScan) {
     this.keyScan = keyScan;
@@ -20,7 +24,24 @@ public class AuthController {
   public void setMemberDao(MemberDao memberDao) {
     this.memberDao = memberDao;
   }
+  
+  public void setSession(Session session) {
+    this.session = session;
+  }
 
+  @RequestMapping("unsubscribe")
+  public void unsubscribe(Session se) {
+    if (CommandUtil.confirm(keyScan, "정말 탈퇴하시겠습니까?")) {
+      try {
+        Member loginUser = (Member)se.getAttribute("loginUser");
+        memberDao.delete(loginUser.getNo());
+        System.out.println("회원 정보를 삭제하였습니다. 안녕히 가세요.");
+      } catch (Exception e) {
+        System.out.println("데이터를 저장하는데 실패했습니다.");
+      }
+    }
+  }
+  
   public void service() {
     String input = null;
     while (true) {
@@ -128,7 +149,12 @@ public class AuthController {
       return false;
     }
     
+    // 로그인 성공한 회원 정보를 세션에 보관한다.
+    // why? 다른 컨틀롤러가 사용할 수 있도록!
+    session.setAttribute("loginUser", member);
+    
     System.out.printf("환영합니다. %s님!\n", member.getName());
+    
     return true;
   }
 }

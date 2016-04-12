@@ -22,6 +22,7 @@ import bitcamp.pms.context.ApplicationContext;
 import bitcamp.pms.context.request.RequestHandler;
 import bitcamp.pms.context.request.RequestHandlerMapping;
 import bitcamp.pms.controller.AuthController;
+import bitcamp.pms.util.Session;
 
 
 //=> 정리!
@@ -30,6 +31,7 @@ public class ProjectApp {
   ApplicationContext appContext;
   RequestHandlerMapping requestHandlerMapping;
   Scanner keyScan = new Scanner(System.in);
+  Session session = new Session();
   
   public static void main(String[] args) {
     ProjectApp projectApp = new ProjectApp();
@@ -40,6 +42,7 @@ public class ProjectApp {
     appContext = new ApplicationContext("bitcamp.pms");
     requestHandlerMapping = new RequestHandlerMapping(appContext);
     appContext.addBean("stdinScan", keyScan);
+    appContext.addBean("session", session);
     
     try {
       InputStream inputStream = Resources.getResourceAsStream(
