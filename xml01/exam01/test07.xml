@@ -5,6 +5,8 @@
      1) < : &lt;   less than
      2) > : &gt;   greater than
      3) & : &amp;  ampersand
+     4) " : &quot; quotation
+     5) ' : &apos; apostrophe
   -->
 <book>
   <title>자바 프로그래밍</title>
