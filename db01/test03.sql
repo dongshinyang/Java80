@@ -44,6 +44,36 @@ create table test01(
   intro text
 );
 
+4. date, datetime 타입
+=> date: 날짜
+=> datetime: 날짜와 시간
+drop table test01;
+create table test01(
+  tno int primary key, 
+  email varchar(10) unique not null,
+  name varchar(20) not null,
+  intro text,
+  cre_dt date,
+  upd_dt datetime
+);
+
+insert into test01(tno,email,name,cre_dt,upd_dt) 
+values(1,'aaa','aaa','2016-2-2','2016-2-2');
+
+insert into test01(tno,email,name,cre_dt,upd_dt) 
+values(2,'bbb','bbb','2016-2-2 12:17:02','2016-2-2 12:17:02');
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
