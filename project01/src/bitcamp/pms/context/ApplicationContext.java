@@ -75,7 +75,10 @@ public class ApplicationContext {
       String classNameWithPackage = file.getPath()  
                         .replace("./bin/", "") 
                         .replace(".class","")
-                        .replace("/", "."); 
+                        .replace("/", ".")
+                        .replace(".\\bin\\", "") 
+                        .replace("\\", "."); 
+
       try {
         Class<?> clazz = Class.forName(classNameWithPackage);
         
