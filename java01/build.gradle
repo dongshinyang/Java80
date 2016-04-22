@@ -29,6 +29,9 @@ sourceSets {
 
 //3) 의존 라이브러리를 다운로드 받을 서버를 지정한다.
 repositories {
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
     mavenCentral()  // 메이븐 중앙 서버 지정(https://repo1.maven.org/maven2/)
 }
 
@@ -39,7 +42,7 @@ dependencies {
   compile 'org.apache.bcel:bcel:5.2'
   compile 'mysql:mysql-connector-java:5.1.38'
   compile 'org.mybatis:mybatis:3.3.1'
-  
+  compile 'org.springframework:spring-context:4.3.0.RC1'
 }
 
 
