@@ -10,43 +10,29 @@
 
     <context:component-scan base-package="step33.exam11"/>
     
-    <!-- Mybatis SQL SessionFactory 객체를 준비 -->
+    <!-- Mybatis SqlSessionFactory 객체를 준비 : Mybatis Spring 연동 라이브러리 사용 
+      주목
+      => 클래스명이 "SqlSessionFactoryBean"이다.
+      => 그러나 분명한 것은 이 객체가 리턴하는 것은 SqlSessionFactory 객체라는 것이다.
+    -->
     <bean id="sqlSessionFactory" 
-          class="step33.exam11.SqlSessionFactoryFactoryBean">
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+      <!-- mybatis 자체 DB 커넥션 풀을 사용할 수 없다.
+           스프링에서 관리하는 DB 커넥션 풀을 사용해야 한다. -->
+      <property name="dataSource" ref="dataSource"/>
+              
       <property name="configLocation" value="step33/exam11/mybatis-config.xml"/>
     </bean>
-    <!-- 자바 코드 표현
-    Map<String,Object> objPool = new HashMap<>();
-    
-    SqlSessionFactoryFactoryBean obj = new SqlSessionFactoryFactoryBean();
-    obj.setConfigLocation("step33/exam11/mybatis-config.xml");
-    
-    if (FactoryBean.class.isInstance(obj)) {
-      Object obj2 = obj.getObject();
-      objPool.put("sqlSessionFactory", obj2);
-    } else {
-      objPool.put("sqlSessionFactory", obj);  
-    }
-     -->
-    
-    <!-- 스프링이 객체를 생성하여 저장하는 또 다른 예) 
-      
-    <bean id="car" class="step33.exam11.Car">
-      <property name="model" value="티코"/>
-      <property name="maker" value="비트자동차"/>
-    </bean>
-    Car obj = new Car();
-    obj.setModel("티코");
-    obj.setMaker("비트자동차");
-    
-    if (FactoryBean.class.isInstance(obj)) {
-      Object obj2 = obj.getObject();
-      objPool.put("car", obj2);
-    } else {
-      objPool.put("car", obj);
-    }
-    
-     -->
+   
+    <!-- 스프링의 DB 커넥션 풀 준비하기 -->
+    <bean id="dataSource" 
+          class="org.apache.commons.dbcp.BasicDataSource" 
+          destroy-method="close">
+		    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		    <property name="url" value="jdbc:mysql://localhost:3306/java80db" />
+		    <property name="username" value="java80" />
+		    <property name="password" value="1111" />
+		</bean>
 </beans>
 
 
