@@ -1,14 +1,8 @@
 package bitcamp.pms.controller;
 
-import java.sql.Date;
-import java.util.List;
-import java.util.Scanner;
+import org.springframework.stereotype.Controller;
 
-import bitcamp.pms.annotation.Controller;
 import bitcamp.pms.annotation.RequestMapping;
-import bitcamp.pms.dao.ProjectDao;
-import bitcamp.pms.domain.Project;
-import bitcamp.pms.util.CommandUtil;
 
 @Controller
 @RequestMapping("project/")

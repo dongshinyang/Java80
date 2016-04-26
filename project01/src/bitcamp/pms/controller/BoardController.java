@@ -1,13 +1,8 @@
 package bitcamp.pms.controller;
 
-import java.util.List;
-import java.util.Scanner;
+import org.springframework.stereotype.Controller;
 
-import bitcamp.pms.annotation.Controller;
 import bitcamp.pms.annotation.RequestMapping;
-import bitcamp.pms.dao.BoardDao;
-import bitcamp.pms.domain.Board;
-import bitcamp.pms.util.CommandUtil;
 
 @Controller
 @RequestMapping("board/") // 매핑 정보 일부를 선언한다.

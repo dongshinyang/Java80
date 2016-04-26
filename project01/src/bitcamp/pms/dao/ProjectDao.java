@@ -1,9 +1,6 @@
 package bitcamp.pms.dao;
 
-import bitcamp.pms.annotation.Component;
-
-@Component
-public class ProjectDao {
+public interface ProjectDao {
 /*
   
   public List<Project> selectList() throws Exception {

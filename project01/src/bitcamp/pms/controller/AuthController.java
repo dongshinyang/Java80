@@ -1,10 +1,13 @@
 package bitcamp.pms.controller;
 
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import bitcamp.pms.annotation.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import bitcamp.pms.annotation.RequestMapping;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.domain.Member;
@@ -13,24 +16,14 @@ import bitcamp.pms.util.Session;
 
 @Controller
 public class AuthController {
-  Scanner keyScan;
+  @Autowired
   MemberDao memberDao;
+
+  Scanner keyScan;
   Session session;
   
-  public void setScanner(Scanner keyScan) {
-    this.keyScan = keyScan;
-  }
-  
-  public void setMemberDao(MemberDao memberDao) {
-    this.memberDao = memberDao;
-  }
-  
-  public void setSession(Session session) {
-    this.session = session;
-  }
-
   @RequestMapping("unsubscribe")
-  public void unsubscribe(Session se) {
+  public void unsubscribe(Session se, Scanner keyScan) {
     if (CommandUtil.confirm(keyScan, "정말 탈퇴하시겠습니까?")) {
       try {
         Member loginUser = (Member)se.getAttribute("loginUser");
@@ -42,7 +35,10 @@ public class AuthController {
     }
   }
   
-  public void service() {
+  public void service(Scanner keyScan, Session session) {
+    this.keyScan = keyScan;
+    this.session = session;
+    
     String input = null;
     while (true) {
       System.out.println("1) 로그인");
@@ -139,7 +135,10 @@ public class AuthController {
     System.out.print("암호: ");
     String password = keyScan.nextLine();
     
-    Member member = memberDao.selectOneByEmail(email);
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("email", email);
+    
+    Member member = memberDao.selectOne(paramMap);
     
     if (member == null) {
       System.out.println("등록되지 않은 사용자입니다.");
