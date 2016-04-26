@@ -15,7 +15,38 @@
           class="step33.exam11.SqlSessionFactoryFactoryBean">
       <property name="configLocation" value="step33/exam11/mybatis-config.xml"/>
     </bean>
-
+    <!-- 자바 코드 표현
+    Map<String,Object> objPool = new HashMap<>();
+    
+    SqlSessionFactoryFactoryBean obj = new SqlSessionFactoryFactoryBean();
+    obj.setConfigLocation("step33/exam11/mybatis-config.xml");
+    
+    if (FactoryBean.class.isInstance(obj)) {
+      Object obj2 = obj.getObject();
+      objPool.put("sqlSessionFactory", obj2);
+    } else {
+      objPool.put("sqlSessionFactory", obj);  
+    }
+     -->
+    
+    <!-- 스프링이 객체를 생성하여 저장하는 또 다른 예) 
+      
+    <bean id="car" class="step33.exam11.Car">
+      <property name="model" value="티코"/>
+      <property name="maker" value="비트자동차"/>
+    </bean>
+    Car obj = new Car();
+    obj.setModel("티코");
+    obj.setMaker("비트자동차");
+    
+    if (FactoryBean.class.isInstance(obj)) {
+      Object obj2 = obj.getObject();
+      objPool.put("car", obj2);
+    } else {
+      objPool.put("car", obj);
+    }
+    
+     -->
 </beans>
 
 

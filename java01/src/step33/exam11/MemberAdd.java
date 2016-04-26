@@ -1,4 +1,3 @@
-// 주제: SQL 맵퍼인 mybatis 적용하기 - MemberDao에 적용하기 - insert
 package step33.exam11;
 
 import org.springframework.context.ApplicationContext;
