@@ -8,33 +8,22 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="step33.exam11"/>
+    <context:component-scan base-package="step33.exam12"/>
     
-    <!-- Mybatis SqlSessionFactory 객체를 준비 : Mybatis Spring 연동 라이브러리 사용 
-      주목
-      => 클래스명이 "SqlSessionFactoryBean"이다.
-      => 그러나 분명한 것은 이 객체가 리턴하는 것은 SqlSessionFactory 객체라는 것이다.
-    -->
     <bean id="sqlSessionFactory" 
           class="org.mybatis.spring.SqlSessionFactoryBean">
-      <!-- mybatis 자체 DB 커넥션 풀을 사용할 수 없다.
-           스프링에서 관리하는 DB 커넥션 풀을 사용해야 한다. -->
       <property name="dataSource" ref="dataSource"/>
-      
-      <!-- SQL Mapper 파일의 경로를 지정한다. -->
       <property name="mapperLocations" 
-                value="classpath*:step33/exam11/*Mapper.xml" />
-      
-      <!-- Domain 클래스의 별명을 자동으로 지정하기 -->
-      <property name="typeAliasesPackage" value="step33.exam11" />
-      
-      <!-- 위와 같이 설정하면 더이상 mybatis 설정 파일은 필요 없다. -->   
-      <!--       
-      <property name="configLocation" value="step33/exam11/mybatis-config.xml"/>
-      -->
+                value="classpath*:step33/exam12/*Mapper.xml" />
+      <property name="typeAliasesPackage" value="step33.exam12" />
+    </bean>
+    
+    <!-- DAO 인터페이스를 찾아서 자동으로 구현체를 생성한다. -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+      <!-- DAO 인터페이스가 있는 패키지를 지정한다. -->
+      <property name="basePackage" value="step33.exam12"/>
     </bean>
    
-    <!-- 스프링의 DB 커넥션 풀 준비하기 -->
     <bean id="dataSource" 
           class="org.apache.commons.dbcp.BasicDataSource" 
           destroy-method="close">

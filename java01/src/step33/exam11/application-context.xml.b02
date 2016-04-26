@@ -20,18 +20,8 @@
       <!-- mybatis 자체 DB 커넥션 풀을 사용할 수 없다.
            스프링에서 관리하는 DB 커넥션 풀을 사용해야 한다. -->
       <property name="dataSource" ref="dataSource"/>
-      
-      <!-- SQL Mapper 파일의 경로를 지정한다. -->
-      <property name="mapperLocations" 
-                value="classpath*:step33/exam11/*Mapper.xml" />
-      
-      <!-- Domain 클래스의 별명을 자동으로 지정하기 -->
-      <property name="typeAliasesPackage" value="step33.exam11" />
-      
-      <!-- 위와 같이 설정하면 더이상 mybatis 설정 파일은 필요 없다. -->   
-      <!--       
+              
       <property name="configLocation" value="step33/exam11/mybatis-config.xml"/>
-      -->
     </bean>
    
     <!-- 스프링의 DB 커넥션 풀 준비하기 -->
