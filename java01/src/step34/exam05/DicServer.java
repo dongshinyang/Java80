@@ -59,7 +59,47 @@ public class DicServer {
   }
   
   private static String toKor(String word) {
-    return "오호라";
+    Socket socket = null;
+    Scanner in = null;
+    PrintStream out = null;
+    
+    try {
+      socket = new Socket("endic.naver.com", 80);
+      in = new Scanner(socket.getInputStream());
+      out = new PrintStream(socket.getOutputStream());
+      
+      // 네이버 사전 서버에 요청한다.
+      out.printf("GET /search.nhn?sLn=kr&searchOption=all&query=%s HTTP/1.1\n", word);
+      out.println("Host: endic.naver.com");
+      out.println();
+      
+      // 네이버의 응답을 버퍼에 저장한다.
+      StringBuilder buffer = new StringBuilder();
+      String line;
+      try {
+        while (true) {
+          line = in.nextLine();
+          buffer.append(line);
+        }
+      } catch (Exception e) {}
+      
+      // 버퍼에 저장된 내용을 분석하여 한국어 번역 부분을 발췌한다.
+      String startTag = "<span class=\"fnt_k05\">";
+      String endTag = "</span>";
+      int startIndex = buffer.indexOf(startTag);
+      int endIndex = buffer.indexOf(endTag, startIndex);
+      
+      return buffer.substring(startIndex + startTag.length(), endIndex);
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+
+    } finally {  
+      try {out.close();} catch (Exception e) {}
+      try {in.close();} catch (Exception e) {}
+      try {socket.close();} catch (Exception e) {}
+    }
+    return "실행 오류!";
   }
 
 }
