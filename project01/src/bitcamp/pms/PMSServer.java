@@ -16,11 +16,34 @@ public class PMSServer {
   
   public void execute() {
     Socket socket = null;
+    try {
+      while (true) {
+        socket = serverSocket.accept();
+        serviceClient(socket);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  
+  public void close() {
+    try {serverSocket.close();} catch (Exception e) {}
+  }
+  
+  private int getServerPort() {
+    //java -Dport=8989 -cp ./bin PMSServer
+    String value = System.getProperty("port");
+    if (value != null) {
+      return Integer.parseInt(value);
+    }
+    return 9999;
+  }
+  
+  private void serviceClient(Socket socket) {
     Scanner in = null;
     PrintStream out = null;
     
     try {
-      socket = serverSocket.accept();
       in = new Scanner(new BufferedInputStream(socket.getInputStream()));
       out = new PrintStream(new BufferedOutputStream(socket.getOutputStream()));
       
@@ -48,19 +71,6 @@ public class PMSServer {
       try {out.close();} catch (Exception e) {}
       try {socket.close();} catch (Exception e) {}
     }
-  }
-  
-  public void close() {
-    try {serverSocket.close();} catch (Exception e) {}
-  }
-  
-  private int getServerPort() {
-    //java -Dport=8989 -cp ./bin PMSServer
-    String value = System.getProperty("port");
-    if (value != null) {
-      return Integer.parseInt(value);
-    }
-    return 9999;
   }
 
   public static void main(String[] args) {
