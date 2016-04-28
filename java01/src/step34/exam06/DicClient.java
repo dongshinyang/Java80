@@ -1,4 +1,4 @@
-package step34.exam05;
+package step34.exam06;
 
 import java.io.PrintStream;
 import java.net.Socket;
@@ -15,7 +15,7 @@ public class DicClient {
     String input = null;
     
     try {
-      socket = new Socket("192.168.0.14", 9999);
+      socket = new Socket("localhost", 9999);
       in = new Scanner(socket.getInputStream());
       out = new PrintStream(socket.getOutputStream());
       
