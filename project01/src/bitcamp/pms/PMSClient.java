@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class PMSClient {
+  static Scanner keyScan = new Scanner(System.in);
   Socket socket;
   Scanner in;
   PrintStream out;
@@ -24,7 +25,6 @@ public class PMSClient {
   }
   
   public void execute() {
-    Scanner keyScan = new Scanner(System.in);
     String command = null;
 
     do {
@@ -39,6 +39,7 @@ public class PMSClient {
     System.out.print("명령? ");
     String command = keyScan.nextLine();
     out.println(command);
+    out.flush();
     return command;
   }
   
@@ -51,15 +52,16 @@ public class PMSClient {
   }
   
   public static void main(String[] args) {
-    //1) 프로그램 아규먼트 검사
-    if (args.length != 2) {
-      System.out.println("사용법: PMSClient 서버주소 포트번호");
-      return;
-    }
+    System.out.print("서버? ");
+    String server = keyScan.nextLine();
+    
+    System.out.print("포트번호? ");
+    int port = Integer.parseInt(keyScan.nextLine());
+    
     
     PMSClient client = null;
     try {
-      client = new PMSClient(args[0], Integer.parseInt(args[1]));
+      client = new PMSClient(server, port);
       client.execute();
       
     } catch (Exception e) {
