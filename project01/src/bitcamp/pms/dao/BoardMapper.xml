@@ -4,36 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="bitcamp.pms.dao.BoardDao">
-  <resultMap type="Member" id="MemberMap">
-    <id     column="MNO"    property="no"/>
-    <result column="MNAME"  property="name"/>
+  <resultMap type="Board" id="BoardMap">
+    <id     column="BNO"    property="no"/>
+    <result column="CONTS"  property="content"/>
+    <result column="VWCNT"    property="views"/>
     <result column="PWD"    property="password"/>
+    <result column="CDT"    property="createdDate"/>
   </resultMap>
   
-  <insert id="insert" parameterType="Member">
-    insert into MEMBERS(MNAME,EMAIL,PWD,TEL)
-    values(#{name},#{email},#{password},#{tel})
+  <insert id="insert" parameterType="Board">
+    insert into BOARDS(TITLE,CONTS,PWD,CDT)
+    values(#{title},#{content},#{password},now())
   </insert>
   
-  <update id="update" parameterType="Member">
-    update MEMBERS set
-      MNAME=#{name},
-      EMAIL=#{email},
-      TEL=#{tel}
-    where MNO=#{no}
+  <update id="update" parameterType="Board">
+    update BOARDS set
+      TITLE=#{title}, 
+      CONTS=#{content}, 
+      CDT=now() 
+    where BNO=#{no}
   </update>
   
-  <!-- parameterType이 원시 데이터 타입일 경우, 
-      => 프로퍼티 이름은 아무거나 넣어도 된다.
-   -->
   <delete id="delete" parameterType="int">
-    delete from MEMBERS
-    where MNO=#{no}
+    delete from BOARDS 
+    where BNO=#{no}
   </delete>
 
-  <select id="selectList" resultMap="MemberMap">
-    select MNO, MNAME, EMAIL, PWD, TEL 
-    from MEMBERS
+  <select id="selectList" resultMap="BoardMap">
+    select BNO, TITLE, VWCNT, CDT 
+    from BOARDS
+    order by BNO DESC
+  </select>
+  
+  <select id="selectOne" resultMap="BoardMap" parameterType="int">
+    select BNO, TITLE, CONTS, VWCNT, CDT 
+    from BOARDS
+    where BNO=#{no}
   </select>
 </mapper>
 
