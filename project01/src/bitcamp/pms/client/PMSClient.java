@@ -1,4 +1,4 @@
-package bitcamp.pms;
+package bitcamp.pms.client;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

@@ -1,5 +1,6 @@
 package bitcamp.pms.controller;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -69,14 +70,15 @@ public class MemberController {
   }
   
   @RequestMapping("list.do")
-  public void list() {
+  public void list(PrintStream out) {
     try {
       List<Member> members = memberDao.selectList();
       
       for (Member member : members) {
-        System.out.printf("%d, %s, %s, %s\n", member.getNo(),
+        out.printf("%d, %s, %s, %s\n", member.getNo(),
             member.getName(), member.getEmail(), member.getTel());
       }
+      
     } catch (Exception e) {
       throw new RuntimeException("회원 데이터 로딩 실패!", e);
     }
