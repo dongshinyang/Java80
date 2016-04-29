@@ -7,6 +7,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.springframework.context.ApplicationContext;
@@ -62,9 +64,16 @@ public class ServiceThread extends Thread {
     }
   }
   
-  void processCommand(String input) {
+  private void processCommand(String input) {
     String[] tokens = input.split("\\?");
-
+    
+    // 1) 클라이언트가 보낸 파라미터 값을 맵 객체에 담는다.
+    Map<String,String> paramMap = null; 
+    if (tokens.length > 1) {
+      paramMap = parseParameters(tokens[1]);
+    }
+    
+    // 2) 클라이언트의 요청을 처리할 메서드를 찾는다.
     RequestHandler requestHandler = 
         (RequestHandler) requestHandlerMapping.getRequestHandler(tokens[0]);
       
@@ -77,6 +86,7 @@ public class ServiceThread extends Thread {
         
     Method method = requestHandler.getMethod();
     Object obj = requestHandler.getObj();
+    
     try {
       ArrayList<Object> args = new ArrayList<>();
       Parameter[] params = method.getParameters();
@@ -87,6 +97,8 @@ public class ServiceThread extends Thread {
           arg = session;
         } else if (param.getType() == PrintStream.class) {
           arg = out;
+        } else if (param.getType() == Map.class) {
+          arg = paramMap;
         } else {
           arg = beanContainer.getBean(param.getType());
         }
@@ -103,6 +115,19 @@ public class ServiceThread extends Thread {
       out.println(); // 클라이언트에게 응답 종료를 알리기 위해 빈 줄을 보낸다.
       out.flush();
     }
+  }
+  
+  private HashMap<String,String> parseParameters(String str) {
+    HashMap<String,String> paramMap = new HashMap<>();
+    
+    String[] tokens = str.split("&");
+    String[] kv = null;
+    for (String token : tokens) {
+      kv = token.split("=");
+      paramMap.put(kv[0], kv[1]);
+    }
+    
+    return paramMap;
   }
 }
 

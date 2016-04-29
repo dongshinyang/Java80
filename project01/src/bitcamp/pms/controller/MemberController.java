@@ -3,6 +3,7 @@ package bitcamp.pms.controller;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,30 +21,18 @@ public class MemberController {
   private MemberDao memberDao;
 
   @RequestMapping("add.do")
-  public void add(Scanner keyScan) {
+  public void add(Map<String,String> paramMap, PrintStream out) {
     Member member = new Member();
+    member.setName(paramMap.get("name"));
+    member.setEmail(paramMap.get("email"));
+    member.setPassword(paramMap.get("password"));
+    member.setTel(paramMap.get("tel"));
 
-    System.out.print("이름? ");
-    member.setName(keyScan.nextLine());
-
-    System.out.print("이메일? ");
-    member.setEmail(keyScan.nextLine());
-
-    System.out.print("암호? ");
-    member.setPassword(keyScan.nextLine());
-
-    System.out.print("전화? ");
-    member.setTel(keyScan.nextLine());
-
-    if (CommandUtil.confirm(keyScan, "저장하시겠습니까?")) {
-      try {
-        memberDao.insert(member);
-        System.out.println("저장하였습니다.");
-      } catch (Exception e) {
-        System.out.println("데이터를 저장하는데 실패했습니다.");
-      }
-    } else {
-      System.out.println("저장을 취소하였습니다.");
+    try {
+      memberDao.insert(member);
+      out.println("저장하였습니다.");
+    } catch (Exception e) {
+      out.println("데이터를 저장하는데 실패했습니다.");
     }
   }
   
