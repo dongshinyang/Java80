@@ -1,6 +1,6 @@
 package bitcamp.pms.controller;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -12,13 +12,13 @@ import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.domain.Board;
 
 @Controller
-@RequestMapping("board/") 
+@RequestMapping("/board/") 
 public class BoardController {
   @Autowired
   private BoardDao boardDao;
 
   @RequestMapping("add.do")
-  public void add(Map<String,String> paramMap, PrintStream out) {
+  public void add(Map<String,String> paramMap, PrintWriter out) {
     Board board = new Board();
     board.setTitle(paramMap.get("title"));
     board.setContent(paramMap.get("content"));
@@ -34,7 +34,7 @@ public class BoardController {
   }
   
   @RequestMapping("view.do")
-  public void view(Map<String,String> paramMap, PrintStream out) {
+  public void view(Map<String,String> paramMap, PrintWriter out) {
     try {
       int no = Integer.parseInt(paramMap.get("no"));
   
@@ -57,7 +57,7 @@ public class BoardController {
   }
   
   @RequestMapping("delete.do")
-  public void delete(Map<String,String> paramMap, PrintStream out) {
+  public void delete(Map<String,String> paramMap, PrintWriter out) {
     try {
       int no = Integer.parseInt(paramMap.get("no"));
   
@@ -74,7 +74,7 @@ public class BoardController {
   }
   
   @RequestMapping("list.do")
-  public void list(PrintStream out) {
+  public void list(PrintWriter out) {
     try {
       List<Board> boards = boardDao.selectList();
       
@@ -88,7 +88,7 @@ public class BoardController {
   }
   
   @RequestMapping("update.do")
-  public void update(Map<String,String> paramMap, PrintStream out) {
+  public void update(Map<String,String> paramMap, PrintWriter out) {
     try {
       int no = Integer.parseInt(paramMap.get("no"));
       

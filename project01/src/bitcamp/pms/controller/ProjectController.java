@@ -1,6 +1,6 @@
 package bitcamp.pms.controller;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +13,13 @@ import bitcamp.pms.dao.ProjectDao;
 import bitcamp.pms.domain.Project;
 
 @Controller
-@RequestMapping("project/")
+@RequestMapping("/project/")
 public class ProjectController {
   @Autowired
   private ProjectDao projectDao;
 
   @RequestMapping("add.do")
-  public void add(Map<String,String> paramMap, PrintStream out) {
+  public void add(Map<String,String> paramMap, PrintWriter out) {
     try {
       Project project = new Project();
       project.setTitle(paramMap.get("title"));
@@ -36,7 +36,7 @@ public class ProjectController {
   }
    
   @RequestMapping("delete.do")
-  public void delete(Map<String,String> paramMap, PrintStream out) {
+  public void delete(Map<String,String> paramMap, PrintWriter out) {
     try {
       int no = Integer.parseInt(paramMap.get("no"));
       int count = projectDao.delete(no);
@@ -53,7 +53,7 @@ public class ProjectController {
   }
   
   @RequestMapping("list.do")
-  public void list(PrintStream out) {
+  public void list(PrintWriter out) {
     try {
       List<Project> projects = projectDao.selectList();
       for (Project project : projects) {
@@ -70,7 +70,7 @@ public class ProjectController {
   }
   
   @RequestMapping("view.do")
-  public void view(Map<String,String> paramMap, PrintStream out) {
+  public void view(Map<String,String> paramMap, PrintWriter out) {
     try {
       int no = Integer.parseInt(paramMap.get("no"));
       Project project = projectDao.selectOne(no);
@@ -93,7 +93,7 @@ public class ProjectController {
   }
   
   @RequestMapping("update.do")
-  public void update(Map<String,String> paramMap, PrintStream out) {
+  public void update(Map<String,String> paramMap, PrintWriter out) {
     try {
       int no = Integer.parseInt(paramMap.get("no"));
 

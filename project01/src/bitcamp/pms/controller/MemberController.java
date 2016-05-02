@@ -1,6 +1,6 @@
 package bitcamp.pms.controller;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +13,13 @@ import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.domain.Member;
 
 @Controller
-@RequestMapping("member/")
+@RequestMapping("/member/")
 public class MemberController {
   @Autowired
   private MemberDao memberDao;
 
   @RequestMapping("add.do")
-  public void add(Map<String,String> paramMap, PrintStream out) {
+  public void add(Map<String,String> paramMap, PrintWriter out) {
     Member member = new Member();
     member.setName(paramMap.get("name"));
     member.setEmail(paramMap.get("email"));
@@ -35,7 +35,7 @@ public class MemberController {
   }
   
   @RequestMapping("delete.do")
-  public void delete(Map<String,String> paramMap, PrintStream out) {
+  public void delete(Map<String,String> paramMap, PrintWriter out) {
     try {
       int no = Integer.parseInt(paramMap.get("no"));
       int count = memberDao.delete(no);
@@ -52,7 +52,7 @@ public class MemberController {
   }
   
   @RequestMapping("list.do")
-  public void list(PrintStream out) {
+  public void list(PrintWriter out) {
     try {
       List<Member> members = memberDao.selectList();
       
@@ -67,7 +67,7 @@ public class MemberController {
   }
   
   @RequestMapping("update.do")
-  public void update(Map<String,String> paramMap, PrintStream out) {
+  public void update(Map<String,String> paramMap, PrintWriter out) {
     try {
       int no = Integer.parseInt(paramMap.get("no"));
   

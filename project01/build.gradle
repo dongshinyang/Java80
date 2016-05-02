@@ -4,6 +4,12 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+// 소스 파일이 어떤 문자 집합으로 저장되었는지 Gradle 도구에게 알려준다.
+// 만약 알려주지 않으면 OS의 기본 문자 집합이라고 간주한다.
+compileJava {  // "compileJava" 명령을 실행할 때 사용할 정보
+  options.encoding="UTF-8" 
+}
+
 /*
 2) 자바 소스 폴더 지정
 => 지정하지 않으면 다음 구조로 간주한다.
@@ -46,7 +52,15 @@ dependencies {
   compile 'org.springframework:spring-context:4.3.0.RC1'
   compile 'commons-dbcp:commons-dbcp:1.4'
   compile 'org.springframework:spring-jdbc:4.3.0.RC1'
-  
+  compile 'javax.servlet:javax.servlet-api:3.1.0'
+}
+
+// .classpath 경로에 지정된 의존 라이브러리를
+// build/libs 디렉토리에 복사하는 명령어 정의
+// 이 명령어는 별도로 실행해야 한다.
+task copyToLib(type: Copy) {
+    into "$buildDir/libs"
+    from configurations.runtime
 }
 
 
