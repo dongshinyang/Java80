@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>web02</display-name>
+  
+  <!-- 서블릿 클래스 정보 등록. -->
+  <servlet>
+    <servlet-name>Hello</servlet-name> <!-- 서블릿 이름 -->
+    <servlet-class>step01.Hello</servlet-class> <!-- 서블릿 클래스 -->
+  </servlet>
+  <servlet>
+    <servlet-name>Hello2</servlet-name> <!-- 서블릿 이름 -->
+    <servlet-class>step01.Hello2</servlet-class> <!-- 서블릿 클래스 -->
+  </servlet>
+    
+  <!-- 서블릿 클래스에 URL을 지정. -->
+  <servlet-mapping>
+    <servlet-name>Hello</servlet-name>
+    <url-pattern>/step01/hello</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Hello2</servlet-name>
+    <!-- URL은 마음대로 작성할 수 있음을 증명하기 위해 위의 서블릿과 
+         다른 URL을 지정할 것이다. -->
+    <url-pattern>/hello2</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
