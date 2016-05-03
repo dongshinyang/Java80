@@ -1,6 +1,15 @@
 apply plugin: 'java'
-apply plugin: 'eclipse'
+//웹 프로젝트 만들기
+//apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp' //= eclipse + wtp(web tool plugin)
+apply plugin: 'war'
 
+//웹 자원이 있는 폴더 지정하기 
+//=> 지정하지 않으면 src/main/webapp 폴더가 된다.
+webAppDirName='www'
+
+//자바 소스가 있는 폴더 지정하기
+//=> 지정하지 않으면 src/main/java 폴더가 된다.
 sourceSets {
     main {
         java {

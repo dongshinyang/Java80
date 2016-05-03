@@ -2,6 +2,21 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>web02</display-name>
   
+  <!-- 필터 클래스 정보 등록 -->
+  <filter>
+    <filter-name>MyFilter</filter-name>
+    <filter-class>step02.MyFilter</filter-class>
+  </filter>
+  
+  <!-- 필터를 적용할 URL 등록 -->
+  <filter-mapping>
+    <filter-name>MyFilter</filter-name>
+    <url-pattern>/step02/myservlet</url-pattern>
+  </filter-mapping>
+  
+  
+  
+  
   <!-- 서블릿 클래스 정보 등록. -->
   <servlet>
     <servlet-name>Hello</servlet-name> <!-- 서블릿 이름 -->
@@ -10,6 +25,11 @@
   <servlet>
     <servlet-name>Hello2</servlet-name> <!-- 서블릿 이름 -->
     <servlet-class>step01.Hello2</servlet-class> <!-- 서블릿 클래스 -->
+  </servlet>
+  <servlet>
+    <servlet-name>MyServlet</servlet-name> <!-- 서블릿 이름 -->
+    <servlet-class>step02.MyServlet</servlet-class> <!-- 서블릿 클래스 -->
+    <load-on-startup>1</load-on-startup>
   </servlet>
     
   <!-- 서블릿 클래스에 URL을 지정. -->
@@ -22,6 +42,10 @@
     <!-- URL은 마음대로 작성할 수 있음을 증명하기 위해 위의 서블릿과 
          다른 URL을 지정할 것이다. -->
     <url-pattern>/hello2</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MyServlet</servlet-name>
+    <url-pattern>/step02/myservlet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
