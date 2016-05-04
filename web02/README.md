@@ -66,7 +66,7 @@
 - Servlet09.java => 기타 요청과 관련된 정보를 추출하기
 - Sevvlet10.java => HTTP 프로토콜과 관련된 정보를 추출하기 - HttpServletRequest
 - Sevvlet11.java => HttpServlet 클래스를 상속하여 HTTP 정보 추출하기
-
+- Sevvlet12.java => HTTP 프로토콜의 요청 방식을 식별하기
 
 
 
