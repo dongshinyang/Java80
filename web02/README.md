@@ -57,6 +57,14 @@
 ## step03
 - Servlet01.java => @WebServlet 애노테이션을 이용한 서블릿 배치
 - Servlet02.java => 웹 브라우저로 출력하기
+- Servlet03.java => 한글이 출력 안되는 문제 해결 
+- Servlet04.java => 출력하는 데이터의 형식을 HTTP 클라이언트에게 알려주기
+
+
+
+
+
+
 
 
 
