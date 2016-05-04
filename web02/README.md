@@ -59,7 +59,7 @@
 - Servlet02.java => 웹 브라우저로 출력하기
 - Servlet03.java => 한글이 출력 안되는 문제 해결 
 - Servlet04.java => 출력하는 데이터의 형식을 HTTP 클라이언트에게 알려주기
-
+- Servlet05.java => 클라이언트가 보낸 파라미터 값 알아내기
 
 
 

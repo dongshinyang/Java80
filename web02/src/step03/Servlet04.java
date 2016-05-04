@@ -19,7 +19,7 @@ public class Servlet04 extends GenericServlet {
       ServletRequest request, ServletResponse response) 
       throws ServletException, IOException {
     
-    // 출력할 내용의 문자집합을 지정한다.
+    // 출력할 내용의 데이터 타입과 문자집합을 지정한다.
     response.setContentType("text/plain;charset=UTF-8");
     
     // 출력 도구를 준비한다.
@@ -57,6 +57,26 @@ public class Servlet04 extends GenericServlet {
   application/xml         --> .xml
   ...
    
+# 로케일(Locale)
+- 요청 및 응답할 때 사용할 언어와 국가를 표시하는 것
+- 언어 코드
+[ISO 696-1]/[ISO639-2]
+en/eng
+fr/fre or fra
+ja/jpa
+ko/kor
+
+- 국가 코드
+us/usa (United State)
+gb/gbr (United Kingdom)
+kr/kor (South Korea)
+kp/prk (North Korea)
+jp/jpn (Japan)
+
+- 로케일 표현 : 언어-국가
+예)
+en-US, en-GB, ko-KR, ja-JP
+
    
  */
 
