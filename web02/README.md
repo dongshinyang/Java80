@@ -62,9 +62,10 @@
 - Servlet05.java => 클라이언트가 보낸 파라미터 값 알아내기
 - Servlet06.java => 중복 이름의 파라미터 값 다루기
 - Servlet07.java => 파라미터 이름과 값을 알아내기
-
-
-
+- Servlet08.java => 파라미터 이름과 값을 알아내기2
+- Servlet09.java => 기타 요청과 관련된 정보를 추출하기
+- Sevvlet10.java => HTTP 프로토콜과 관련된 정보를 추출하기 - HttpServletRequest
+- Sevvlet11.java => HttpServlet 클래스를 상속하여 HTTP 정보 추출하기
 
 
 
