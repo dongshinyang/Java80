@@ -26,10 +26,22 @@ public class Servlet18 extends HttpServlet {
 
     request.setCharacterEncoding("UTF-8");
     
+    // 멀티파트 형식으로 데이터를 받은 경우, 
+    // 다음과 같이 일반적인 방법으로 값을 꺼낼 수 없다.
+    // 다음 출력 결과는 모두 null 일 것이다.
     out.printf("name => %s\n", request.getParameter("name"));
     out.printf("email => %s\n", request.getParameter("email"));
     out.printf("tel => %s\n", request.getParameter("tel"));
     out.printf("photo => %s\n", request.getParameter("photo"));
+    
+    // 해결책?
+    // => 클라이언트가 보낸 데이터를 파트별로 분석하고 처리해야 한다.
+    // => 개발자가 직접? 노~ 노~.
+    //    멀티파트 데이터를 전문적으로 처리하는 외부 라이브러리를 사용하라!
+    // => Servlet19.java 참조!
+    // => 외부라이브러리?
+    //    보통 아파치 그룹(www.apache.org)의 공통 라이브러리를 많이 사용한다.
+    //     
   }
 }
 

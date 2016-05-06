@@ -77,8 +77,10 @@
   getpost2.html
 - Servlet17.java => POST 요청 시 한글 깨짐 현상 해결
   getpost3.html
-- Servlet18.java => 파일업로드와 HTTP 요청 프로토콜
+- Servlet18.java => 파일업로드와 HTTP 요청 프로토콜 분석
   upload.html
+- Servlet19.java => 파일업로드 처리
+  upload2.html
 
 
 
