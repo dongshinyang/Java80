@@ -69,6 +69,20 @@
 - Servlet12.java => HTTP 프로토콜의 요청 방식을 식별하기 - HTTP 요청 프로토콜 분석
 - Servlet13.java => HTTP 응답 헤더 추가하기 - HTTP 응답 프로토콜 분석
 
+## step04
+- Servlet14.java => JavaEE에서 제공하는 HttpServlet 클래스 상속하기
+- Servlet15.java => GET 요청과 POST 요청
+  getpost.html
+
+
+
+
+
+
+
+
+
+
 
 
 

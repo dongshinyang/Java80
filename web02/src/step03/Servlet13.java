@@ -81,6 +81,38 @@ HTTP/1.1 200 OK
 404 : Not Found => 요청한 자원을 찾을 수 없을 때,
 500 : Internal Server Error => 요청 처리 중에 오류가 발생했을 때,
 
+2) 일반 헤더
+=> HTTP 요청 프로토콜과 같다. Servlet12.java 참조할 것.
+
+3) 응답 헤더
+=> 응답할 때 클라이언트로 보낼 수 있는 헤더.
+=> 예)
+Server: Apache-Coyote/1.1
+
+4) 엔티티 헤더
+=> 서버가 보내는 데이터에 대한 정보
+=> 예)
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 8
+
+5) 빈줄
+=> 헤더 정보와 데이터를 구분하기 위함.
+
+5) 메시지 본문(message-body)
+=> 클라이언트에 보내는 본문 데이터. 
+
+# HTTP 프로토콜 형식
+1) 요청
+Request-Line (CRLF)
+(일반헤더 | 요청헤더 | 엔티티 헤더 (CRLF))*
+(CRLF)
+message-body <== POST 요청일 때,
+
+2) 응답
+Status-Line (CRLF)
+(일반헤더 | 응답헤더 | 엔티티 헤더 (CRLF))*
+(CRLF)
+message-body <== 서버가 클라이언트로 보내는 데이터 
 
  */
 
