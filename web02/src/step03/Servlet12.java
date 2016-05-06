@@ -40,7 +40,7 @@ Accept-Language: ko-KR,ko;q=0.8,en-US;q=0.6,en;q=0.4 (CRLF)
 
 # HTTP 요청 프로토콜 분석
 1) GET /web02/step03/servlet12?name=aaaa&age=30&tel=111-1111 HTTP/1.1
-=> Request Line: method request-uri http version (CRLF)
+=> Request Line: method request-uri protocol version (CRLF)
 => method: GET, POST, PUT, DELETE, TRACE, HEAD, OPTIONS, CONNECT 등
 => request-uri: 요청하는 자원의 웹 주소
 => http version: 프로토콜 이름 및 버전 

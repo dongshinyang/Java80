@@ -64,10 +64,10 @@
 - Servlet07.java => 파라미터 이름과 값을 알아내기
 - Servlet08.java => 파라미터 이름과 값을 알아내기2
 - Servlet09.java => 기타 요청과 관련된 정보를 추출하기
-- Sevvlet10.java => HTTP 프로토콜과 관련된 정보를 추출하기 - HttpServletRequest
-- Sevvlet11.java => HttpServlet 클래스를 상속하여 HTTP 정보 추출하기
-- Sevvlet12.java => HTTP 프로토콜의 요청 방식을 식별하기
-
+- Servlet10.java => HTTP 프로토콜과 관련된 정보를 추출하기 - HttpServletRequest
+- Servlet11.java => HttpServlet 클래스를 상속하여 HTTP 정보 추출하기
+- Servlet12.java => HTTP 프로토콜의 요청 방식을 식별하기 - HTTP 요청 프로토콜 분석
+- Servlet13.java => HTTP 응답 헤더 추가하기 - HTTP 응답 프로토콜 분석
 
 
 
