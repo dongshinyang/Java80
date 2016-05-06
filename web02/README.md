@@ -73,7 +73,12 @@
 - Servlet14.java => JavaEE에서 제공하는 HttpServlet 클래스 상속하기
 - Servlet15.java => GET 요청과 POST 요청
   getpost.html
-
+- Servlet16.java => GET 요청과 POST 요청 프로토콜 상세 분석
+  getpost2.html
+- Servlet17.java => POST 요청 시 한글 깨짐 현상 해결
+  getpost3.html
+- Servlet18.java => 파일업로드와 HTTP 요청 프로토콜
+  upload.html
 
 
 
