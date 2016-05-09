@@ -81,6 +81,31 @@
   upload.html
 - Servlet19.java => 파일업로드 처리
   upload2.html
+- servlet20 패키지 => 요청을 다른 서블릿에게 위임하기 - forward
+  calculator.html 
+  CalculatorServlet.java
+  PlusServlet.java
+  MinusServlet.java
+  MultipleServlet.java
+  DivideServlet.java
+- servlet21 패키지 => 요청을 다른 서블릿에게 위임하기 - include
+  calculator2.html 
+  CalculatorServlet.java
+  PlusServlet.java
+  MinusServlet.java
+  MultipleServlet.java
+  DivideServlet.java
+- servlet22 패키지 => 서블릿 끼리 값을 주고 받기 - getAttribute()/setAttribute()
+  HeaderServlet.java
+  TailerServlet.java
+  calculator3.html 
+  CalculatorServlet.java
+  PlusServlet.java
+  MinusServlet.java
+  MultipleServlet.java
+  DivideServlet.java
+  
+## step05
 
 
 

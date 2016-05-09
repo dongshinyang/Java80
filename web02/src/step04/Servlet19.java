@@ -1,6 +1,7 @@
 /* 주제: 파일업로드 처리 */
 package step04;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -64,20 +65,21 @@ public class Servlet19 extends HttpServlet {
           out.printf("%s=%s\n", item.getFieldName(), item.getName());
           
           // 서버에 업로드된 파일을 저장하기
-          // 1) 임의의 파일 명을 준비한다. 
+          // 가. 임의의 파일 명을 준비한다. 
           //    보통 "현재 시간(밀리초) + 일련번호"를 파일명으로 사용한다.
           int extPoint = item.getName().lastIndexOf(".");
           String filename = System.currentTimeMillis() + "-" + count()
                              + item.getName().substring(extPoint);
           out.printf("새파일명=%s\n", filename);
           
-          // 2) 파일을 저장할 경로 알아내기
+          // 나. 파일을 저장할 경로 알아내기
           //    $contextRoot/files/새파일명 ---> 진짜 OS 경로
           ServletContext servletContext = this.getServletContext();
           String realPath = servletContext.getRealPath("/files/" + filename);
           out.printf("새 파일을 저장할 실제 경로=%s\n", realPath);
           
-          
+          // 다. 파일을 저장한다.
+          item.write(new File(realPath));
         }
       }
     } catch (Exception e) {
