@@ -104,8 +104,14 @@
   MinusServlet.java
   MultipleServlet.java
   DivideServlet.java
-  
+- Servlet23.java => 서블릿 초기화 파라미터 다루기, 서블릿 컨텍스트 파라미터 다루기
+  CharacterEncodingFilter.java => 필터 초기화 파라미터 다루기
+- Servlet24.java => GET/POST 요청을 분리하여 처리하기 - getMethod()
+- Servlet25.java => GET/POST 요청을 분리하여 처리하기 - doGet(), doPost(), ...
+ 
 ## step05
+- html01.html
+- ...
 
 
 

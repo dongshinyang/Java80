@@ -8,9 +8,9 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
-@WebFilter("/*")
+// web.xml에 배치 정보를 등록했기 때문에, 다음 애노테이션을 제거하라!
+//@WebFilter("/*")
 public class CharacterEncodingFilter implements Filter {
   FilterConfig filterConfig;
   
@@ -22,8 +22,13 @@ public class CharacterEncodingFilter implements Filter {
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
-    System.out.println("CharacterEncodingFilter.doFilter()...");
-    request.setCharacterEncoding("UTF-8");
+    
+    // web.xml에 선언된 필터 초기화 파라미터 값 꺼내기
+    String encoding = filterConfig.getInitParameter("encoding");
+
+    System.out.println("CharacterEncodingFilter.doFilter() => " + encoding);
+    
+    request.setCharacterEncoding(encoding);
     
     chain.doFilter(request, response);
   }
