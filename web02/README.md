@@ -118,6 +118,17 @@
 - test04.html => 문단(paragraph) 구성하기. <p> 
 - test05.html => 목록을 구성하기. <ol>, <ul>
 - test06.html => 폼 만들기. <form>, <input>, <select>, <button>
+- test07.html => 테이블 만들기. <table>, <thead>, <tbody>
+- test08.html => 테이블 만들기 초 간단 버전.
+- test09.html => 테이블 셀 병합 기법. colspan, rowspan 속성
+- test10.html => 링크 축가하기. <a href="url">
+- test11.html => 태그 달기. <a href="#태그">
+- test12.html => 사용자 정의 태그 사용하기.
+- test13.html => 데이터 목록 출력하기. <dl>, <dt>, <dd>
+- test14.html => 그림 출력하기. <img>
+
+
+
 
 
 
