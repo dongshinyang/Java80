@@ -107,16 +107,17 @@
 - Servlet23.java => 서블릿 초기화 파라미터 다루기, 서블릿 컨텍스트 파라미터 다루기
   CharacterEncodingFilter.java => 필터 초기화 파라미터 다루기
 - Servlet24.java => GET/POST 요청을 분리하여 처리하기 - getMethod()
-- Servlet25.java => GET/POST 요청을 분리하여 처리하기 - doGet(), doPost(), ...
+- Servlet25.java => GET/POST 요청을 분리하여 처리하기2
+- Servlet26.java => GET/POST 요청을 분리하여 처리하기2 - doGet(), doPost(), ...
  
 ## step05
-- html01.html
-- ...
-
-
-
-
-
+- test00.html => HTML4 기본 구조
+- test01.html => HTML5 기본 구조와 HTML5 목표
+- test02.html => 제목(header) 표현할 사용할 태그. <h1>,<h2>,...
+- test03.html => 시맨틱 웹의 의미
+- test04.html => 문단(paragraph) 구성하기. <p> 
+- test05.html => 목록을 구성하기. <ol>, <ul>
+- test06.html => 폼 만들기. <form>, <input>, <select>, <button>
 
 
 
