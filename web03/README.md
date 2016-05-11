@@ -40,8 +40,20 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 7) 리스너에서 스프링 IoC 객체 생성하기
    - ContextLoaderListener.contextInitialized() 메서드 편집
    
-  
-  
+# 게시판을 위한 mybatis 준비
+1) "bitcamp.pms.vo" 패키지 생성
+2) Board 값 객체 준비
+3) "bitcamp.pms.dao" 패키지 생성
+4) 게시판 DAO 준비
+   - BoardDao 인터페이스 준비
+5) 게시판 맵퍼 파일 준비
+   - src/main/resources/bitcamp/pms/dao 폴더 생성
+   - BoardDao.xml 파일 준비   
+
+# 게시판 서블릿 준비
+1) "bitcamp.pms.servlet" 패키지 생성
+2) BoardListServlet 클래스 생성
+   - BoardDao를 사용하여 게시물 출력한다.   
 
 
 
