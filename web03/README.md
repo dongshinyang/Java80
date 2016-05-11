@@ -1,0 +1,36 @@
+# MAVEN 기본 Web Application 프로젝트 폴더 생성
+src/main/java         => 자바 소스 파일을 두는 폴더
+        /resources    => 설정 파일을 두는 폴더.
+                         예: .properties, .xml, .txt 등
+        /webapp       => 웹 자원을 두는 폴더.
+                         예: .html, .css, .js, .gif, .jsp 등
+   /test/java         => 단위 테스트(JUnit) 자바 소스 파일을 두는 폴더
+        /resources    => 단위 테스트에 사용되는 설정 파일을 두는 폴더.
+
+# 이클립스 프로젝트 준비
+1) build.gradle 파일 준비
+2) "gradle eclipse" 명령 실행
+3) 이클립스로 프로젝트 로딩
+
+# ContextLoaderListener 준비
+- 서블릿에서 공통으로 사용할 스프링 IoC 컨테이너를 준비한다.
+1) ContextLoaderListener 클래스 생성
+2) web.xml에 컨텍스트 파라미터 추가
+   - src/main/webapp/WEB-INF 폴더 추가
+   - web.xml 파일 준비(기존 프로젝트의 파일을 가져온다)
+   - web.xml 파일을 현재 프로젝트에 맞게끔 초기화시킨다.
+   - 스프링 설정 파일 경로를 지정하는 파라미터 
+3) ContextLoaderListener에 스프링 IoC 컨테이너 객체를 생성한다.
+   - contextInitialized() 메서드 편집     
+
+
+
+
+
+
+
+
+
+
+
+#
