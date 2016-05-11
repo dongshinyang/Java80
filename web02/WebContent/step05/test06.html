@@ -8,10 +8,18 @@
 <body>
 <form>
 <p>
-text:  <input type="text" name="t1"><br>
+text:  <input type="hidden" name="t0" value="숨겨진값"><br>
+type="hidden"인 입력상자는 화면에 보이지 않는다.<br>
+화면에 보여지지 않지만 서버에 값을 보내고 싶을 때 사용한다. 
+</p>
+<p>
+text:  <input type="text" name="t1" value="홍길동"><br>
+text:  <input type="text" name="t2" placeholder="이름을 입력하세요."><br>
 일반 텍스트 입력 상자.<br>
 name을 지정하지 않으면 서버에 보내지 않는다.<br>
-값을 입력하지 않으면 빈 문자열을 보낸다.
+값을 입력하지 않으면 빈 문자열을 보낸다.<br>
+텍스트 상자의 값을 지정하려면 value 속성을 사용하라!<br>
+입력할 값에 대해 안내 문구를 출력하려면 placeholder 속성을 사용하라!
 </p>
 <p>
 password: <input type="password" name="p1"><br>
@@ -72,13 +80,30 @@ date: <input type="date" name="mydate"><br>
   <option value="4">재직자</option>
 </select><br>
 selected 속성 이름만 있어도 해당 항목이 선택된다.<br>
-option의 value를 지정하지 않으면 option 태그의 콘텐츠가 사용된다.
+option의 value를 지정하지 않으면 option 태그의 콘텐츠가 사용된다.<br>
+<select name="state2" multiple>
+  <option value="1" selected>Java</option>
+  <option value="2">C</option>
+  <option value="3">C++</option>
+  <option value="4">C#</option>
+  <option value="4">Python</option>
+  <option value="4">PHP</option>
+</select><br>
+multiple 속성을 붙이면, 한 번에 여러 개의 값을 선택할 수 있다.<br>
+Ctrl/Shift 키를 이용하여 여러 개의 값을 선택할 수 있다<br>
+서버에 보낼 때는 같은 이름으로 선택된 값을 여러 개 보낸다.<br>
+(예: state2=2&state3=4)
 </p>
 <p>
 <button>기본이 제출 버튼=submit</button><br>
 <button type="button">일반 버튼은 반드시 type을 button이라 지정해야 한다.</button><br>
 <button type="reset">button 태그로 reset 버튼도 만들 수 있다.</button>
 </p>
+<p>
+<textarea name="content" rows="5" cols="60">test</textarea><br>
+여러 줄 입력 가능. 
+</p>
+
 </form>
 </body>
 </html>

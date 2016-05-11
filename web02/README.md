@@ -126,6 +126,7 @@
 - test12.html => 사용자 정의 태그 사용하기.
 - test13.html => 데이터 목록 출력하기. <dl>, <dt>, <dd>
 - test14.html => 그림 출력하기. <img>
+- test15.html => UI 컴포넌트 묶기 : <div>, 콘텐츠 구분 : <span> 
 
 
 
