@@ -8,29 +8,21 @@ src/main/java         => 자바 소스 파일을 두는 폴더
         /resources    => 단위 테스트에 사용되는 설정 파일을 두는 폴더.
 
 # 이클립스 프로젝트 준비
-1) build.gradle 파일 준비
+1) build.gradle 파일 준비(project01 프로젝트에서 가져온다)
+   - 현재 프로젝트에 맞게끔 편집한다.
 2) "gradle eclipse" 명령 실행
 3) 이클립스로 프로젝트 로딩
 
 # ContextLoaderListener 준비
 - 서블릿에서 공통으로 사용할 스프링 IoC 컨테이너를 준비한다.
-1) ContextLoaderListener 클래스 생성
-2) web.xml에 컨텍스트 파라미터 추가
+1) "bitcamp.pms.listener" 패키지 생성
+2) ServletContextListener 구현체 "ContextLoaderListener" 클래스 생성
+2) web.xml에 리스너 배치 설정
    - src/main/webapp/WEB-INF 폴더 추가
    - web.xml 파일 준비(기존 프로젝트의 파일을 가져온다)
    - web.xml 파일을 현재 프로젝트에 맞게끔 초기화시킨다.
-   - 스프링 설정 파일 경로를 지정하는 파라미터 
-3) ContextLoaderListener에 스프링 IoC 컨테이너 객체를 생성한다.
-   - contextInitialized() 메서드 편집     
+   - 리스너 등록
+3) 톰캣 서버에 추가한 후 실행 테스트    
 
 
 
-
-
-
-
-
-
-
-
-#
