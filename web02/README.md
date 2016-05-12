@@ -139,8 +139,9 @@
 - Test03.jsp => JSP 문법: 스크립트릿(scriptlet element, <% 자바 코드 %>)
 - Test04.jsp => JSP 문법: 표현식(expression element, <%= 표현식 %>)
                           리턴 결과가 있는 부분 자바 코드 
-
-
+- Test05.jsp => JSP 문법: 선언문(declaration element, <%! 클래스에 삽입할 코드 %>)
+- Test06.jsp => JSP 문법: 지시문(directive element, <%@ 지시어 속성=값 ... %>)
+- Test07.jsp => JSP 문법: 지시문 => include
 
 
 
