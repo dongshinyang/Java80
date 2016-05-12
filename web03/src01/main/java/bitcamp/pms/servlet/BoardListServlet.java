@@ -1,9 +1,9 @@
 package bitcamp.pms.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,21 +36,37 @@ public class BoardListServlet extends HttpServlet {
     List<Board> list = boardDao.selectList();
     
     // 4) 게시물 목록을 클라이언트로 출력한다.
-    // => include() 하는 경우, 메인 서블릿의 contentType 설정을 사용한다.
-    // => forward() 하는 경우, 메인 서블릿의 contentType 설정을 무시한다.
     response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
     
-    // 5) 뷰 컴포넌트(BoardList.jsp)를 including 한다.
-    RequestDispatcher rd = request.getRequestDispatcher("/board/BoardList.jsp");
-    
-    // BoardList.jsp를 실행하기 전에 ServletRequest 보관소에
-    // 목록 조회 결과를 저장해둔다.
-    request.setAttribute("list", list);
-    
-    // BoardList.jsp를 실행한다.
-    // => 물론 including이기 때문에 실행한 후 다시 이 서블릿으로 리턴할 것이다.
-    rd.include(request, response);
-    
+    out.println("<html>");
+    out.println("<head>");
+    out.println("<title>게시판</title>");
+    out.println("</head>");
+    out.println("<body>");
+    out.println("<h1>게시판-목록</h1>");
+    out.println("<p><a href='add.do'>새 글</a></p>");
+    out.println("<table border='1'>");
+    out.println("<thead>");
+    out.println("<tr>");
+    out.println("  <th>번호</th>");
+    out.println("  <th>제목</th>");
+    out.println("  <th>등록일</th>");
+    out.println("  <th>조회수</th>");
+    out.println("</tr>");
+    out.println("</thead>");
+    out.println("<tbody>");
+    for (Board board : list) {
+      out.printf("<tr><td>%d</td>", board.getNo()); 
+      out.printf("<td><a href='detail.do?no=%d'>%s</a></td>", 
+          board.getNo(), board.getTitle());
+      out.printf("<td>%s</td>", board.getCreatedDate().toString());
+      out.printf("<td>%d</td></tr>\n",board.getViews());
+    }
+    out.println("</tbody>");
+    out.println("</table>");
+    out.println("</body>");
+    out.println("</html>");
   }
 }
 

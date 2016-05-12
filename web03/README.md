@@ -63,6 +63,11 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 5) BoardDetailServlet, BoardUpdateServlet, BoardDeleteServlet 클래스 생성
 6) 리다이렉트 적용.
 
+# JSP를 이용한 MVC 아키텍처 적용
+1) BoardListServlet에서 출력 부분을 분리하여 BoardList.jsp에 맡긴다.
+   - webapp/board 폴더 생성
+   - webapp/board/BoardList.jsp 생성
+   - BoardListServlet 변경
 
 
 
