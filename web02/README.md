@@ -128,6 +128,10 @@
 - test14.html => 그림 출력하기. <img>
 - test15.html => UI 컴포넌트 묶기 : <div>, 콘텐츠 구분 : <span> 
 
+## step06
+- Servlet27.java => 리프레시 - HTML <meta> 태그 이용
+- Servlet28.java => 리프레시2 - 응답 헤더를 이용
+- Servlet29.java => 리다이렉트
 
 
 
