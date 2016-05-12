@@ -135,6 +135,17 @@
 
 ## step07
 - Test01.jsp => JSP 개념과 동작원리
+- Test02.jsp => JSP 문법: 템플릿 데이터(template data)
+- Test03.jsp => JSP 문법: 스크립트릿(scriptlet element, <% 자바 코드 %>)
+- Test04.jsp => JSP 문법: 표현식(expression element, <%= 표현식 %>)
+                          리턴 결과가 있는 부분 자바 코드 
+
+
+
+
+
+
+
 
 
 
