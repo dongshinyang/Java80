@@ -133,7 +133,8 @@
 - Servlet28.java => 리프레시2 - 응답 헤더를 이용
 - Servlet29.java => 리다이렉트
 
-
+## step07
+- Test01.jsp => JSP 개념과 동작원리
 
 
 
