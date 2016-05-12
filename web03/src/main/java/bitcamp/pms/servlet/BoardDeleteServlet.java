@@ -1,7 +1,6 @@
 package bitcamp.pms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -32,6 +31,10 @@ public class BoardDeleteServlet extends HttpServlet {
     int no = Integer.parseInt(request.getParameter("no"));
     boardDao.delete(no);
     
+    // redirect 적용
+    response.sendRedirect("list.do");
+    
+    /*
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     
@@ -45,6 +48,7 @@ public class BoardDeleteServlet extends HttpServlet {
     out.println("<a href='list.do'>목록</a>");
     out.println("</body>");
     out.println("</html>");
+    */
   }
 }
 

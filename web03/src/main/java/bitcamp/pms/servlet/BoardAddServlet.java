@@ -61,6 +61,10 @@ public class BoardAddServlet extends HttpServlet {
     
     boardDao.insert(board);
     
+    // redirect 적용
+    response.sendRedirect("list.do");
+    
+    /*
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
     
@@ -74,6 +78,7 @@ public class BoardAddServlet extends HttpServlet {
     out.println("<a href='list.do'>목록</a>");
     out.println("</body>");
     out.println("</html>");
+    */
   }
 }
 

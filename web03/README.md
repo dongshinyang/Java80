@@ -60,7 +60,8 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 4) POST 요청 데이터에 대한 한글 처리
    - 스프링에서 제공하는 필터 사용할 것.
    - web.xml에 스프링 필터 등록하라!    
-
+5) BoardDetailServlet, BoardUpdateServlet, BoardDeleteServlet 클래스 생성
+6) 리다이렉트 적용.
 
 
 
