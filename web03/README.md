@@ -76,6 +76,8 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - Copyright.jsp 작성
    - 목록 또는 상세정보 출력 화면에 Copyright.jsp 실행을 포함하라!
 
+# JSP 페이지에 EL 적용하기
+1) BoardDetail.jsp, MemberDetail.jsp 페이지에 EL 적용
 
 
 

@@ -149,7 +149,10 @@
 - Test12.jsp => JSP 액션 태그: <jsp:include> 사용법 => including 수행 
   BasicStyle.jsp 
 
-
+## step08
+- Test01.jsp => EL 사용법: 개요
+- Test02.jsp => EL 사용법: 보관소에 저장된 객체의 프로퍼티 값 출력하기
+- Test03.jsp => EL 사용법: 보관소명 생략하기
 
 
 
