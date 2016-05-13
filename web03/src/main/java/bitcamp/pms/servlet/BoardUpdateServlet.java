@@ -36,24 +36,8 @@ public class BoardUpdateServlet extends HttpServlet {
     
     boardDao.update(board);
     
-    // redirect 적용
     response.sendRedirect("list.do");
     
-    /*
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>게시판</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시판-변경 결과</h1>");
-    out.println("<p>변경 성공입니다.</p>");
-    out.println("<a href='list.do'>목록</a>");
-    out.println("</body>");
-    out.println("</html>");
-    */
   }
 }
 

@@ -1,8 +1,8 @@
 package bitcamp.pms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,26 +23,14 @@ public class BoardAddServlet extends HttpServlet {
   protected void doGet(
       HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException {
-    // 게시물 입력 폼 출력
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
     
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>게시판</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시판-새 글</h1>");
-    out.println("<form action='add.do' method='post'>");
-    out.println("제목: <input type='text' name='title'><br>");
-    out.println("내용: <textarea name='content' rows='5' cols='60'></textarea><br>");
-    out.println("<button>등록</button>");
-    out.println("<button type='reset'>초기화</button>");
-    out.println("</form>");
-    out.println("</body>");
-    out.println("</html>");
+    // forwarding인 경우, 메인 서블릿에서 콘텐츠 타입을 설정할 필요는 없다.
+    //response.setContentType("text/html;charset=UTF-8");
+    
+    RequestDispatcher rd = request.getRequestDispatcher("/board/BoardForm.jsp");
+    rd.forward(request, response);
+    
   }
-  
   
   @Override
   protected void doPost(
@@ -61,24 +49,7 @@ public class BoardAddServlet extends HttpServlet {
     
     boardDao.insert(board);
     
-    // redirect 적용
     response.sendRedirect("list.do");
-    
-    /*
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>게시판</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시판-등록 결과</h1>");
-    out.println("<p>등록 성공입니다.</p>");
-    out.println("<a href='list.do'>목록</a>");
-    out.println("</body>");
-    out.println("</html>");
-    */
   }
 }
 

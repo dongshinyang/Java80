@@ -31,24 +31,8 @@ public class BoardDeleteServlet extends HttpServlet {
     int no = Integer.parseInt(request.getParameter("no"));
     boardDao.delete(no);
     
-    // redirect 적용
     response.sendRedirect("list.do");
     
-    /*
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>게시판</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>게시판-삭제 결과</h1>");
-    out.println("<p>삭제 성공입니다.</p>");
-    out.println("<a href='list.do'>목록</a>");
-    out.println("</body>");
-    out.println("</html>");
-    */
   }
 }
 
