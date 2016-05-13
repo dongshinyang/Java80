@@ -142,7 +142,8 @@
 - Test05.jsp => JSP 문법: 선언문(declaration element, <%! 클래스에 삽입할 코드 %>)
 - Test06.jsp => JSP 문법: 지시문(directive element, <%@ 지시어 속성=값 ... %>)
 - Test07.jsp => JSP 문법: 지시문 => include
-
+- Test08.jsp => JSP 문법: JSP 액션 태그 => <jsp:useBean> 사용법1
+- Test09.jsp => JSP 문법: JSP 액션 태그 => <jsp:useBean> 사용법2
 
 
 
