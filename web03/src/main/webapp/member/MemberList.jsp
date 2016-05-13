@@ -22,8 +22,8 @@
 </tr>
 </thead>
 <tbody>
+<jsp:useBean id="list" type="java.util.List<Member>" scope="request"/>
 <%
-List<Member> list = (List<Member>)request.getAttribute("list");
 for (Member member : list) {%>
 <tr>
   <td><%=member.getNo()%></td>
@@ -34,6 +34,7 @@ for (Member member : list) {%>
 <%} %>
 </tbody>
 </table>
+<jsp:include page="../common/Copyright.jsp"/>
 </body>
 </html>
 

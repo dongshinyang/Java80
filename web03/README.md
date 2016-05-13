@@ -68,8 +68,13 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - webapp/board 폴더 생성
    - webapp/board/BoardList.jsp 생성
    - BoardListServlet 변경
+2) 회원 관리에도 적용하기
 
-
+# JSP 액션 태그 적용하기
+1) <jsp:useBean> 적용
+2) <jsp:include> 적용
+   - Copyright.jsp 작성
+   - 목록 또는 상세정보 출력 화면에 Copyright.jsp 실행을 포함하라!
 
 
 

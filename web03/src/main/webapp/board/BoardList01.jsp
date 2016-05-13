@@ -22,8 +22,9 @@
 </tr>
 </thead>
 <tbody>
-<jsp:useBean id="list" type="java.util.List<Board>" scope="request"/>
 <%
+// ServletRequest 보관소에 저장된 게시물 목록을 가져온다.
+List<Board> list = (List<Board>)request.getAttribute("list");
 for (Board board : list) {%>
 <tr>
   <td><%=board.getNo()%></td>
@@ -34,7 +35,6 @@ for (Board board : list) {%>
 <%} %>
 </tbody>
 </table>
-<jsp:include page="../common/Copyright.jsp"/>
 </body>
 </html>
 

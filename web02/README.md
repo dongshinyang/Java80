@@ -142,11 +142,12 @@
 - Test05.jsp => JSP 문법: 선언문(declaration element, <%! 클래스에 삽입할 코드 %>)
 - Test06.jsp => JSP 문법: 지시문(directive element, <%@ 지시어 속성=값 ... %>)
 - Test07.jsp => JSP 문법: 지시문 => include
-- Test08.jsp => JSP 문법: JSP 액션 태그 => <jsp:useBean> 사용법1
-- Test09.jsp => JSP 문법: JSP 액션 태그 => <jsp:useBean> 사용법2
-
-
-
+- Test08.jsp => JSP 액션 태그: <jsp:useBean> 사용법1 => 개요 
+- Test09.jsp => JSP 액션 태그: <jsp:useBean> 사용법2 => class 속성
+- Test10.jsp => JSP 액션 태그: <jsp:useBean> 사용법3 => type과 class 속성
+- Test11.jsp => JSP 액션 태그: <jsp:useBean> 사용법4 => type 속성
+- Test12.jsp => JSP 액션 태그: <jsp:include> 사용법 => including 수행 
+  BasicStyle.jsp 
 
 
 

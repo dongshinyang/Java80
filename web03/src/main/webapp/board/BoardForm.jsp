@@ -14,5 +14,6 @@
 <button>등록</button>
 <button type='reset'>초기화</button>
 </form>
+<jsp:include page="../common/Copyright.jsp"/>
 </body>
 </html>

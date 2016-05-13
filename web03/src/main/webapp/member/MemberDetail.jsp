@@ -1,10 +1,7 @@
-<%@page import="bitcamp.pms.vo.Member"%>
 <%@ page 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-Member member = (Member)request.getAttribute("member");
-%>
+<jsp:useBean id="member" type="bitcamp.pms.vo.Member" scope="request"/>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,5 +18,6 @@ Member member = (Member)request.getAttribute("member");
 <button>변경</button>
 <a href='delete.do?no=<%=member.getNo()%>'>삭제</a><button type='reset'>초기화</button>
 </form>
+<jsp:include page="../common/Copyright.jsp"/>
 </body>
 </html>
