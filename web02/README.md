@@ -153,10 +153,20 @@
 - Test01.jsp => EL 사용법: 개요
 - Test02.jsp => EL 사용법: 보관소에 저장된 객체의 프로퍼티 값 출력하기
 - Test03.jsp => EL 사용법: 보관소명 생략하기
+- Test04.jsp => EL 사용법: 파라미터 값 꺼내기
+- Test05.jsp => EL 사용법: 요청 프로토콜에 있는 헤더 값 꺼내기
+- Test06.jsp => EL 기초 문법: 표현식
+- Test07.jsp => EL 기초 문법: 배열에서 값 꺼내기
+- Test08.jsp => EL 기초 문법: List에서 값 꺼내기
+- Test09.jsp => EL 기초 문법: Map에서 값 꺼내기
+- Test10.jsp => EL 기초 문법: 산술 연산자 사용법 
+- Test11.jsp => EL 기초 문법: 논리 연산자 사용법 
+- Test12.jsp => EL 기초 문법: 관계 연산자 사용법 
+- Test13.jsp => EL 기초 문법: empty와 조건 연산자 사용법
 
-
-
-
+## step09
+- Test01.jsp => JSTL 사용법 : 개요
+- Test01.jsp => JSTL 사용법 : Core 라이브러리 - c:out
 
 
 

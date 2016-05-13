@@ -30,7 +30,7 @@ request.setAttribute("car", car);
 %>
 <pre>
 1) 보관소명 생략
-\${객체이름} : pageContext.findAttribute("객체이름")'
+\${객체이름} : pageContext.findAttribute("객체이름")
 
 2) 보관소명을 생략하면 다음 순서로 객체를 찾는다.
 PageContext => ServletRequest => HttpSession => ServletContext

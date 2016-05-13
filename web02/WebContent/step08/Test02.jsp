@@ -43,8 +43,17 @@ PageContext     => pageScope
 \${requestScope.car.maker} => ${requestScope.car.maker}
 \${requestScope.car.getEngine().getCc()} => ${requestScope.car.getEngine().getCc()} : 일반 자바 문법 사용
 \${requestScope.car.engine.cc} => ${requestScope.car.engine.cc}  : OGNL 표기법 사용
-</pre>
 
+\${requestScope.car["maker"]} => ${requestScope.car["maker"]}
+\${requestScope["car"]["maker"]} => ${requestScope["car"]["maker"]}
+
+</pre>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>
 
