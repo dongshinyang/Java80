@@ -1,8 +1,8 @@
 package bitcamp.pms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,25 +24,8 @@ public class MemberAddServlet extends HttpServlet {
       HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException {
 
-    response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>회원관리</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>회원관리-새 회원</h1>");
-    out.println("<form action='add.do' method='post'>");
-    out.println("이름: <input type='text' name='name'><br>");
-    out.println("이메일: <input type='text' name='email'><br>");
-    out.println("암호: <input type='password' name='password'><br>");
-    out.println("전화: <input type='text' name='tel'><br>");
-    out.println("<button>등록</button>");
-    out.println("<button type='reset'>초기화</button>");
-    out.println("</form>");
-    out.println("</body>");
-    out.println("</html>");
+    RequestDispatcher rd = request.getRequestDispatcher("/member/MemberForm.jsp");
+    rd.forward(request, response);
   }
   
   

@@ -1,9 +1,9 @@
 package bitcamp.pms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,36 +33,10 @@ public class MemberListServlet extends HttpServlet {
     List<Member> list = memberDao.selectList();
     
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>회원관리</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>회원-목록</h1>");
-    out.println("<p><a href='add.do'>새 회원</a></p>");
-    out.println("<table border='1'>");
-    out.println("<thead>");
-    out.println("<tr>");
-    out.println("  <th>번호</th>");
-    out.println("  <th>이름</th>");
-    out.println("  <th>이메일</th>");
-    out.println("  <th>전화</th>");
-    out.println("</tr>");
-    out.println("</thead>");
-    out.println("<tbody>");
-    for (Member member : list) {
-      out.printf("<tr><td>%d</td>", member.getNo());
-      out.printf("<td><a href='detail.do?no=%d'>%s</a></td>", 
-          member.getNo(), member.getName());
-      out.printf("<td>%s</td>", member.getEmail());
-      out.printf("<td>%s</td></tr>\n", member.getTel());
-    }
-    out.println("</tbody>");
-    out.println("</table>");
-    out.println("</body>");
-    out.println("</html>");
+
+    RequestDispatcher rd = request.getRequestDispatcher("/member/MemberList.jsp");
+    request.setAttribute("list", list);
+    rd.include(request, response);
   }
 }
 

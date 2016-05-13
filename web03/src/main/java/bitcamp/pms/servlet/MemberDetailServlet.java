@@ -1,10 +1,10 @@
 package bitcamp.pms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,30 +37,10 @@ public class MemberDetailServlet extends HttpServlet {
     Member member = memberDao.selectOne(paramMap);
     
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
     
-    out.println("<html>");
-    out.println("<head>");
-    out.println("<title>회원관리</title>");
-    out.println("</head>");
-    out.println("<body>");
-    out.println("<h1>회원관리-상세정보</h1>");
-    out.println("<form action='update.do' method='post'>");
-    out.printf("번호: <input type='text' name='no' value='%d' readonly><br>\n",
-        member.getNo());
-    out.printf("이름: <input type='text' name='name' value='%s'><br>\n",
-        member.getName());
-    out.printf("이메일: <input type='text' name='email' value='%s'><br>\n",
-        member.getEmail());
-    out.println("암호: <input type='password' name='password'><br>");
-    out.printf("전화: <input type='text' name='tel' value='%s'><br>\n",
-        member.getTel());
-    out.println("<button>변경</button>");
-    out.printf("<a href='delete.do?no=%d'>삭제</a>", member.getNo());
-    out.println("<button type='reset'>초기화</button>");
-    out.println("</form>");
-    out.println("</body>");
-    out.println("</html>");
+    RequestDispatcher rd = request.getRequestDispatcher("/member/MemberDetail.jsp");
+    request.setAttribute("member", member);
+    rd.include(request, response);
   }
 }
 
