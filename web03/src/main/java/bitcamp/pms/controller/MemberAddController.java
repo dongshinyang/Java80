@@ -9,23 +9,25 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import bitcamp.pms.dao.BoardDao;
-import bitcamp.pms.vo.Board;
+import bitcamp.pms.dao.MemberDao;
+import bitcamp.pms.vo.Member;
 
-@Component("/board/add")
-public class BoardAddController {
+@Component("/member/add")
+public class MemberAddController {
   @Autowired
-  BoardDao boardDao;
+  MemberDao memberDao;
   
   public String execute(
       HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException {
 
-    Board board = new Board();
-    board.setTitle(request.getParameter("title"));
-    board.setContent(request.getParameter("content"));
+    Member member = new Member();
+    member.setName(request.getParameter("name"));
+    member.setEmail(request.getParameter("email"));
+    member.setPassword(request.getParameter("password"));
+    member.setTel(request.getParameter("tel"));
     
-    boardDao.insert(board);
+    memberDao.insert(member);
     
     return "redirect:list.do";
   }

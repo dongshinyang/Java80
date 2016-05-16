@@ -1,33 +1,25 @@
-package bitcamp.pms.servlet;
+package bitcamp.pms.controller;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.vo.Member;
 
-@WebServlet("/member/update")
-public class MemberUpdateServlet extends HttpServlet {
-  private static final long serialVersionUID = 1L;
-
-  @Override
-  protected void doPost(
+@Component("/member/update")
+public class MemberUpdateController {
+  @Autowired
+  MemberDao memberDao;
+  
+  public String execute(
       HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException {
-
-    ServletContext servletContext = this.getServletContext();
-    ApplicationContext iocContainer = 
-        (ApplicationContext)servletContext.getAttribute("iocContainer");
-    
-    MemberDao memberDao = iocContainer.getBean(MemberDao.class);
     
     Member member = new Member();
     member.setNo(Integer.parseInt(request.getParameter("no")));
@@ -38,7 +30,7 @@ public class MemberUpdateServlet extends HttpServlet {
     
     memberDao.update(member);
     
-    request.setAttribute("view", "redirect:list.do");
+    return "redirect:list.do";
   }
 }
 

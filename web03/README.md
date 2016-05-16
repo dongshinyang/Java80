@@ -88,15 +88,21 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 3) 기존 서블릿을 페이지 컨트롤러로 만들기
    - BoardXxxServlet, MemberXxxServlet 클래스를 변경
 
-# Page Controller를 POJO로 만들기
-1) BoardXxxServlet 서블릿 클래스들을 POJO 일반 클래스로 변경한다.
-   - POJO 클래스는 스프링 IoC 컨테이너에서 관리할 수 있다.
+# 페이지 컨트롤러를 Spring IoC 컨테이너에서 관리하기
+=> 페이지 컨트롤러 클래스를 일반 클래스(POJO)로 변경한다.
+=> POJO 클래스는 스프링 IoC 컨테이너에서 관리할 수 있다.
+1) BoardXxxServlet 서블릿 클래스를 POJO 클래스로 변경한다.
    - BoardListServlet --> BoardListController
    - BoardAddServlet --> BoardNewFormController, BoardAddController
    - BoardDetailServlet --> BoardDetailController
    - BoardUpdateServlet --> BoardUpdateController
    - BoardDeleteServlet --> BoardDeleteController 
-   
+2) MemberXxxServlet 서블릿 클래스를 POJO 클래스로 변경한다.
+   - MemberListServlet --> MemberListController
+   - MemberAddServlet --> MemberNewFormController, MemberAddController
+   - MemberDetailServlet --> MemberDetailController
+   - MemberUpdateServlet --> MemberUpdateController
+   - MemberDeleteServlet --> MemberDeleteController    
 
 
 

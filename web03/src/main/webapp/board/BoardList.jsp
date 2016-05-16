@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>게시판-목록</h1>
-<p><a href='add.do'>새 글</a></p>
+<p><a href='new.do'>새 글</a></p>
 <table border='1'>
 <thead>
 <tr>

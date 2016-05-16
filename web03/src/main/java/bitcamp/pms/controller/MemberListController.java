@@ -1,6 +1,7 @@
 package bitcamp.pms.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,25 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import bitcamp.pms.dao.BoardDao;
-import bitcamp.pms.vo.Board;
+import bitcamp.pms.dao.MemberDao;
+import bitcamp.pms.vo.Member;
 
-@Component("/board/add")
-public class BoardAddController {
+@Component("/member/list")
+public class MemberListController {
   @Autowired
-  BoardDao boardDao;
+  MemberDao memberDao;
   
   public String execute(
       HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException {
+    
+    List<Member> list = memberDao.selectList();
+    
+    response.setContentType("text/html;charset=UTF-8");
 
-    Board board = new Board();
-    board.setTitle(request.getParameter("title"));
-    board.setContent(request.getParameter("content"));
-    
-    boardDao.insert(board);
-    
-    return "redirect:list.do";
+    request.setAttribute("list", list);
+    return "/member/MemberList.jsp";
   }
 }
 
