@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판(by JSP, JSTL, EL)</title>
+<title>게시판</title>
 </head>
 <body>
 <h1>게시판-목록</h1>

@@ -3,7 +3,6 @@ package bitcamp.pms.servlet;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ import org.springframework.context.ApplicationContext;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.vo.Member;
 
-@WebServlet("/member/list.do")
+@WebServlet("/member/list")
 public class MemberListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -34,9 +33,8 @@ public class MemberListServlet extends HttpServlet {
     
     response.setContentType("text/html;charset=UTF-8");
 
-    RequestDispatcher rd = request.getRequestDispatcher("/member/MemberList.jsp");
     request.setAttribute("list", list);
-    rd.include(request, response);
+    request.setAttribute("view", "/member/MemberList.jsp");
   }
 }
 

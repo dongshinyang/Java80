@@ -27,6 +27,18 @@
     <listener-class>bitcamp.pms.listener.ContextLoaderListener</listener-class>
   </listener>
 
+  <!-- 프론트 컨트롤러 등록 -->
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>bitcamp.pms.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+
   <!-- 웹 서버에 자원을 요청할 때 폴더 이름까지만 지정한다면,
        웹 서버는 다음 순서로 기본 파일을 찾는다.
        해당 파일이 있으면 그 파일을 클라이언트로 보낸다. -->  

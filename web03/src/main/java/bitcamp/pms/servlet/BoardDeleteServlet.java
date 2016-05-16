@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 
 import bitcamp.pms.dao.BoardDao;
 
-@WebServlet("/board/delete.do")
+@WebServlet("/board/delete")
 public class BoardDeleteServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -31,8 +31,7 @@ public class BoardDeleteServlet extends HttpServlet {
     int no = Integer.parseInt(request.getParameter("no"));
     boardDao.delete(no);
     
-    response.sendRedirect("list.do");
-    
+    request.setAttribute("view", "redirect:list.do");
   }
 }
 

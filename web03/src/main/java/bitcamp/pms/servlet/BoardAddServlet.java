@@ -2,7 +2,6 @@ package bitcamp.pms.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.vo.Board;
 
-@WebServlet("/board/add.do")
+@WebServlet("/board/add")
 public class BoardAddServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -23,13 +22,7 @@ public class BoardAddServlet extends HttpServlet {
   protected void doGet(
       HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException {
-    
-    // forwarding인 경우, 메인 서블릿에서 콘텐츠 타입을 설정할 필요는 없다.
-    //response.setContentType("text/html;charset=UTF-8");
-    
-    RequestDispatcher rd = request.getRequestDispatcher("/board/BoardForm.jsp");
-    rd.forward(request, response);
-    
+    request.setAttribute("view", "/board/BoardForm.jsp");
   }
   
   @Override
@@ -49,7 +42,7 @@ public class BoardAddServlet extends HttpServlet {
     
     boardDao.insert(board);
     
-    response.sendRedirect("list.do");
+    request.setAttribute("view", "redirect:list.do");
   }
 }
 

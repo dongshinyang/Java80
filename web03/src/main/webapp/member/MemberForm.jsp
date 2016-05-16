@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>회원관리(by JSP)</title>
+<title>회원관리</title>
 </head>
 <body>
 <h1>회원관리-새 회원</h1>

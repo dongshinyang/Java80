@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,7 @@ import org.springframework.context.ApplicationContext;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.vo.Member;
 
-@WebServlet("/member/detail.do")
+@WebServlet("/member/detail")
 public class MemberDetailServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -38,9 +37,8 @@ public class MemberDetailServlet extends HttpServlet {
     
     response.setContentType("text/html;charset=UTF-8");
     
-    RequestDispatcher rd = request.getRequestDispatcher("/member/MemberDetail.jsp");
     request.setAttribute("member", member);
-    rd.include(request, response);
+    request.setAttribute("view", "/member/MemberDetail.jsp");
   }
 }
 

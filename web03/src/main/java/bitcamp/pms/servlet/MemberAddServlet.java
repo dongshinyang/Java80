@@ -2,7 +2,6 @@ package bitcamp.pms.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import bitcamp.pms.dao.MemberDao;
 import bitcamp.pms.vo.Member;
 
-@WebServlet("/member/add.do")
+@WebServlet("/member/add")
 public class MemberAddServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -23,9 +22,7 @@ public class MemberAddServlet extends HttpServlet {
   protected void doGet(
       HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException {
-
-    RequestDispatcher rd = request.getRequestDispatcher("/member/MemberForm.jsp");
-    rd.forward(request, response);
+    request.setAttribute("view", "/member/MemberForm.jsp");
   }
   
   
@@ -48,7 +45,7 @@ public class MemberAddServlet extends HttpServlet {
     
     memberDao.insert(member);
     
-    response.sendRedirect("list.do");
+    request.setAttribute("view", "redirect:list.do");
   }
 }
 

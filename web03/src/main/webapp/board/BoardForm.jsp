@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>게시판(by JSP)</title>
+<title>게시판</title>
 </head>
 <body>
 <h1>게시판-새 글</h1>

@@ -14,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.vo.Board;
 
-@WebServlet("/board/update.do")
+@WebServlet("/board/update")
 public class BoardUpdateServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -36,8 +36,7 @@ public class BoardUpdateServlet extends HttpServlet {
     
     boardDao.update(board);
     
-    response.sendRedirect("list.do");
-    
+    request.setAttribute("view", "redirect:list.do");
   }
 }
 

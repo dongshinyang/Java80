@@ -166,7 +166,22 @@
 
 ## step09
 - Test01.jsp => JSTL 사용법 : 개요
-- Test01.jsp => JSTL 사용법 : Core 라이브러리 - c:out
+- Test02.jsp => JSTL 사용법 : Core 라이브러리 - c:out
+- Test03.jsp => JSTL 사용법 : Core 라이브러리 - c:set, c:remove
+- Test04.jsp => JSTL 사용법 : Core 라이브러리 - c:if
+- Test05.jsp => JSTL 사용법 : Core 라이브러리 - c:choose
+- Test06.jsp => JSTL 사용법 : Core 라이브러리 - c:forEach
+- Test07.jsp => JSTL 사용법 : Core 라이브러리 - c:forTokens
+- Test08.jsp => JSTL 사용법 : Core 라이브러리 - c:import
+- Test09.jsp => JSTL 사용법 : Core 라이브러리 - c:redirect
+- Test10.jsp => JSTL 사용법 : i18n 라이브러리 - fmt:parseDate
+- Test11.jsp => JSTL 사용법 : i18n 라이브러리 - fmt:formatDate
+
+
+
+
+
+
 
 
 

@@ -50,7 +50,7 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - src/main/resources/bitcamp/pms/dao 폴더 생성
    - BoardDao.xml 파일 준비   
 
-# 게시판 서블릿 준비
+# 게시판 서블릿 준비(src01)
 1) "bitcamp.pms.servlet" 패키지 생성
 2) BoardListServlet 클래스 생성
    - BoardDao를 사용하여 게시물 출력한다.
@@ -63,26 +63,31 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 5) BoardDetailServlet, BoardUpdateServlet, BoardDeleteServlet 클래스 생성
 6) 리다이렉트 적용.
 
-# JSP를 이용한 MVC 아키텍처 적용
+# JSP를 이용한 MVC 아키텍처 적용(src02)
 1) BoardListServlet에서 출력 부분을 분리하여 BoardList.jsp에 맡긴다.
    - webapp/board 폴더 생성
    - webapp/board/BoardList.jsp 생성
    - BoardListServlet 변경
 2) 회원 관리에도 적용하기
 
-# JSP 액션 태그 적용하기
+# JSP 액션 태그 적용하기(src02)
 1) <jsp:useBean> 적용
 2) <jsp:include> 적용
    - Copyright.jsp 작성
    - 목록 또는 상세정보 출력 화면에 Copyright.jsp 실행을 포함하라!
 
-# JSP 페이지에 EL 적용하기
+# JSP 페이지에 EL, JSTL 적용하기(src02)
 1) BoardDetail.jsp, MemberDetail.jsp 페이지에 EL 적용
+2) BoardList.jsp, MemberList.jsp 페이지에 EL, JSTL 적용.
 
-
-
-
-
+# Front Controller 적용하기(src03)
+1) 프론트 컨트롤러 생성
+   - DispatcherServlet 클래스 작성
+2) 프론트 컨트롤러 배치
+   - web.xml에 서블릿 정보 및 매핑 정보 등록
+3) 기존 서블릿을 페이지 컨트롤러로 만들기
+   - BoardXxxServlet, MemberXxxServlet 클래스를 변경
+   
 
 
 
