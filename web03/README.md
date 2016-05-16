@@ -87,6 +87,15 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - web.xml에 서블릿 정보 및 매핑 정보 등록
 3) 기존 서블릿을 페이지 컨트롤러로 만들기
    - BoardXxxServlet, MemberXxxServlet 클래스를 변경
+
+# Page Controller를 POJO로 만들기
+1) BoardXxxServlet 서블릿 클래스들을 POJO 일반 클래스로 변경한다.
+   - POJO 클래스는 스프링 IoC 컨테이너에서 관리할 수 있다.
+   - BoardListServlet --> BoardListController
+   - BoardAddServlet --> BoardNewFormController, BoardAddController
+   - BoardDetailServlet --> BoardDetailController
+   - BoardUpdateServlet --> BoardUpdateController
+   - BoardDeleteServlet --> BoardDeleteController 
    
 
 
