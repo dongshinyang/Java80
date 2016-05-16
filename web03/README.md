@@ -109,8 +109,10 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - BoardController 클래스를 작성한다.
    - 각 BoardXxxController의 execute()를 가져와서 이름을 바꾼다.
    - 요청을 처리하는 각 메서드에 @RequestMapping 애노테이션을 붙인다.
-   
-
+2) MemberXxxController를 MemberController로 합치기
+   - MemberController 클래스를 작성한다.
+   - 각 MemberXxxController의 execute()를 가져와서 이름을 바꾼다.
+   - 요청을 처리하는 각 메서드에 @RequestMapping 애노테이션을 붙인다.
 
 
 
