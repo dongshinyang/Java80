@@ -2,8 +2,6 @@ package bitcamp.pms.servlet;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public class DispatcherServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -36,8 +33,7 @@ public class DispatcherServlet extends HttpServlet {
     try {
       // 3) 페이지 컨트롤러에서 해당 URL을 처리하는 메서드를 찾는다.
       Method method = findRequestHandler(pageController, pageControllerPath);
-      Object[] paramValues = prepareParameterValues(method, request, response);
-      String viewUrl = (String)method.invoke(pageController, paramValues);
+      String viewUrl = (String)method.invoke(pageController, request, response);
     
       // 4) 뷰 컴포넌트를 실행한다.
       if (viewUrl.startsWith("redirect:")) {
@@ -49,34 +45,6 @@ public class DispatcherServlet extends HttpServlet {
     } catch (Exception e) {
       throw new ServletException(e);
     }
-  }
-
-  private Object[] prepareParameterValues(
-      Method method, 
-      HttpServletRequest request, 
-      HttpServletResponse response) {
-    // 1) 파라미터 값을 저장할 목록 준비
-    ArrayList<Object> paramValues = new ArrayList<>();
-    
-    // 2) 메서드의 파라미터 정보를 추출한다.
-    Parameter[] parameters = method.getParameters();
-    
-    // 3) 파라미터에 적합한 객체를 찾아 값을 준비한다.
-    String requestParamName = null;
-    for (Parameter param : parameters) {
-      if (param.getType() == HttpServletRequest.class) {
-        paramValues.add(request);
-      } else if (param.getType() == HttpServletResponse.class) {
-        paramValues.add(response);
-      } else if (param.getType() == String.class) {
-        requestParamName = param.getAnnotation(RequestParam.class).value();
-        paramValues.add(request.getParameter(requestParamName));
-      } else {
-        paramValues.add(null);
-      }
-    }
-    
-    return paramValues.toArray();
   }
 
   private Method findRequestHandler(Object pageController, String pageControllerPath) {
