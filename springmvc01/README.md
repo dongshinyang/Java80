@@ -1,4 +1,44 @@
 # 스프링 Web MVC 프레임워크 사용법
 
 ## 프론트 컨트롤러 설정하기
- 
+1) web.xml에 DispatcherServlet 클래스를 등록한다.
+2) 스프링 설정 파일을 추가한다.
+   - /WEB-INF/conf/dispatcher-servlet.xml
+   - 만약 스프링 설정 파일을 /WEB-INF 폴더에 놓고,
+     설정 파일의 이름을 "서블릿이름-servlet.xml"로 지정한다면
+     스프링 설정 파일의 위치를 지정하는 초기화 파라미터("contextConfigLocation")
+     를 생략할 수 있다.
+   - 위의 규칙을 따르지 않는다면 명확하게 스프링 설정 파일의 위치를 지정해야 한다.
+       
+## 페이지 컨트롤러 만들기
+- Controller01.java : 페이지 컨트롤러 클래스의 기본 구조
+- Controller02.java : @RequestMapping 사용법 - 메서드에만 붙이기
+- Controller03.java : @RequestMapping 사용법 - 클래스와 메서드에 모두 붙이기 
+- Controller04.java : 요청 핸들러에서 뷰 url 리턴하기
+- Controller05.java : @RequestMapping 사용법 - GET 요청과 POST 요청 구분 
+  Controller05.jsp : GET/POST 요청을 위한 페이지
+- Controller06.java : @RequestMapping 사용법 - GET 요청과 POST 요청 구분2 
+  Controller06.jsp : GET/POST 요청을 위한 페이지2
+- Controller07.java : @RequestMapping 사용법 - 파라미터 이름으로 요청을 구분하기 
+- Controller08.java : @RequestMapping 사용법 - 요청 프로토콜의 헤더로 요청을 구분하기  
+  Controller08.html : 서버에 임의의 요청을 보내는 페이지 
+- Controller09.java : 요청 핸들러 파라미터 - @RequestParam 애노테이션
+- Controller10.java : 요청 핸들러 파라미터 - @RequestParam 애노테이션의 필수 여부 지정하기
+                                              => required, defaultValue 속성
+- Controller11.java : 요청 핸들러 파라미터 - @RequestParam 애노테이션의 value 속성 생략                                             
+- Controller12.java : 요청 핸들러 파라미터 - @RequestParam 애노테이션 생략 
+- Controller13.java : 요청 핸들러 파라미터 - VO 객체를 파라미터로 선언하기
+- Controller14.java : 요청 핸들러 파라미터 - request, response 받기
+- Controller15.java : 요청 핸들러 파라미터 - ServletContext 받기(불가!)
+- Controller16.java : 요청 핸들러 파라미터 - String을 java.util.Date 타입으로 변환하기(v3.0)
+- Controller17.java : 요청 핸들러 파라미터 - String을 java.util.Date 타입으로 변환하기2(v2.5)
+- Controller18.java : 요청 핸들러 파라미터 - String을 java.util.Date 타입으로 변환하기2(v3.2)
+  GlobalInitBinder.java : 공통 @InitBinder를 모아둔 클래스.
+
+
+
+
+
+
+
+
