@@ -71,6 +71,9 @@ public class DispatcherServlet extends HttpServlet {
       } else if (param.getType() == String.class) {
         requestParamName = param.getAnnotation(RequestParam.class).value();
         paramValues.add(request.getParameter(requestParamName));
+      } else if (param.getType() == int.class) {
+        requestParamName = param.getAnnotation(RequestParam.class).value();
+        paramValues.add(Integer.parseInt(request.getParameter(requestParamName)));
       } else {
         paramValues.add(null);
       }

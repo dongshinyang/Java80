@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.vo.Board;
@@ -22,12 +22,12 @@ public class BoardController {
   
   @RequestMapping("add")
   public String add(
-      HttpServletRequest request, 
-      HttpServletResponse response) throws ServletException, IOException {
+      @RequestParam("title") String title, 
+      @RequestParam("content") String content) throws ServletException, IOException {
 
     Board board = new Board();
-    board.setTitle(request.getParameter("title"));
-    board.setContent(request.getParameter("content"));
+    board.setTitle(title);
+    board.setContent(content);
     
     boardDao.insert(board);
     
@@ -35,22 +35,18 @@ public class BoardController {
   }
   
   @RequestMapping("delete")
-  public String delete(
-      HttpServletRequest request, 
-      HttpServletResponse response) throws ServletException, IOException {
-
-    int no = Integer.parseInt(request.getParameter("no"));
-    boardDao.delete(no);
+  public String delete(@RequestParam("no") int no) 
+      throws ServletException, IOException {
     
+    boardDao.delete(no);
     return "redirect:list.do";
   }
   
   @RequestMapping("detail")
   public String detail(
       HttpServletRequest request, 
-      HttpServletResponse response) throws ServletException, IOException {
+      @RequestParam("no") int no) throws ServletException, IOException {
     
-    int no = Integer.parseInt(request.getParameter("no"));
     Board board = boardDao.selectOne(no);
     
     request.setAttribute("board", board);
@@ -58,9 +54,8 @@ public class BoardController {
   }
   
   @RequestMapping("list")
-  public String list(
-      HttpServletRequest request, 
-      HttpServletResponse response) throws ServletException, IOException {
+  public String list(HttpServletRequest request) 
+      throws ServletException, IOException {
     
     List<Board> list = boardDao.selectList();
     
@@ -69,20 +64,21 @@ public class BoardController {
   }
   
   @RequestMapping("new")
-  public String form(
-      HttpServletRequest request, 
-      HttpServletResponse response) throws ServletException, IOException {
+  public String form() throws ServletException, IOException {
     return "/board/BoardForm.jsp";
   }
   
   @RequestMapping("update")
   public String update(
-      HttpServletRequest request, 
-      HttpServletResponse response) throws ServletException, IOException {
+      @RequestParam("no") int no,
+      @RequestParam("title") String title,
+      @RequestParam("content") String content) 
+      throws ServletException, IOException {
+    
     Board board = new Board();
-    board.setNo(Integer.parseInt(request.getParameter("no")));
-    board.setTitle(request.getParameter("title"));
-    board.setContent(request.getParameter("content"));
+    board.setNo(no);
+    board.setTitle(title);
+    board.setContent(content);
     
     boardDao.update(board);
     
