@@ -122,7 +122,14 @@ src/main/java         => 자바 소스 파일을 두는 폴더
      그 메서드가 원하는 파라미터 값을 던져준다.
 2) 각 페이지 컨트롤러의 메서드에 대해 파라미터 선언 변경
 
-
+# 스프링 MVC 프레임워크 적용하기(src07)
+1) 프론트 컨트롤러 교체
+   - 스프링에서 제공하는 프론트 컨트롤러로 교체한다.
+   - web.xml 파일을 편집한다.
+   - application-context.xml --> dispatcher-servlet.xml 로 이름 변경. 
+   - 기존의 DispatcherServlet 클래스 삭제한다.
+   - 기존의 ContextLoaderListener 클래스 삭제한다.
+  
 
 
 
