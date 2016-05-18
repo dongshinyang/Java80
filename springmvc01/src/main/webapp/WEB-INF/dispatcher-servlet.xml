@@ -19,6 +19,12 @@
             @DateTimeFormat과 같은 애노테이션이 동작하지 않는다.
     -->
     <mvc:annotation-driven/>
+    
+    <!-- 멀티파트 파라미터 값 처리기 등록 -->
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		    <property name="maxUploadSize" value="10000000"/>
+		</bean>
 </beans>
 
 

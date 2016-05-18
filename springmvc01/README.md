@@ -34,8 +34,8 @@
 - Controller17.java : 요청 핸들러 파라미터 - String을 java.util.Date 타입으로 변환하기2(v2.5)
 - Controller18.java : 요청 핸들러 파라미터 - String을 java.util.Date 타입으로 변환하기2(v3.2)
   GlobalInitBinder.java : 공통 @InitBinder를 모아둔 클래스.
-
-
+- Controller19.java : 요청 핸들러 파라미터 - 멀티파트 파라미터 값(파일업로드) 다루기.
+  Controller19.html : 파일 업로드 폼 페이지
 
 
 
