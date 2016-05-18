@@ -190,11 +190,14 @@
 - Servlet39.java => 쿠키 응용: 마지막 방문일 출력하기
 
 ## step11
-- Servlet40A.java => 세션의 생성과 유지
+- Servlet40A.java => 세션을 사용하지 않고 페이지 간의 데이터를 전달하는 방법
   Servlet40B.java
   Servlet40C.java
-
-
+  Servlet40C.java
+- Servlet41A.java => 세션을 사용해 페이지 간의 데이터를 전달하는 방법
+  Servlet41B.java
+  Servlet41C.java
+  Servlet41C.java
 
 
 

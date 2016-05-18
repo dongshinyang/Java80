@@ -16,6 +16,7 @@ public class Controller26 {
   public String form(@CookieValue(required=false) String id, Model model) {
     if (id != null) {
       model.addAttribute("id", id);
+      model.addAttribute("checked", "checked='checked'");
     }
     return "/controller26/form.jsp";
   }
