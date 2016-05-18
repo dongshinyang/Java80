@@ -36,6 +36,20 @@
   GlobalInitBinder.java : 공통 @InitBinder를 모아둔 클래스.
 - Controller19.java : 요청 핸들러 파라미터 - 멀티파트 파라미터 값(파일업로드) 다루기.
   Controller19.html : 파일 업로드 폼 페이지
+- Controller20.java : 뷰 컴포넌트로 값 전달 - ServletRequest 보관소에 직접 담기.   
+- Controller21.java : 뷰 컴포넌트로 값 전달 - Map 객체 사용 
+- Controller22.java : 뷰 컴포넌트로 값 전달 - Model 객체 사용 
+- Controller23.java : 뷰 컴포넌트로 값 전달 - ModelAndView 객체 사용
+- Controller24.java : 요청 핸들러의 리턴 다루기 - 콘텐츠 직접 리턴하기
+- Controller25.java : 요청 핸들러의 리턴 다루기 - 콘텐츠를 객체에 담아 리턴하기
+
+
+
+
+
+
+
+
 
 
 
