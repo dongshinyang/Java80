@@ -177,9 +177,15 @@
 - Test10.jsp => JSTL 사용법 : i18n 라이브러리 - fmt:parseDate
 - Test11.jsp => JSTL 사용법 : i18n 라이브러리 - fmt:formatDate
 
-
-
-
+## step10
+- Servlet30.java => 서버에서 클라이언트로 쿠키 전달하기 - HTTP 응답 프로토콜과 쿠키
+- Servlet31.java => 클라이언트에서 서버로 쿠키 전달하기 - HTTP 요청 프로토콜과 쿠키
+- Servlet32.java => 쿠키의 사용 범위 확인 - 같은 경로(하위 경로 포함)만 가능
+- Servlet33.java => 쿠키의 사용 범위를 지정하기 - 다른 경로에도 쿠키 보내는 방법
+- Servlet34.java => 쿠키의 사용 범위 확인 - / 
+- Servlet35.java => 쿠키의 사용 범위 확인 - /other
+- Servlet36.java => 쿠키의 사용 범위 확인 - /step10/other
+- Servlet37.java => 쿠키의 유효기간 지정하기
 
 
 
