@@ -187,6 +187,19 @@
 - Servlet36.java => 쿠키의 사용 범위 확인 - /step10/other
 - Servlet37.java => 쿠키의 유효기간 지정하기
 - Servlet38.java => 쿠키 응용: 로그인 폼에서 아이디 저장할 때
+- Servlet39.java => 쿠키 응용: 마지막 방문일 출력하기
+
+## step11
+- Servlet40A.java => 세션의 생성과 유지
+  Servlet40B.java
+  Servlet40C.java
+
+
+
+
+
+
+
 
 
 

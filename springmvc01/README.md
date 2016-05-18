@@ -42,9 +42,11 @@
 - Controller23.java : 뷰 컴포넌트로 값 전달 - ModelAndView 객체 사용
 - Controller24.java : 요청 핸들러의 리턴 다루기 - 콘텐츠 직접 리턴하기
 - Controller25.java : 요청 핸들러의 리턴 다루기 - 콘텐츠를 객체에 담아 리턴하기
-
-
-
+- Controller26.java : 쿠기 사용하기 - 로그인 폼에서 아이디 저장하기
+  /controller26/form.jsp : 로그인 폼
+  /controller26/loginResult.jsp : 로그인 결과  
+- Controller27.java : 쿠기 사용하기 - 마지막 방문일 출력하기(JSP의 EL이용)
+  /controller27.jsp
 
 
 
