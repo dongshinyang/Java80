@@ -186,7 +186,7 @@
 - Servlet35.java => 쿠키의 사용 범위 확인 - /other
 - Servlet36.java => 쿠키의 사용 범위 확인 - /step10/other
 - Servlet37.java => 쿠키의 유효기간 지정하기
-
+- Servlet38.java => 쿠키 응용: 로그인 폼에서 아이디 저장할 때
 
 
 
