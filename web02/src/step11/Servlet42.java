@@ -54,6 +54,7 @@ public class Servlet42 extends HttpServlet {
     String password = request.getParameter("password");
     
     //로그인 정보를 세션에 저장
+    boolean login = false;
     HttpSession session = request.getSession();
     if (id.equals("hong") && password.equals("1111")) {
       Member member = new Member();
@@ -65,9 +66,9 @@ public class Servlet42 extends HttpServlet {
       
       session.setAttribute("loginUser", member);
       response.setHeader("Refresh", "2;url=main"); // 2초 후에 메인 화면을 요청하라고 지시한다.
+      login = true;
     } else {
       session.invalidate(); // 로그인 실패할 때 기존 세션 정보를 무효화시켜라!
-      session = request.getSession(); // 새 세션 준비!
     }
     
     //만약 아이디 저장이 체크되어 있다면, 
@@ -87,7 +88,8 @@ public class Servlet42 extends HttpServlet {
     out.println("<html>");
     out.println("<body>");
     out.println("<h1>로그인 결과</h1>");
-    if (session.getAttribute("loginUser") != null) {
+    
+    if (login) {
       out.println("로그인 성공입니다!");
     } else {
       out.println("로그인 실패입니다!");
