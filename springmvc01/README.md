@@ -47,8 +47,9 @@
   /controller26/loginResult.jsp : 로그인 결과  
 - Controller27.java : 쿠기 사용하기 - 마지막 방문일 출력하기(JSP의 EL이용)
   /controller27.jsp
-
-
+- Controller28.java : 세션 사용하기 - HttpSession 객체 활용
+- Controller29.java : 세션 사용하기 - @SessionAttributes, Model 객체 활용
+- Controller30.java : 세션 사용하기 - 로그아웃 처리. 세션 무효화시킴.
 
 
 
