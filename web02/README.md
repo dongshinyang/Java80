@@ -198,7 +198,9 @@
   Servlet41B.java
   Servlet41C.java
   Servlet41C.java
-
+- Servlet42.java => GET(로그인 폼 출력), POST(로그인 처리)
+- Servlet43.java => 로그아웃 처리
+- Servlet44.java => 세션에서 로그인 정보를 꺼내 출력. 로그아웃 링크 출력.
 
 
 

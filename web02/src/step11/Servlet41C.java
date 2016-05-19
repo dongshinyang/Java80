@@ -24,6 +24,10 @@ public class Servlet41C extends HttpServlet {
     String email = request.getParameter("email");
     
     // HttpSession 보관소에 저장
+    // => request.getSession()이 리턴하는 객체는
+    //    Servlet41B에서 만든 세션 객체이다.
+    // => 왜? 요청 프로토콜에 세션아이디가 쿠키 값으로 들어 있다.
+    // => 따라서 그 세션아이디로 기존에 생성된 세션을 찾아서 리턴한 것이다.
     HttpSession session = request.getSession();
     session.setAttribute("tel", tel);
     session.setAttribute("email", email);

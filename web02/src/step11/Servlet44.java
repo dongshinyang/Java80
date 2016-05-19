@@ -10,36 +10,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/step11/servlet41/page4")
-public class Servlet41D extends HttpServlet {
+@WebServlet("/step11/main")
+public class Servlet44 extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected void doPost(
+  protected void doGet(
       HttpServletRequest request, 
       HttpServletResponse response) throws ServletException, IOException {
     
-    // 요청 프로토콜의 쿠키 데이터 중에서 세션 아이디를 꺼낸다.
-    // 그 아이디에 해당하는 세션 객체를 찾아서 리턴할 것이다.
+    // 세션에서 로그인 정보 꺼내기
     HttpSession session = request.getSession();
+    Member member = (Member)session.getAttribute("loginUser"); 
+    if ( member == null) { // 로그인을 하지 않았다면,
+      response.sendRedirect("login"); // 로그인 폼을 다시 요청하라고 응답한다.
+      return;
+    }
     
-    String name = (String)session.getAttribute("name");
-    String age = (String)session.getAttribute("age");
-    String tel = (String)session.getAttribute("tel");
-    String email = (String)session.getAttribute("email");
     
+    // 정상적으로 로그인한 사용자에게 출력하는 화면
     response.setContentType("text/html; charset=UTF-8");
     PrintWriter out = response.getWriter();
     out.println("<html>");
     out.println("<body>");
-    out.println("<h1>입력 결과</h1>");
-    out.printf("[%s,%s,%s,%s] 정보를 저장하였습니다.\n", name, age, tel, email);
+    out.println("<div style='height:20px;background-color:yellow;'>");
+    out.printf("%s(%s) <a href='logout'>로그아웃</a>\n", 
+        member.getName(), member.getId());
+    out.println("</div>");
+    out.println("<h1>메인화면</h1>");
+    out.println("<p>하하하...메인화면..</p>");
     out.println("</body>");
     out.println("</html>");
   }
   
   
 }
+
+
 
 
 
