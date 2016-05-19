@@ -4,26 +4,23 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import bitcamp.pms.dao.BoardDao;
 import bitcamp.pms.vo.Board;
 
-@Component
+@Controller
 @RequestMapping("/board/")
 public class BoardController {
   @Autowired
   BoardDao boardDao;
   
   @RequestMapping("add")
-  public String add(
-      @RequestParam("title") String title, 
-      @RequestParam("content") String content) throws ServletException, IOException {
+  public String add(String title, String content) throws ServletException, IOException {
 
     Board board = new Board();
     board.setTitle(title);
@@ -35,7 +32,7 @@ public class BoardController {
   }
   
   @RequestMapping("delete")
-  public String delete(@RequestParam("no") int no) 
+  public String delete(int no) 
       throws ServletException, IOException {
     
     boardDao.delete(no);
@@ -43,37 +40,31 @@ public class BoardController {
   }
   
   @RequestMapping("detail")
-  public String detail(
-      HttpServletRequest request, 
-      @RequestParam("no") int no) throws ServletException, IOException {
+  public String detail(int no, Model model) throws ServletException, IOException {
     
     Board board = boardDao.selectOne(no);
     
-    request.setAttribute("board", board);
-    return "/board/BoardDetail.jsp";
+    model.addAttribute("board", board);
+    return "board/BoardDetail";
   }
   
   @RequestMapping("list")
-  public String list(HttpServletRequest request) 
+  public String list(Model model) 
       throws ServletException, IOException {
     
     List<Board> list = boardDao.selectList();
     
-    request.setAttribute("list", list);
-    return "/board/BoardList.jsp";
+    model.addAttribute("list", list);
+    return "board/BoardList";
   }
   
   @RequestMapping("new")
   public String form() throws ServletException, IOException {
-    return "/board/BoardForm.jsp";
+    return "board/BoardForm";
   }
   
   @RequestMapping("update")
-  public String update(
-      @RequestParam("no") int no,
-      @RequestParam("title") String title,
-      @RequestParam("content") String content) 
-      throws ServletException, IOException {
+  public String update(int no, String title, String content) throws ServletException, IOException {
     
     Board board = new Board();
     board.setNo(no);

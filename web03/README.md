@@ -130,6 +130,47 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - 기존의 DispatcherServlet 클래스 삭제한다.
    - 기존의 ContextLoaderListener 클래스 삭제한다.
   
+# 스프링 MVC 프레임워크 적용하기2(src08)
+1) 웹 컴포넌트와 비즈니스 객체를 분리하여 관리한다.
+   => 웹 컴포넌트? 페이지 컨트롤러, JSP, InitBinder, 프로퍼티 에디터 등
+   => 비즈니스 컴포넌트? DAO, Service 등 
+   => 비즈니스 컴포넌트를 여러 프론트 컨트롤러가 공유할 수 있다.
+   => 어떻게?
+      웹 컴포넌트는 DispatcherServlet 프론트 컨트롤러에서 관리하고,
+      비즈니스 컴포넌트는 ContextLoaderListener에서 관리한다.
+   => 설정
+      1. /WEB-INF/conf/applicationContext.xml 스프링 설정 파일을 만든다.
+         => 이 파일에서는 DAO, Service, Mybatis 등 비즈니스 관련 
+            컴포넌트만 준비하게 만든다.
+      2. web.xml에 스프링에서 제공하는 ContextLoaderListener를 등록한다.
+         => 이 클래스는 ServletContextListener의 구현체이다.
+         => 웹 애플리케이션이 시작되거나 종료될 때 호출되는 메서드를 갖고 있다.
+         => 웹 애플리케이션이 시작될 때 applicationContext.xml을 읽어서
+            이 설정 파일에 있는대로 객체를 준비한다.
+      3. /WEB-INF/conf/dispatcher-servlet.xml 에서 비즈니스 관련 설정을 제거한다.  
+      
+2) 페이지 컨트롤러 정리
+- @Component 대신 @Controller를 사용하라!
+- ServletRequest 보관소에 모델 관련 객체를 담는 대신 Model 객체에 담아라! 
+- 요청 핸들러의 파라미터 변수 이름이 클라이언트가 보낸 파라미터 이름과 같다면,
+  @RequestParam을 생략하라!
+
+3) JSP를 WEB-INF에 밑에 감춰라.
+- MVC 구조에서는 JSP를 직접 실행해서는 안된다. 반드시 페이지 컨트롤러를 경유해
+  실행해야 한다.
+  왜? 페이지 컨트롤러에서 JSP가 출력할 데이터를 준비하기 때문이다.
+  예를 들면 BoardList.jsp는 직접 실행해 봐야 소용없다.
+- 기존의 JSP를 모두 /WEB-INF/views/ 폴더에 둔다.
+- JSP가 어느 폴더에 있는지 대신 찾아주는 해결사를 등록하라!
+  뷰를 찾아주는 해결사(ViewResolver)
+- /WEB-INF/conf/dispatcher-servlet.xml 파일에 다음 빈을 등록한다.
+    <bean id="jspViewResolver"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+      <property name="prefix" value="/WEB-INF/views/"/>
+      <property name="suffix" value=".jsp"/>
+  </bean>
+- 뷰리졸버에서 페이지 컨트롤러가 리턴하는 JSP URL 앞,뒤로 경로를 붙이기 때문에
+  페이지 컨트롤러의 리턴 값을 정리하라!  
 
 
 

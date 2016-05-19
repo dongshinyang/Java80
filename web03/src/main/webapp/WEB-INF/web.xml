@@ -2,13 +2,12 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>web03</display-name>
   
-  <!-- 스프링 설정 파일이 있는 경로를 지정한다. -->
-  <!--  
+  <!-- ContextLoaderListener가 사용할 스프링 설정 파일의 경로를 지정한다. -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/conf/application-context.xml</param-value>
+    <param-value>/WEB-INF/conf/applicationContext.xml</param-value>
   </context-param>
-  -->
+
   
   <!-- 필터 등록 -->
   <filter>
@@ -25,11 +24,10 @@
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
   
-  <!--  
+  <!-- 여러 프론트 컨트롤러가 사용할 공용 비즈니스 객체를 준비시킨다. -->
   <listener>
-    <listener-class>bitcamp.pms.listener.ContextLoaderListener</listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
-  -->
   
   <!-- 프론트 컨트롤러 등록 -->
   <servlet>
@@ -46,6 +44,7 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+
   
 
   <!-- 웹 서버에 자원을 요청할 때 폴더 이름까지만 지정한다면,
