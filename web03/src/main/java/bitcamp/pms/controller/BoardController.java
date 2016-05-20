@@ -10,14 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import bitcamp.pms.dao.BoardDao;
+import bitcamp.pms.service.BoardService;
 import bitcamp.pms.vo.Board;
 
 @Controller
 @RequestMapping("/board/")
 public class BoardController {
-  @Autowired
-  BoardDao boardDao;
+  @Autowired BoardService boardService;
   
   @RequestMapping("add")
   public String add(String title, String content) throws ServletException, IOException {
@@ -26,7 +25,7 @@ public class BoardController {
     board.setTitle(title);
     board.setContent(content);
     
-    boardDao.insert(board);
+    boardService.add(board);
     
     return "redirect:list.do";
   }
@@ -35,14 +34,14 @@ public class BoardController {
   public String delete(int no) 
       throws ServletException, IOException {
     
-    boardDao.delete(no);
+    boardService.delete(no);
     return "redirect:list.do";
   }
   
   @RequestMapping("detail")
   public String detail(int no, Model model) throws ServletException, IOException {
     
-    Board board = boardDao.selectOne(no);
+    Board board = boardService.retrieve(no);
     
     model.addAttribute("board", board);
     return "board/BoardDetail";
@@ -52,7 +51,7 @@ public class BoardController {
   public String list(Model model) 
       throws ServletException, IOException {
     
-    List<Board> list = boardDao.selectList();
+    List<Board> list = boardService.list();
     
     model.addAttribute("list", list);
     return "board/BoardList";
@@ -71,7 +70,7 @@ public class BoardController {
     board.setTitle(title);
     board.setContent(content);
     
-    boardDao.update(board);
+    boardService.change(board);
     
     return "redirect:list.do";
   }

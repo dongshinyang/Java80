@@ -173,7 +173,7 @@ src/main/java         => 자바 소스 파일을 두는 폴더
   페이지 컨트롤러의 리턴 값을 정리하라!  
 
 # 스프링 MVC 프레임워크 적용하기2(src09)
-## 로그인 및 검증 인터셉터 추가하라(src09)
+## 로그인 및 검증 인터셉터 추가하라
 1) 로그인 검사하는 인터셉터 추가
    - AuthInterceptor 클래스 작성
    - dispatcher-servlet.xml에 인터셉터 등록
@@ -181,6 +181,15 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - AuthController 클래스 작성
    - /WEB-INF/views/auth/form.jsp 작성
 
+## 비즈니스 로직 분리 - Service Layer 추가
+=> Service Layer?
+   - 업무 관련 로직을 수행
+   - 트랜잭션 제어
+1) BoardController에서 업무 관련 로직을 분리하여 BoardService를 만든다.
+2) MemberController에서 업무 관련 로직을 분리하여 MemberService를 만든다.   
+3) AuthController는 MemberService를 이용하여 요청을 처리한다.
+   
+   
 
 
 

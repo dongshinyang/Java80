@@ -1,7 +1,5 @@
 package bitcamp.pms.controller;
 
-import java.util.HashMap;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,15 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import bitcamp.pms.dao.MemberDao;
+import bitcamp.pms.service.MemberService;
 import bitcamp.pms.vo.Member;
 
 @Controller
 @RequestMapping("/auth")
 @SessionAttributes("loginUser")
 public class AuthController {
-  @Autowired
-  MemberDao memberDao;
+  @Autowired MemberService memberService;
   
   @RequestMapping(value="/login", method=RequestMethod.GET)
   public String form(@CookieValue(required=false) String email, Model model) {
@@ -51,12 +48,8 @@ public class AuthController {
       response.addCookie(cookie);
     }
     
-    HashMap<String,Object> paramMap = new HashMap<>();
-    paramMap.put("email", email);
-    paramMap.put("password", password);
-    
-    if (memberDao.isMember(paramMap) > 0) {
-      Member member = memberDao.selectOne(paramMap);
+    if (memberService.exist(email, password)) {
+      Member member = memberService.retrieveByEmail(email);
       model.addAttribute("loginUser", member);
       return "redirect:../board/list.do";
 
