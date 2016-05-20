@@ -50,12 +50,16 @@
 - Controller28.java : 세션 사용하기 - HttpSession 객체 활용
 - Controller29.java : 세션 사용하기 - @SessionAttributes, Model 객체 활용
 - Controller30.java : 세션 사용하기 - 로그아웃 처리. 세션 무효화시킴.
-
-
-
-
-
-
+- Controller31.java : 세션 사용하기 - 로그인 폼 및 로그인 처리하기
+  /controller31/form.jsp : 로그인 폼
+- Controller32.java : 세션 사용하기 - 로그인 사용자만 접근할 수 있도록 제어하기.
+  /controller32/page.jsp 
+- AuthFilter.java : 로그인 여부 검사하기 - 서블릿 필터 기술 이용
+- Interceptor01.java : 스프링 인터셉터 사용하기 - HandlerInterceptor 직접 구현하기
+  Controller33.java : 인터셉터 확인 용
+  /Controller33.jsp : 인터셉터 확인 용
+- Interceptor02.java : 스프링 인터셉터 사용하기 - HandlerInterceptorAdapter 상속하여 구현하기
+- AuthInterceptor.java : 스프링 인터셉터 사용하기 - 로그인 검사 인터셉터 만들기
 
 
 

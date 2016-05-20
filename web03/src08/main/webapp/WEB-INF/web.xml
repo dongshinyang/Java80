@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>springmvc01</display-name>
+  <display-name>web03</display-name>
+  
+  <!-- ContextLoaderListener가 사용할 스프링 설정 파일의 경로를 지정한다. -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/conf/applicationContext.xml</param-value>
+  </context-param>
+
   
   <!-- 필터 등록 -->
   <filter>
@@ -17,17 +24,19 @@
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
   
+  <!-- 여러 프론트 컨트롤러가 사용할 공용 비즈니스 객체를 준비시킨다. -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
   <!-- 프론트 컨트롤러 등록 -->
   <servlet>
     <servlet-name>dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <!-- 만약 스프링 설정 파일이 /WEB-INF/서블릿이름-servlet.xml 이라면,
-         다음과 같이 초기화 파라미터로 등록할 필요가 없다. 
     <init-param>
 	    <param-name>contextConfigLocation</param-name>
-	    <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+	    <param-value>/WEB-INF/conf/dispatcher-servlet.xml</param-value>
 	  </init-param>
-	  -->
     <load-on-startup>1</load-on-startup>
   </servlet>
 
@@ -35,7 +44,12 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+
   
+
+  <!-- 웹 서버에 자원을 요청할 때 폴더 이름까지만 지정한다면,
+       웹 서버는 다음 순서로 기본 파일을 찾는다.
+       해당 파일이 있으면 그 파일을 클라이언트로 보낸다. -->  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

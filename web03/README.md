@@ -172,9 +172,13 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 - 뷰리졸버에서 페이지 컨트롤러가 리턴하는 JSP URL 앞,뒤로 경로를 붙이기 때문에
   페이지 컨트롤러의 리턴 값을 정리하라!  
 
-
-
-
+# 로그인 및 검증 인터셉터 추가하라(src09)
+1) 로그인 검사하는 인터셉터 추가
+   - AuthInterceptor 클래스 작성
+   - dispatcher-servlet.xml에 인터셉터 등록
+2) 로그인 페이지 컨트롤러 추가   
+   - AuthController 클래스 작성
+   - /WEB-INF/views/auth/form.jsp 작성
 
 
 
