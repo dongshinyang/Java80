@@ -181,13 +181,20 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - AuthController 클래스 작성
    - /WEB-INF/views/auth/form.jsp 작성
 
-## 비즈니스 로직 분리 - Service Layer 추가
+## 비즈니스 로직 분리 - Service Layer 추가(src09)
 => Service Layer?
    - 업무 관련 로직을 수행
    - 트랜잭션 제어
 1) BoardController에서 업무 관련 로직을 분리하여 BoardService를 만든다.
 2) MemberController에서 업무 관련 로직을 분리하여 MemberService를 만든다.   
 3) AuthController는 MemberService를 이용하여 요청을 처리한다.
+
+## 페이징 처리(src09)
+1) BoardMapper.xml, MemberMapper.xml 변경
+2) BoardDao, MemberDao 변경
+3) BoardService, MemberService 변경
+4) BoardController, MemberController 변경ㅇ
+
    
    
 
