@@ -1,15 +1,17 @@
 package bitcamp.pms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import bitcamp.pms.vo.Board;
 
 public interface BoardDao {
-  List<Board> selectList();
+  List<Board> selectList(Map<String,Object> paramMap);
   int insert(Board board);
   Board selectOne(int no);
   int update(Board board);
   int delete(int no);
+  int countAll();
 }
 
 

@@ -12,12 +12,13 @@ import bitcamp.pms.vo.Member;
 // => mybatis는 RuntimeException 예외를 던지기 때문에 
 //    각 메서드 선언부에 throws 절을 작성할 필요가 없다.
 public interface MemberDao {
-  List<Member> selectList();
+  List<Member> selectList(Map<String,Object> paramMap);
   Member selectOne(Map<String,Object> paramMap);
   int insert(Member member);
   int update(Member member);
   int delete(int no);
   int isMember(Map<String,Object> paramMap);
+  int countAll();
 }
 
 

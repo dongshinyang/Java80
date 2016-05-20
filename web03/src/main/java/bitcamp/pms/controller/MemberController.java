@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import bitcamp.pms.service.MemberService;
 import bitcamp.pms.vo.Member;
@@ -48,9 +49,34 @@ public class MemberController {
   }
   
   @RequestMapping("list")
-  public String list(Model model) throws ServletException, IOException {
-    List<Member> list = memberService.list();
+  public String list(
+      @RequestParam(defaultValue="1") int pageNo, 
+      @RequestParam(defaultValue="3") int pageSize, Model model) 
+      throws ServletException, IOException {
+    
+    // 페이지 번호와 페이지 당 출력 개수의 유효성 검사
+    if (pageNo < 0) { // 1페이지 부터 시작
+      pageNo = 1;
+    }
+    
+    int totalPage = memberService.countPage(pageSize);
+    if (pageNo > totalPage) { // 가장 큰 페이지 번호를 넘지 않게 한다.
+      pageNo = totalPage;
+    }
+    
+    if (pageSize < 3) { // 최소 3개
+      pageSize = 3; 
+    } else if (pageSize > 50) { // 최대 50개 
+      pageSize = 50;
+    }
+    
+    List<Member> list = memberService.list(pageNo, pageSize);
+    
+    model.addAttribute("pageNo", pageNo);
+    model.addAttribute("pageSize", pageSize);
+    model.addAttribute("totalPage", totalPage);
     model.addAttribute("list", list);
+    
     return "member/MemberList";
   }
   

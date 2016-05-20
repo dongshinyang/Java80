@@ -1,5 +1,6 @@
 package bitcamp.pms.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,24 @@ public class BoardService {
     return boardDao.selectOne(no);
   }
   
-  public List<Board> list() {
-    return boardDao.selectList();
+  public List<Board> list(int pageNo, int pageSize) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("startIndex", (pageNo - 1) * pageSize);
+    paramMap.put("length", pageSize);
+    
+    return boardDao.selectList(paramMap);
   }
   
   public void change(Board board) {
     boardDao.update(board);
+  }
+
+  public int countPage(int pageSize) {
+    int count = boardDao.countAll();
+    int pages = count / pageSize;
+    if ((count % pageSize) > 0)
+      pages++;
+    return pages;
   }
 }
 

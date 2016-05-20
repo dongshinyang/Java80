@@ -36,6 +36,7 @@
   <select id="selectList" resultMap="MemberMap">
     <include refid="select01"/>
     order by MNAME asc
+    limit #{startIndex}, #{length}
   </select>
   
   <select id="selectOne" parameterType="map" resultMap="MemberMap">
@@ -53,6 +54,11 @@
     select count(*) 
     from MEMBERS
     where EMAIL=#{email} and PWD=#{password}
+  </select>
+  
+  <select id="countAll" resultType="int">
+    select count(*) 
+    from MEMBERS
   </select>
 </mapper>
 

@@ -36,8 +36,12 @@ public class MemberService {
     return memberDao.selectOne(paramMap);
   }
   
-  public List<Member> list() {
-    return memberDao.selectList();
+  public List<Member> list(int pageNo, int pageSize) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("startIndex", (pageNo - 1) * pageSize);
+    paramMap.put("length", pageSize);
+    
+    return memberDao.selectList(paramMap);
   }
   
   public void change(Member member) {
@@ -54,6 +58,14 @@ public class MemberService {
     }
     
     return false;
+  }
+
+  public int countPage(int pageSize) {
+    int count = memberDao.countAll();
+    int pages = count / pageSize;
+    if ((count % pageSize) > 0)
+      pages++;
+    return pages;
   }
 }
 

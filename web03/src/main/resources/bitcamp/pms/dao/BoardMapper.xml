@@ -30,16 +30,22 @@
     where BNO=#{no}
   </delete>
 
-  <select id="selectList" resultMap="BoardMap">
+  <select id="selectList" resultMap="BoardMap" parameterType="map">
     select BNO, TITLE, VWCNT, CDT 
     from BOARDS
     order by BNO DESC
+    limit #{startIndex}, #{length}
   </select>
   
   <select id="selectOne" resultMap="BoardMap" parameterType="int">
     select BNO, TITLE, CONTS, VWCNT, CDT 
     from BOARDS
     where BNO=#{no}
+  </select>
+  
+  <select id="countAll" resultType="int">
+    select count(*) 
+    from BOARDS
   </select>
 </mapper>
 
