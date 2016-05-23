@@ -195,6 +195,20 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 3) BoardService, MemberService 변경
 4) BoardController, MemberController 변경ㅇ
 
+## 실무 프로젝트 구조로 개선(src10)
+1) 서비스 계층에 인터페이스 도입하기
+=> 컨트롤러 계층에서 서비스 계층의 클래스를 직접 사용하면,
+   향후 서비스 로직을 바꿀 필요가 있을 때 대체하기가 쉽지 않다.
+=> 해결책?
+   컨트롤러 계층과 서비스 계층 사이의 호출 규칙을 정의한 후,
+   그 구현체를 사용하면 
+   나중에 서비스 로직이 바뀌더라도 간단히 구현체를 교체함으로써
+   변경에 대응하기가 쉬워진다.
+=> 기존의 Service 클래스를 인터페이스과 구현체로 분리하라!
+   BoardService --> BoardService 인터페이스와 BoardServiceImpl 클래스로 분리한다.
+   MemberService --> MemberService 인터페이스와 MemberServiceImpl 클래스로 분리한다.
+2) AOP 기술을 이용하여 트랜잭션 적용하기
+    
    
    
 
