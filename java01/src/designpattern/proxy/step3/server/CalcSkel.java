@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class CalcServer {
+public class CalcSkel {
   // 원격의 요청을 처리할 비즈니스 객체
   static Calculator calc = new CalculatorImpl();
   

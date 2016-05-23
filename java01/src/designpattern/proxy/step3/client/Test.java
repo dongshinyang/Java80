@@ -20,40 +20,22 @@
 
 package designpattern.proxy.step3.client;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.Socket;
+import designpattern.proxy.step3.server.Calculator;
 
 public class Test {
 
   public static void main(String[] args) throws Exception {
     // 계산기 객체 사용하기
-    // 1) 소켓을 통해 계산 수행
+    // 1) 계산을 수행할 객체(proxy)를 생성한다.
+    Calculator calc = new CalcStub();
+    
     // 2) 메서드 호출
-    System.out.printf("10 + 20 = %f\n", calculate("plus", 10, 20));
-    System.out.printf("10 - 20 = %f\n", calculate("minus", 10, 20));
-    System.out.printf("10 * 20 = %f\n", calculate("multiple", 10, 20));
-    System.out.printf("10 / 20 = %f\n", calculate("divide", 10, 20));
+    // => 원격에 있는 서비스를 사용할 때는 로컬 객체인양 쓰면 된다.
+    System.out.printf("10 + 20 = %f\n", calc.plus(10, 20));
+    System.out.printf("10 - 20 = %f\n", calc.minus(10, 20));
+    System.out.printf("10 * 20 = %f\n", calc.multiple(10, 20));
+    System.out.printf("10 / 20 = %f\n", calc.divide(10, 20));
   }
-  
-  public static double calculate(String method, double a, double b) throws Exception {
-    Socket socket = new Socket("localhost", 9999);
-    DataInputStream in = new DataInputStream(socket.getInputStream());
-    DataOutputStream out = new DataOutputStream(socket.getOutputStream());
-    
-    out.writeUTF(method);
-    out.writeDouble(a);
-    out.writeDouble(b);
-    
-    double result = in.readDouble();
-    
-    try {in.close();} catch (Exception e) {}
-    try {out.close();} catch (Exception e) {}
-    try {socket.close();} catch (Exception e) {}
-    
-    return result;
-  }
-
 }
 
 
