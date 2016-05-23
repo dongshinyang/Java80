@@ -1,3 +1,5 @@
+/* 주제: Calculator 객체를 직접 만들어 사용하기. */
+
 package designpattern.proxy.step1;
 
 public class Test {
