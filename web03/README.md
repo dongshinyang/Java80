@@ -207,10 +207,66 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 => 기존의 Service 클래스를 인터페이스과 구현체로 분리하라!
    BoardService --> BoardService 인터페이스와 BoardServiceImpl 클래스로 분리한다.
    MemberService --> MemberService 인터페이스와 MemberServiceImpl 클래스로 분리한다.
+   
 2) AOP 기술을 이용하여 트랜잭션 적용하기
+=> 방법1) @Transactional 애노테이션 이용
+   트랜잭션을 사용해야 하는 메서드에 @Transactional을 붙인다.
+   문제는 각 클래스에 코드를 첨가해야 한다. => 번거롭다.
+   해결책? AOP 기술 사용
+   
+=> 방법2) AOP를 사용하여 트랜잭션을 적용할 메서드를 지정한다.
+   기존 코드를 손댈 필요가 없다.
+   트랜잭션 정책이 바뀌더라도 기존 코드를 변경하지 않는다.
+
+=> 트랜잭션을 사용해야 하는 메서드?
+   insert, update, delete 을 실행하는 메서드
+   DAO가 아니라 Service 객체의 메서드    
+=> 예) 
+   DefaultBoardService: add(), delete(), change()
+   DefaultMemberService: add(), delete(), change()
+   
+=> AOP를 사용하여 트랜잭션 다루기
+1) DataSource(DB 커넥션 풀)에 트랜잭션 관리자를 도입한다.
+   => ContextLoaderListener의 스프링 설정 파일에 추가하라! 
+<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+</bean>
+
+2) DB 커넥션의 트랜잭션을 관리할 AOP 어드바이스(필터)를 추가하라!
+   => 개발자가 클래스를 만들 필요가 없다.
+   => 스프링에서 제공하는 객체를 사용하라
+<tx:advice id="txAdvice" transaction-manager="txManager">
+  <tx:attributes>
+      <tx:method name="retrieve*" read-only="true"/>
+      <tx:method name="list*" read-only="true"/>
+      <tx:method name="count*" read-only="true"/>
+      <tx:method name="*"/>
+  </tx:attributes>
+</tx:advice> 
+
+3) 포인트 컷(Point Cut)을 지정하라!
+   => 어떤 클래스에 대해 Advice를 적용할 것인지 지정한다.
+   => 스프링 AOP 기능 활성화시킨다.
+<aop:aspectj-autoproxy/>
+   => 포인트 컷을 지정하고 어드바이스와 연결한다.
+<aop:config>
+      <aop:pointcut id="serviceOperationPointCut" 
+                    expression="execution(* *.service.impl.*.*(..))"/>
+      <aop:advisor advice-ref="txAdvice" 
+                   pointcut-ref="serviceOperationPointCut"/>
+</aop:config>
+
+4) AOP 라이브러리 추가해야 한다.
+  compile 'org.springframework:spring-aop:4.3.0.RC2'
+  compile 'org.aspectj:aspectjweaver:1.8.9'
+
+
+
+
+
+
+
     
-   
-   
 
 
 
