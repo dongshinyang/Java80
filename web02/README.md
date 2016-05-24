@@ -127,6 +127,7 @@
 - test13.html => 데이터 목록 출력하기. <dl>, <dt>, <dd>
 - test14.html => 그림 출력하기. <img>
 - test15.html => UI 컴포넌트 묶기 : <div>, 콘텐츠 구분 : <span> 
+- test16.html => HTML5 Semantic 태그 사용하기
 
 ## step06
 - Servlet27.java => 리프레시 - HTML <meta> 태그 이용
@@ -202,7 +203,9 @@
 - Servlet43.java => 로그아웃 처리
 - Servlet44.java => 세션에서 로그인 정보를 꺼내 출력. 로그아웃 링크 출력.
 
-
+## step12
+- css00.html : CSS 스타일 개요
+- css1-01.html : selector 사용법
 
 
 
