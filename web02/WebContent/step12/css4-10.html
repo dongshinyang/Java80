@@ -12,7 +12,7 @@
 <style>
 @font-face{
   font-family:'rosettaicons';
-  src:url('../../font/rosetta-icons-Regular.eot');
+  src:url('https://abs.twimg.com/a/1464058313/font/rosetta-icons-Regular.eot');
   src:url('https://abs.twimg.com/a/1464058313/font/rosetta-icons-Regular.eot?#iefix') format('embedded-opentype'), 
       url('https://abs.twimg.com/a/1464058313/font/rosetta-icons-Regular.woff') format('woff'),
       url('https://abs.twimg.com/a/1464058313/font/rosetta-icons-Regular.ttf') format('truetype');
@@ -20,74 +20,44 @@
   font-weight:normal
 }
 
-
-
-div {
-  /* border: 1px solid red; */
-}
-
-#imgbox {
-  /* border: 1px solid red; */
+#checkResult:before {
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin: 5px 0 0 0;
-  padding: 0px;
+  font-family: "rosettaicons";
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
 }
 
-input[name=email] {
-  border-width: 0px;
-  height: 19px;
-  margin: 0px 5px 3px 0;
-  padding: 0px;
+.success:before {
+  content: "\f179";
+  color: blue;
 }
 
-input[name=email]:focus {
-  outline: none;
-}
-
-.success {
-  background: white url("img03.png") no-repeat -87px -27px;
-}
-
-.failure {
-  background: white url("img03.png") no-repeat -287px -27px;
-}
-
-#emailbox {
-  display: inline-block;
-  border: 1px solid gray;
-  width: 195px;
-  padding-left: 5px;
+.failure:before {
+  content: "\f178";
+  color: red;
 }
 
 </style>
 </head>
 <body>
-이메일:
-<div id="emailbox"> 
-<input id="email" type="text" name="email"><div id="imgbox"></div><span id="checkResult"></span>
-</div><br>
-
+이메일:<input id="email" type="text" name="email"><span id="checkResult"></span><br>
 암호: <input id="password" type="password" name="password"><br>
 <button type="button">로그인</button>
 
 <script>
 var t1 = document.getElementById("email");
-var imgbox = document.getElementById("imgbox");
+var checkResult = document.getElementById("checkResult");
 
 t1.onkeyup = function(event) {
 	if (t1.value == "admin") { // 중복 이메일로 가정하자!
-		//document.getElementById("checkResult").innerHTML = "중복된 이메일입니다.";
-	  imgbox.className = "failure";
+		checkResult.className = "failure";
 	  
 	} else if (t1.value.length == 0) {
-		//document.getElementById("checkResult").innerHTML = "";
-		imgbox.className = "";
+		checkResult.className = "";
 		
 	} else { // 신규 이메일로 가정하자!
-		//document.getElementById("checkResult").innerHTML = "사용 가능!";
-	  imgbox.className = "success";
+		checkResult.className = "success";
 	}
 };
 </script>
