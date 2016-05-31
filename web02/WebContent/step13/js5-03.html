@@ -52,18 +52,21 @@ var content = document.querySelector("#content");
 var d2 = document.querySelector("#d2");
 var btn1 = document.querySelector("#btn1");
 
-//=> onclick으로 등록한 리스너는 target 또는 bubble 단계에서 이벤트를 받게되면 호출된다.
-content.onclick = function() {
-	console.log("content....");
-}
+//=> addEventListener()으로 등록한 리스너는 
+//   target 또는 bubble 단계에서 이벤트를 받게되면 호출된다.
+// 예) content.addEventListener("이벤트명", 함수객체);
 
-d2.onclick = function() {
-  console.log("d2....");
-}
+content.addEventListener("click", function() {
+	console.log("content....2");
+});
 
-btn1.onclick = function() {
-  console.log("btn1....");
-}
+d2.addEventListener("click", function() {
+  console.log("d2....2");
+});
+
+btn1.addEventListener("click", function() {
+  console.log("btn1....2");
+});
 
 
 

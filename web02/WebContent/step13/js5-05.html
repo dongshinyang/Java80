@@ -1,10 +1,6 @@
-<!-- 주제: 이벤트 처리 - 이벤트 전달 순서
-=> 이벤트 발생!
-   1) body 태그에게 전달
-   2) 그 자신 태그에게 전달(반복)   : capture phase
-   3) 이벤트가 발생된 태그에 전달   : target phase
-   4) 부모 태그에 전달(반복)        : bubble phase
-   5) body 태그에 전달
+<!-- 주제: 이벤트 처리 - 버블 단계를 막는 방법
+=> 타겟 단계에서 리스너를 호출할 후에 
+   부모로 이벤트를 전달하는 것을 막는 방법. 
 -->
 <!DOCTYPE html>
 <html>
@@ -52,18 +48,22 @@ var content = document.querySelector("#content");
 var d2 = document.querySelector("#d2");
 var btn1 = document.querySelector("#btn1");
 
-//=> onclick으로 등록한 리스너는 target 또는 bubble 단계에서 이벤트를 받게되면 호출된다.
-content.onclick = function() {
-	console.log("content....");
-}
+//=> 부모에게 이벤트를 전달하지 않기.
 
-d2.onclick = function() {
-  console.log("d2....");
-}
+content.addEventListener("click", function(event) {
+	console.log("content....2");
+	event.stopPropagation(); // 부모에게 이벤트를 전달하지 말라고 설정한다.
+});
 
-btn1.onclick = function() {
-  console.log("btn1....");
-}
+d2.addEventListener("click", function(event) {
+  console.log("d2....2");
+  event.stopPropagation(); // 부모에게 이벤트를 전달하지 말라고 설정한다.
+});
+
+btn1.addEventListener("click", function(event) {
+  console.log("btn1....2");
+  event.stopPropagation(); // 부모에게 이벤트를 전달하지 말라고 설정한다.
+});
 
 
 

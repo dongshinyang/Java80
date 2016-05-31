@@ -1,10 +1,6 @@
-<!-- 주제: 이벤트 처리 - 이벤트 전달 순서
-=> 이벤트 발생!
-   1) body 태그에게 전달
-   2) 그 자신 태그에게 전달(반복)   : capture phase
-   3) 이벤트가 발생된 태그에 전달   : target phase
-   4) 부모 태그에 전달(반복)        : bubble phase
-   5) body 태그에 전달
+<!-- 주제: 이벤트 처리 - 캡쳐 단계에 호출될 리스너 등록
+=> onclick 속성으로 캡쳐 단계에 호출될 리스너를 등록할 수 없다.
+=> addEventListener("이벤트명", 함수객체, true);
 -->
 <!DOCTYPE html>
 <html>
@@ -52,18 +48,22 @@ var content = document.querySelector("#content");
 var d2 = document.querySelector("#d2");
 var btn1 = document.querySelector("#btn1");
 
-//=> onclick으로 등록한 리스너는 target 또는 bubble 단계에서 이벤트를 받게되면 호출된다.
-content.onclick = function() {
-	console.log("content....");
-}
+//=> addEventListener(이벤트명, 함수객체, 캡쳐여부)에서 
+//   세 번째 파라미터 값을 true로 설정하면,  
+//   capture 또는 target 단계에서 이벤트를 받게되면 호출된다.
+// 예) content.addEventListener("이벤트명", 함수객체, true);
 
-d2.onclick = function() {
-  console.log("d2....");
-}
+content.addEventListener("click", function() {
+	console.log("content....2");
+}, true);
 
-btn1.onclick = function() {
-  console.log("btn1....");
-}
+d2.addEventListener("click", function() {
+  console.log("d2....2");
+}, true);
+
+btn1.addEventListener("click", function() {
+  console.log("btn1....2");
+}, true);
 
 
 
