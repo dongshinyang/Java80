@@ -2,7 +2,7 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%Thread.currentThread().sleep(5000); %>
+<h2>버나드</h2>
 <c:choose>
   <c:when test="${param.menu == 1}"> 
 		<h2>교육 과목</h2>

@@ -1,4 +1,4 @@
-<!-- 주제: AJAX(Asynchronous Javascript And XML) 사용법 - IE8이하 이벤트 리스너 등록 지원
+<!-- 주제: AJAX(Asynchronous Javascript And XML) 사용법 - 비동기 요청3 
 -->
 <!DOCTYPE html>
 <html>
@@ -52,14 +52,21 @@ function onclickMenu(event) {
 	} else { // IE6 이하 
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-  xhr.open("GET", "js6-ajax01.jsp?menu=" + this.getAttribute("data-menu"), false);
+	
+	xhr.onreadystatechange = function() {
+		// 서버가 응답을 완료하고, 응답 상태도 200일 때 
+		// 서버 데이터를 처리하면 된다.
+		// => 비동기 요청의 완성!
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			  d2.innerHTML = xhr.responseText;
+			  
+		} else if (xhr.readyState == 4 && xhr.status != 200) {
+			  console.log("서버 요청에 문제 발생!");
+		}
+	};
+	
+  xhr.open("GET", "js6-ajax01.jsp?menu=" + this.getAttribute("data-menu"), true);
   xhr.send(null); 
-  
-  //동기 요청이기 때문에, send() 호출한 후 서버에서 응답을 완료할 때까지
-  //리턴하지 않는다. => 즉 다음 명령을 수행할 수 없다.
-  //이것이 동기식 호출의 문제점이다.
- 
-  d2.innerHTML = xhr.responseText;
   
   var a = document.createElement("a");
   a.href = "http://www.bitcamp.co.kr";
