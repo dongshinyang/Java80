@@ -42,7 +42,7 @@ function loadBoardList() {
         for (var i in list) {
           var tr = document.createElement("tr");
           tr.innerHTML = "<td>" + list[i].no + "</td>" +
-            "<td>" + list[i].title + "</td>" +
+            "<td><a href='#' onclick='onclickDetail(event)' data-no='" + list[i].no + "'>" + list[i].title + "</a></td>" +
             "<td>" + list[i].createdDate + "</td>" +
             "<td>" + list[i].views + "</td>";
           tbody.appendChild(tr);
@@ -57,6 +57,12 @@ function loadBoardList() {
   xhr.send(null); 
 }
 
+// 태그에 선언된 onclick 속성에서 호출한 것이기 때문에
+// 다음 함수는 이벤트 리스너가 아니다.
+function onclickDetail(event) {
+	location.href = "detail.html?no=" + event.target.getAttribute("data-no");
+	event.preventDefault(); // 원래 a 태그의 행위를 막는다.
+}
 
 
 

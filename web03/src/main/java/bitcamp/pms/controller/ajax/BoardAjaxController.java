@@ -8,8 +8,8 @@ import javax.servlet.ServletException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,13 +43,11 @@ public class BoardAjaxController {
     return "redirect:list.do";
   }
   
-  @RequestMapping("detail")
-  public String detail(int no, Model model) throws ServletException, IOException {
-    
+  @RequestMapping(value="detail", produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String detail(int no) throws ServletException, IOException {
     Board board = boardService.retrieve(no);
-    
-    model.addAttribute("board", board);
-    return "board/BoardDetail";
+    return new Gson().toJson(board);
   }
   
   @RequestMapping(value="list", produces="application/json;charset=UTF-8")
@@ -91,7 +89,10 @@ public class BoardAjaxController {
     return "board/BoardForm";
   }
   
-  @RequestMapping("update")
+  @RequestMapping(value="update",
+      method=RequestMethod.POST,
+      produces="application/json;charset=UTF-8")
+  @ResponseBody
   public String update(int no, String title, String content) throws ServletException, IOException {
     
     Board board = new Board();
@@ -99,8 +100,17 @@ public class BoardAjaxController {
     board.setTitle(title);
     board.setContent(content);
     
-    boardService.change(board);
-    
-    return "redirect:list.do";
+    HashMap<String,Object> result = new HashMap<>();
+    try {
+      boardService.change(board);
+      result.put("status", "success");
+    } catch (Exception e) {
+      result.put("status", "failure");
+    }
+    return new Gson().toJson(result);
   }
 }
+
+
+
+
