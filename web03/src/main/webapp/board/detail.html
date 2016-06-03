@@ -9,8 +9,9 @@
 <input id="fNo" type='hidden' name='no'>
 제목: <input id="fTitle" type='text' name='title'><br>
 내용: <textarea id="fContent" name='content' rows='5' cols='60'></textarea><br>
-<button id='changeBtn' type='button'>변경</button>
-<button id='deleteBtn' type='button'>삭제</button>
+<button id='addBtn' type='button' class='add-form'>추가</button>
+<button id='changeBtn' type='button' class='change-form'>변경</button>
+<button id='deleteBtn' type='button' class='change-form'>삭제</button>
 <button type='reset'>초기화</button>
 </form>
 
@@ -19,27 +20,48 @@
 <script>
 var no = location.href.split("=")[1];
 
-var xhr;
-if (window.XMLHttpRequest) {
-  xhr = new XMLHttpRequest();
-} else { // IE6 이하 
-  xhr = new ActiveXObject("Microsoft.XMLHTTP");
+if (no) {
+	var el = document.querySelectorAll('.change-form');
+	for (var i = 0; i < el.length; i++) {
+	  el[i].style.display = ""; // 보여라!	
+	}
+	el = document.querySelectorAll('.add-form');
+	for (var i = 0; i < el.length; i++) {
+    el[i].style.display = "none"; // 감춰라!
+  }
+	
+	var xhr;
+	if (window.XMLHttpRequest) {
+	  xhr = new XMLHttpRequest();
+	} else { // IE6 이하 
+	  xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState == 4 && xhr.status == 200) {
+	      var result = JSON.parse(xhr.responseText);
+	      document.getElementById("fNo").value = result.no;
+	      document.getElementById("fTitle").value = result.title;
+	      document.getElementById("fContent").value = result.content;
+	      
+	  } else if (xhr.readyState == 4 && xhr.status != 200) {
+	      console.log("서버 요청에 문제 발생!");
+	  }
+	};
+	xhr.open("GET", "../ajax/board/detail.do?no=" + no, true);
+	xhr.send(null); 
+	
+} else { // no가 없다. 즉 새 글 등록일 경우,
+	var el = document.querySelectorAll('.change-form');
+  for (var i = 0; i < el.length; i++) {
+    el[i].style.display = "none"; // 감춰라! 
+  }
+  el = document.querySelectorAll('.add-form');
+  for (var i = 0; i < el.length; i++) {
+    el[i].style.display = ""; // 보여라!
+  }
 }
 
-xhr.onreadystatechange = function() {
-  if (xhr.readyState == 4 && xhr.status == 200) {
-      var result = JSON.parse(xhr.responseText);
-      document.getElementById("fNo").value = result.no;
-      document.getElementById("fTitle").value = result.title;
-      document.getElementById("fContent").value = result.content;
-      
-  } else if (xhr.readyState == 4 && xhr.status != 200) {
-      console.log("서버 요청에 문제 발생!");
-  }
-};
-
-xhr.open("GET", "../ajax/board/detail.do?no=" + no, true);
-xhr.send(null); 
 
 var changeBtn = document.querySelector("#changeBtn");
 changeBtn.onclick = function(event) {
@@ -79,9 +101,60 @@ changeBtn.onclick = function(event) {
 
 var deleteBtn = document.querySelector("#deleteBtn");
 deleteBtn.onclick = function(event) {
-  alert("삭제하겠다!");
+	var xhr;
+	if (window.XMLHttpRequest) {
+	  xhr = new XMLHttpRequest();
+	} else { // IE6 이하 
+	  xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState == 4 && xhr.status == 200) {
+	      var result = JSON.parse(xhr.responseText);
+	      if (result.status == "success")
+	    	  location.href = "board.html";
+	      else 
+	    	  window.alert("삭제 실패입니다!");
+	      
+	  } else if (xhr.readyState == 4 && xhr.status != 200) {
+	      console.log("서버 요청에 문제 발생!");
+	  }
+	};
+
+	xhr.open("GET", "../ajax/board/delete.do?no=" + no, true);
+	xhr.send(null); 
 }
 
+var addBtn = document.querySelector("#addBtn");
+addBtn.onclick = function(event) {
+  var xhr;
+  if (window.XMLHttpRequest) {
+    xhr = new XMLHttpRequest();
+  } else { // IE6 이하 
+    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        var result = JSON.parse(xhr.responseText);
+        if (result.status == "success") {
+          location.href = "board.html";
+        } else {
+          window.alert("등록 실패입니다!");
+        }
+        
+    } else if (xhr.readyState == 4 && xhr.status != 200) {
+        console.log("서버 요청에 문제 발생!");
+    }
+  };
+
+  xhr.open("POST", "../ajax/board/add.do", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(
+      "title=" + document.querySelector("#fTitle").value +
+      "&content=" + document.querySelector("#fContent").value
+  ); 
+}
 
 
 </script>

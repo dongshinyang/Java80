@@ -16,17 +16,6 @@ public class DefaultBoardService implements BoardService {
   
   public void add(Board board) {
     boardDao.insert(board);
-    boardDao.insert(board);
-    
-    // 암호를 컬럼의 크기보다 크게 만든다.
-    // => 그러면 오류가 발생할 것이다.
-    // => 확인? 이전에 입력한 내용은 어떻게 되는가?
-    // => 1) AOP 트랜잭션 필터를 걸기 전
-    //       이전에 수행한 두 개의 입력은 처리된다.
-    //    2) AOP 트랜잭션 필터를 적용한 후 
-    //       이전에 수행한 두 개의 입력도 함께 취소된다.
-    board.setPassword("12345678901");
-    boardDao.insert(board);
   }
   
   public void delete(int no) {

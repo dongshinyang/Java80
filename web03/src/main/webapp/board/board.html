@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>게시판-목록</h1>
-<p><a href='new.do'>새 글</a></p>
+<p><button id="newBtn" type="button">새 글</button></p>
 <table id="boardTable" border='1'>
 <thead>
 <tr>
@@ -64,7 +64,9 @@ function onclickDetail(event) {
 	event.preventDefault(); // 원래 a 태그의 행위를 막는다.
 }
 
-
+document.querySelector("#newBtn").onclick = function(event) {
+	location.href = "detail.html";
+}
 
 
 

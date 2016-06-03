@@ -23,24 +23,38 @@ import bitcamp.pms.vo.Board;
 public class BoardAjaxController {
   @Autowired BoardService boardService;
   
-  @RequestMapping("add")
+  @RequestMapping(value="add", produces="application/json;charset=UTF-8")
+  @ResponseBody
   public String add(String title, String content) throws ServletException, IOException {
 
     Board board = new Board();
     board.setTitle(title);
     board.setContent(content);
     
-    boardService.add(board);
+    HashMap<String,Object> result = new HashMap<>();
+    try {
+      boardService.add(board);
+      result.put("status", "success");
+    } catch (Exception e) {
+      e.printStackTrace();
+      result.put("status", "failure");
+    }
     
-    return "redirect:list.do";
+    return new Gson().toJson(result);
   }
   
-  @RequestMapping("delete")
+  @RequestMapping(value="delete", produces="application/json;charset=UTF-8")
+  @ResponseBody
   public String delete(int no) 
       throws ServletException, IOException {
-    
-    boardService.delete(no);
-    return "redirect:list.do";
+    HashMap<String,Object> result = new HashMap<>();
+    try {
+      boardService.delete(no);
+      result.put("status", "success");
+    } catch (Exception e) {
+      result.put("status", "failure");
+    }
+    return new Gson().toJson(result);
   }
   
   @RequestMapping(value="detail", produces="application/json;charset=UTF-8")
@@ -82,11 +96,6 @@ public class BoardAjaxController {
     result.put("list", list);
     
     return new Gson().toJson(result);
-  }
-  
-  @RequestMapping("new")
-  public String form() throws ServletException, IOException {
-    return "board/BoardForm";
   }
   
   @RequestMapping(value="update",
