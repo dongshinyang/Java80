@@ -263,9 +263,13 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 ## AJAX와 JSON을 활용하여 프론트엔드와 백엔드를 분리한다(src11)
 1) build.gradle 파일에 Google-gson 라이브러리 추가한다.
 2) bitcamp.pms.controller.ajax.BoardAjaxController 작성
-   - 기존의 BoardController를 복사하여 편집한다..3) HTML 준비
-   - src/main/webapp/board 폴더 생성성   - board.html 파일 작성성
-
+   - 기존의 BoardController를 복사하여 편집한다..
+3) HTML 준비
+   - src/main/webapp/board 폴더 생성
+   - board.html 파일 작성
+   - detail.html  파일 작성
+## 미니 jQuery 라이브러리 만들어보기(src12)
+1) 
 
 
 

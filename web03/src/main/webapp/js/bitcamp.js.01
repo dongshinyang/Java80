@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+
+function bitcamp(value) { // 예) <tr>, <strong>
+	var tag;
+	
+	if (value.indexOf('<') == 0) {
+	  tag = document.createElement(value.substr(1,value.length - 2))
+	} else {
+	  tag = document.querySelector(value);
+	}
+	
+	return tag;
+}
+
+var $ = bitcamp;

@@ -21,40 +21,34 @@
 
 <p> 이 예제는 비트캠프 "자바80"기의 훈련내용입니다.</p>
 
+
+<script type="text/javascript" src="../js/bitcamp.js"></script>
+
 <script>
 
 loadBoardList();
 
 function loadBoardList() {
-  var xhr;
-  if (window.XMLHttpRequest) {
-    xhr = new XMLHttpRequest();
-  } else { // IE6 이하 
-    xhr = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-        var result = JSON.parse(xhr.responseText);
-        var list = result.list;
-        var tbody = document.querySelector("#boardTable tbody");
-        
-        for (var i in list) {
-          var tr = document.createElement("tr");
-          tr.innerHTML = "<td>" + list[i].no + "</td>" +
-            "<td><a href='#' onclick='onclickDetail(event)' data-no='" + list[i].no + "'>" + list[i].title + "</a></td>" +
-            "<td>" + list[i].createdDate + "</td>" +
-            "<td>" + list[i].views + "</td>";
-          tbody.appendChild(tr);
-        }
-        
-    } else if (xhr.readyState == 4 && xhr.status != 200) {
-        console.log("서버 요청에 문제 발생!");
-    }
-  };
-  
-  xhr.open("GET", "../ajax/board/list.do", true);
-  xhr.send(null); 
+	$.ajax("../ajax/board/list.do", {
+		method: "GET",
+		dataType: "json",
+		success: function(result) {
+      var list = result.list;
+      var tbody = $("#boardTable tbody")[0];
+      
+      for (var i in list) {
+        var tr = $("<tr>")[0];
+        tr.innerHTML = "<td>" + list[i].no + "</td>" +
+          "<td><a href='#' onclick='onclickDetail(event)' data-no='" + list[i].no + "'>" + list[i].title + "</a></td>" +
+          "<td>" + list[i].createdDate + "</td>" +
+          "<td>" + list[i].views + "</td>";
+        tbody.appendChild(tr);
+      }
+		},
+		error: function() {
+			window.alert("서버 요청 실패입니다!")
+		}
+	});
 }
 
 // 태그에 선언된 onclick 속성에서 호출한 것이기 때문에
@@ -64,7 +58,7 @@ function onclickDetail(event) {
 	event.preventDefault(); // 원래 a 태그의 행위를 막는다.
 }
 
-document.querySelector("#newBtn").onclick = function(event) {
+$("#newBtn")[0].onclick = function(event) {
 	location.href = "detail.html";
 }
 

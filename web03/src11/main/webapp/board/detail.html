@@ -17,17 +17,15 @@
 
 <p> 이 예제는 비트캠프 "자바80"기의 훈련내용입니다.</p>
 
-<script type="text/javascript" src="../js/bitcamp.js"></script>
-
 <script>
 var no = location.href.split("=")[1];
 
 if (no) {
-	var el = $('.change-form');
+	var el = document.querySelectorAll('.change-form');
 	for (var i = 0; i < el.length; i++) {
 	  el[i].style.display = ""; // 보여라!	
 	}
-	el = $('.add-form');
+	el = document.querySelectorAll('.add-form');
 	for (var i = 0; i < el.length; i++) {
     el[i].style.display = "none"; // 감춰라!
   }
@@ -42,9 +40,9 @@ if (no) {
 	xhr.onreadystatechange = function() {
 	  if (xhr.readyState == 4 && xhr.status == 200) {
 	      var result = JSON.parse(xhr.responseText);
-	      $("#fNo")[0].value = result.no;
-	      $("#fTitle")[0].value = result.title;
-	      $("#fContent")[0].value = result.content;
+	      document.getElementById("fNo").value = result.no;
+	      document.getElementById("fTitle").value = result.title;
+	      document.getElementById("fContent").value = result.content;
 	      
 	  } else if (xhr.readyState == 4 && xhr.status != 200) {
 	      console.log("서버 요청에 문제 발생!");
@@ -54,18 +52,18 @@ if (no) {
 	xhr.send(null); 
 	
 } else { // no가 없다. 즉 새 글 등록일 경우,
-	var el = $('.change-form');
+	var el = document.querySelectorAll('.change-form');
   for (var i = 0; i < el.length; i++) {
     el[i].style.display = "none"; // 감춰라! 
   }
-  el = $('.add-form');
+  el = document.querySelectorAll('.add-form');
   for (var i = 0; i < el.length; i++) {
     el[i].style.display = ""; // 보여라!
   }
 }
 
 
-var changeBtn = $("#changeBtn")[0];
+var changeBtn = document.querySelector("#changeBtn");
 changeBtn.onclick = function(event) {
 	var xhr;
 	if (window.XMLHttpRequest) {
@@ -95,13 +93,13 @@ changeBtn.onclick = function(event) {
 	
 	//2) 서버에 보낼 데이터를 send()의 파라미터 값으로 넘겨라!
 	xhr.send(
-			"no=" + $("#fNo")[0].value + 
-			"&title=" + $("#fTitle")[0].value +
-			"&content=" + $("#fContent")[0].value
+			"no=" + document.querySelector("#fNo").value + 
+			"&title=" + document.querySelector("#fTitle").value +
+			"&content=" + document.querySelector("#fContent").value
   ); 
 }
 
-var deleteBtn = $("#deleteBtn")[0];
+var deleteBtn = document.querySelector("#deleteBtn");
 deleteBtn.onclick = function(event) {
 	var xhr;
 	if (window.XMLHttpRequest) {
@@ -127,7 +125,7 @@ deleteBtn.onclick = function(event) {
 	xhr.send(null); 
 }
 
-var addBtn = $("#addBtn")[0];
+var addBtn = document.querySelector("#addBtn");
 addBtn.onclick = function(event) {
   var xhr;
   if (window.XMLHttpRequest) {
@@ -153,8 +151,8 @@ addBtn.onclick = function(event) {
   xhr.open("POST", "../ajax/board/add.do", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send(
-      "title=" + $("#fTitle")[0].value +
-      "&content=" + $("#fContent")[0].value
+      "title=" + document.querySelector("#fTitle").value +
+      "&content=" + document.querySelector("#fContent").value
   ); 
 }
 
