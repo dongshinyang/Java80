@@ -29,7 +29,10 @@
 loadBoardList();
 
 function loadBoardList() {
-	$.getJSON("../ajax/board/list.do", function(result) {
+	$.ajax("../ajax/board/list.do", {
+		method: "GET",
+		dataType: "json",
+		success: function(result) {
       var list = result.list;
       var tbody = $("#boardTable tbody")[0];
       
@@ -41,6 +44,10 @@ function loadBoardList() {
           "<td>" + list[i].views + "</td>";
         tbody.appendChild(tr);
       }
+		},
+		error: function() {
+			window.alert("서버 요청 실패입니다!")
+		}
 	});
 }
 
@@ -51,9 +58,9 @@ function onclickDetail(event) {
 	event.preventDefault(); // 원래 a 태그의 행위를 막는다.
 }
 
-$("#newBtn").click(function(event) {
+$("#newBtn")[0].onclick = function(event) {
 	location.href = "detail.html";
-});
+}
 
 
 

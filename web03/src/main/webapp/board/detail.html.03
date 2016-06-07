@@ -23,29 +23,42 @@
 var no = location.href.split("=")[1];
 
 if (no) {
-	$('.change-form').css("display", "");
-	$('.add-form').css("display", "none");
+	var el = $('.change-form');
+	for (var i = 0; i < el.length; i++) {
+	  el[i].style.display = ""; // 보여라!	
+	}
+	el = $('.add-form');
+	for (var i = 0; i < el.length; i++) {
+    el[i].style.display = "none"; // 감춰라!
+  }
 	
   $.getJSON("../ajax/board/detail.do?no=" + no, function(result) {
-      $("#fNo").val(result.no);
-      $("#fTitle").val(result.title);
-      $("#fContent").val(result.content);
+      $("#fNo")[0].value = result.no;
+      $("#fTitle")[0].value = result.title;
+      $("#fContent")[0].value = result.content;
   });
   
 } else { // no가 없다. 즉 새 글 등록일 경우,
-	$('.change-form').css("display", "none");
-	$('.add-form').css("display", "");
+	var el = $('.change-form');
+  for (var i = 0; i < el.length; i++) {
+    el[i].style.display = "none"; // 감춰라! 
+  }
+  el = $('.add-form');
+  for (var i = 0; i < el.length; i++) {
+    el[i].style.display = ""; // 보여라!
+  }
 }
 
 
-$("#changeBtn").click(function(event) {
+var changeBtn = $("#changeBtn")[0];
+changeBtn.onclick = function(event) {
 	$.ajax("../ajax/board/update.do", {
 		method: "POST",
 	  dataType: "json",
 	  data: {
-		  no: $("#fNo").val(), 
-	    title: $("#fTitle").val(),
-	    content: $("#fContent").val()
+		  no: $("#fNo")[0].value, 
+	    title: $("#fTitle")[0].value,
+	    content: $("#fContent")[0].value
 	  },
 	  success: function(result) {
       if (result.status == "success") {
@@ -58,10 +71,10 @@ $("#changeBtn").click(function(event) {
 		  window.alert("서버 요청 실패입니다!");
 	  }
 	});
-});
+}
 
-
-$("#deleteBtn").click(function(event) {
+var deleteBtn = $("#deleteBtn")[0];
+deleteBtn.onclick = function(event) {
   $.getJSON("../ajax/board/delete.do?no=" + no, function(result) {
       if (result.status == "success") {
         location.href = "board.html";
@@ -69,13 +82,13 @@ $("#deleteBtn").click(function(event) {
         window.alert("삭제 실패입니다!");
       }
   });
-});
+}
 
-
-$("#addBtn").click(function(event) {
+var addBtn = $("#addBtn")[0];
+addBtn.onclick = function(event) {
   $.post("../ajax/board/add.do", {
-      title: $("#fTitle").val(),
-      content: $("#fContent").val()
+      title: $("#fTitle")[0].value,
+      content: $("#fContent")[0].value
     }, function(result) {
       if (result.status == "success") {
         location.href = "board.html";
@@ -84,7 +97,7 @@ $("#addBtn").click(function(event) {
       }
     }, "json"
   );
-});
+}
 
 
 </script>

@@ -51,9 +51,9 @@ function onclickDetail(event) {
 	event.preventDefault(); // 원래 a 태그의 행위를 막는다.
 }
 
-$("#newBtn").click(function(event) {
+$("#newBtn")[0].onclick = function(event) {
 	location.href = "detail.html";
-});
+}
 
 
 

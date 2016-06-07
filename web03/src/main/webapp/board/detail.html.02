@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>게시판</title>
+</head>
+<body>
+<h1>게시판-상세정보</h1>
+<form>
+<input id="fNo" type='hidden' name='no'>
+제목: <input id="fTitle" type='text' name='title'><br>
+내용: <textarea id="fContent" name='content' rows='5' cols='60'></textarea><br>
+<button id='addBtn' type='button' class='add-form'>추가</button>
+<button id='changeBtn' type='button' class='change-form'>변경</button>
+<button id='deleteBtn' type='button' class='change-form'>삭제</button>
+<button type='reset'>초기화</button>
+</form>
+
+<p> 이 예제는 비트캠프 "자바80"기의 훈련내용입니다.</p>
+
+<script type="text/javascript" src="../js/bitcamp.js"></script>
+
+<script>
+var no = location.href.split("=")[1];
+
+if (no) {
+	var el = $('.change-form');
+	for (var i = 0; i < el.length; i++) {
+	  el[i].style.display = ""; // 보여라!	
+	}
+	el = $('.add-form');
+	for (var i = 0; i < el.length; i++) {
+    el[i].style.display = "none"; // 감춰라!
+  }
+	
+  $.ajax("../ajax/board/detail.do?no=" + no, {
+    method: "GET",
+    dataType: "json",
+    success: function(result) {
+      $("#fNo")[0].value = result.no;
+      $("#fTitle")[0].value = result.title;
+      $("#fContent")[0].value = result.content;
+    },
+    error: function() {
+      window.alert("서버 요청 실패입니다!");
+    }
+  });
+  
+} else { // no가 없다. 즉 새 글 등록일 경우,
+	var el = $('.change-form');
+  for (var i = 0; i < el.length; i++) {
+    el[i].style.display = "none"; // 감춰라! 
+  }
+  el = $('.add-form');
+  for (var i = 0; i < el.length; i++) {
+    el[i].style.display = ""; // 보여라!
+  }
+}
+
+
+var changeBtn = $("#changeBtn")[0];
+changeBtn.onclick = function(event) {
+	$.ajax("../ajax/board/update.do", {
+		method: "POST",
+	  dataType: "json",
+	  data: {
+		  no: $("#fNo")[0].value, 
+	    title: $("#fTitle")[0].value,
+	    content: $("#fContent")[0].value
+	  },
+	  success: function(result) {
+      if (result.status == "success") {
+        location.href = "board.html";
+      } else {
+        window.alert("변경 실패입니다!");
+      }
+	  },
+	  error: function() {
+		  window.alert("서버 요청 실패입니다!");
+	  }
+	});
+}
+
+var deleteBtn = $("#deleteBtn")[0];
+deleteBtn.onclick = function(event) {
+  $.ajax("../ajax/board/delete.do?no=" + no, {
+    method: "GET",
+    dataType: "json",
+    success: function(result) {
+      if (result.status == "success") {
+        location.href = "board.html";
+      } else {
+        window.alert("삭제 실패입니다!");
+      }
+    },
+    error: function() {
+      window.alert("서버 요청 실패입니다!");
+    }
+  });
+}
+
+var addBtn = $("#addBtn")[0];
+addBtn.onclick = function(event) {
+  $.ajax("../ajax/board/add.do", {
+    method: "POST",
+    dataType: "json",
+    data: {
+      title: $("#fTitle")[0].value,
+      content: $("#fContent")[0].value
+    },
+    success: function(result) {
+      if (result.status == "success") {
+        location.href = "board.html";
+      } else {
+        window.alert("등록 실패입니다!");
+      }
+    },
+    error: function() {
+      window.alert("서버 요청 실패입니다!");
+    }
+  });
+}
+
+
+</script>
+
+</body>
+</html>

@@ -11,29 +11,6 @@ function bitcamp(value) { // 예) <tr>, <strong>
 	  tags = document.querySelectorAll(value)
 	}
 	
-	// 태그 목록을 리턴하기 전에 프로그래밍 할 때 편리하게 사용할 양념을 뿌려두자!
-	tags.click = function(cb) {
-		for (var i = 0; i < this.length; i++) {
-			this[i].addEventListener("click", cb);
-		}
-	}
-	
-	tags.css = function(propName, value) {
-		for (var i = 0; i < this.length; i++) {
-			this[i].style[propName] = value;
-		}
-	}
-	
-	tags.val = function(value) {
-		if (value != undefined) {
-			for (var i = 0; i < this.length; i++) {
-				this[i].value = value;
-			}
-		} else {
-			return this[0].value;
-		}
-	}
-	
 	return tags;
 }
 
