@@ -271,10 +271,14 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 
 ## 미니 jQuery 라이브러리 만들어보기(src12)
 
-## jQuery 적용하기(src13)
+## 오픈소스 라이브러리 적용하기(src13)
+- jQuery 적용하기
+- bootstrap 적용하기
 
-
-
+## 프론트 엔드 패키지 관리자 적용하기(src14)
+- bower 설정 파일(bower.json) 작성
+  bower init
+  
 
     
 
