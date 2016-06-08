@@ -16,12 +16,14 @@ function bitcamp(value) { // 예) <tr>, <strong>
 		for (var i = 0; i < this.length; i++) {
 			this[i].addEventListener("click", cb);
 		}
+		return this;
 	}
 	
 	tags.css = function(propName, value) {
 		for (var i = 0; i < this.length; i++) {
 			this[i].style[propName] = value;
 		}
+		return this;
 	}
 	
 	tags.val = function(value) {
@@ -29,9 +31,39 @@ function bitcamp(value) { // 예) <tr>, <strong>
 			for (var i = 0; i < this.length; i++) {
 				this[i].value = value;
 			}
+			return this;
 		} else {
 			return this[0].value;
 		}
+	}
+	
+	tags.html = function(value) {
+		if (value != undefined) {
+			for (var i = 0; i < this.length; i++) {
+				this[i].innerHTML = value;
+			}
+			return this;
+		} else {
+			return this[0].innerHTML;
+		}
+	}
+	
+	tags.append = function(childs) {
+		for (var i = 0; i < this.length; i++) {
+			for (var j = 0; j < childs.length; j++) {
+				this[i].appendChild(childs[j]);
+			}
+		}
+		return this;
+	}
+	
+	tags.appendTo = function(parents) {
+		for (var i = 0; i < parents.length; i++) {
+			for (var j = 0; j < this.length; j++) {
+				parents[i].appendChild(this[j]);
+			}
+		}
+		return this;
 	}
 	
 	return tags;

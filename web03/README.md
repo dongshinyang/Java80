@@ -268,9 +268,10 @@ src/main/java         => 자바 소스 파일을 두는 폴더
    - src/main/webapp/board 폴더 생성
    - board.html 파일 작성
    - detail.html  파일 작성
-## 미니 jQuery 라이브러리 만들어보기(src12)
-1) 
 
+## 미니 jQuery 라이브러리 만들어보기(src12)
+
+## jQuery 적용하기(src13)
 
 
 
