@@ -30,14 +30,12 @@
 </div>
 
 <script id="temp1" type="text/x-handlebars-template">
-{{#each list}}
 <tr>
   <td>{{no}}</td>
   <td><a href="#" onclick="onclickDetail(event)" data-no="{{no}}">{{title}}</a></td>
   <td>{{createdDate}}</td>
   <td>{{views}}</td>
 </tr>
-{{/each}}
 </script>
 
 <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -49,11 +47,21 @@ loadBoardList();
 
 function loadBoardList() {
 	$.getJSON("../ajax/board/list.do", function(result) {
-      var list = result.list;    
+      var list = result.list;
+      var tbody = $("#boardTable tbody");
+      
+      //1) 템플릿으로 사용할 텍스트를 준비한다.
       var templateData = $('#temp1').html(); 
+      //2) 템플릿에 값을 적용하여 결과를 만들어 줄 함수를 얻는다.
       var template = Handlebars.compile(templateData);
-      var html = template(result);	
-      $("#boardTable tbody").append(html);
+	
+      for (var i in list) {
+    	  //3) 함수를 사용하여 템플릿에 데이터를 적용하고, 그 결과를 리턴 받는다.
+    	  var html = template(list[i]);
+    	  //4) 템플릿 함수로부터 받은 결과 HTML을 가지고 태그를 생성한다.
+    	  //   그리고 그 태그를 tbody에 자식으로 붙인다.
+        $(html).appendTo(tbody);
+      }
 	});
 }
 
