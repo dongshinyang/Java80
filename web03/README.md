@@ -277,7 +277,9 @@ src/main/java         => 자바 소스 파일을 두는 폴더
 
 ## 프론트 엔드 패키지 관리자 적용하기(src14)
 - bower 설정 파일(bower.json) 작성
-  bower init
+  => web03/src/main/webapp> bower init
+- jQuery, bootstrap 적용
+- handlebars 적용
   
 
     

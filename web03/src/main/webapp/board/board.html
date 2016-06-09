@@ -29,8 +29,18 @@
 <p> 이 예제는 비트캠프 "자바80"기의 훈련내용입니다.</p>
 </div>
 
+<script id="temp1" type="text/x-handlebars-template">
+<tr>
+  <td>{{no}}</td>
+  <td><a href="#" onclick="onclickDetail(event)" data-no="{{no}}">{{title}}</a></td>
+  <td>{{createdDate}}</td>
+  <td>{{views}}</td>
+</tr>
+</script>
+
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/handlebars/handlebars.min.js"></script>
 <script>
 
 loadBoardList();
@@ -40,13 +50,17 @@ function loadBoardList() {
       var list = result.list;
       var tbody = $("#boardTable tbody");
       
+      //1) 템플릿으로 사용할 텍스트를 준비한다.
+      var templateData = $('#temp1').html(); 
+      //2) 템플릿에 값을 적용하여 결과를 만들어 줄 함수를 얻는다.
+      var template = Handlebars.compile(templateData);
+	
       for (var i in list) {
-        $("<tr>")
-          .html("<td>" + list[i].no + "</td>" +
-	          "<td><a href='#' onclick='onclickDetail(event)' data-no='" + list[i].no + "'>" + list[i].title + "</a></td>" +
-	          "<td>" + list[i].createdDate + "</td>" +
-	          "<td>" + list[i].views + "</td>")
-          .appendTo(tbody);
+    	  //3) 함수를 사용하여 템플릿에 데이터를 적용하고, 그 결과를 리턴 받는다.
+    	  var html = template(list[i]);
+    	  //4) 템플릿 함수로부터 받은 결과 HTML을 가지고 태그를 생성한다.
+    	  //   그리고 그 태그를 tbody에 자식으로 붙인다.
+        $(html).appendTo(tbody);
       }
 	});
 }
