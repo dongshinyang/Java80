@@ -49,7 +49,6 @@ loadBoardList();
 
 function loadBoardList() {
 	$.getJSON("../ajax/board/list.do", function(result) {
-      var list = result.list;    
       var templateData = $('#temp1').html(); 
       var template = Handlebars.compile(templateData);
       var html = template(result);	
