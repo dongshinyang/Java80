@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판</title>
+<link rel="stylesheet" href="bitcamp.css">
+<style>
+.container {
+  width: 800px;
+}
+</style>
+</head>
+<body>
+<button id='btn1' type="button" class='bx'>버튼1</button>
+<div id="d1"></div>
+
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="bitcamp2.js"></script>
+<script>
+
+$('#btn1').click(function() {
+	$('#d1').append("<button type='button' class='bx'>새로만든버튼</button>");
+	bitcamp();
+});
+
+
+</script>
+
+
+</body>
+</html>

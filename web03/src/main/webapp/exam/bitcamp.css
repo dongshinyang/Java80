@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+.s1 {
+	border: 1px solid blue;
+}
+
+.s1:hover {
+	border: 1px solid red;
+	background: yellow;
+}
+
