@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<button class="btn" type='button'>버튼1</button>
+
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script>
+/*1) 
+$('.btn').on('click', function() {
+  $(document.body).append("<button class='btn'>하하하</button>");
+});
+*/
+/*2) 1번의 단축 표현이다. 
+$('.btn').click(function() {
+	$(document.body).append("<button class='btn'>하하하</button>");
+});
+*/
+
+//3) 현재 존재하는 태그 뿐아니라 앞으로 존재할 태그에 대해서도 리스너 적용!
+$(document.body).on('click', '.btn', function() {
+  $(document.body).append("<button class='btn'>하하하</button>");
+});
+</script>
+</body>
+</html>
