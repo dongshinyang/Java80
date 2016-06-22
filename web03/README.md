@@ -280,7 +280,8 @@ src/main/java         => 자바 소스 파일을 두는 폴더
   => web03/src/main/webapp> bower init
 - jQuery, bootstrap 적용
 - handlebars 적용
-  
+- AJAX 요청에 대해 모든 클라이언트를 승인하기 위한 필터 추가
+  AjaxFilter.java 추가
 
     
 
