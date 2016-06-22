@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>게시판</title>
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -34,6 +35,7 @@
 		<button id='changeBtn' type='button' class='change-form btn btn-default btn-sm'>변경</button>
 		<button id='deleteBtn' type='button' class='change-form btn btn-default btn-sm'>삭제</button>
 	  <button type='reset' class='btn btn-default btn-sm'>초기화</button>
+	  <button id='listBtn' type='button' class='btn btn-default btn-sm'>목록</button>
   </div>
 </div>
 </form>
@@ -110,7 +112,9 @@ $("#addBtn").click(function(event) {
   );
 });
 
-
+$("#listBtn").click(function() {
+  location.href = "board.html";
+});
 </script>
 
 </body>
