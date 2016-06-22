@@ -40,6 +40,7 @@
 <p> 이 예제는 비트캠프 "자바80"기의 훈련내용입니다.</p>
 </div>
 
+<script src="../js/common.js"></script>
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script>
@@ -49,7 +50,7 @@ if (no) {
 	$('.change-form').css("display", "");
 	$('.add-form').css("display", "none");
 	
-  $.getJSON("../ajax/board/detail.do?no=" + no, function(result) {
+  $.getJSON(contextRoot + "/ajax/board/detail.do?no=" + no, function(result) {
       $("#fNo").val(result.no);
       $("#fTitle").val(result.title);
       $("#fContent").val(result.content);
@@ -62,7 +63,7 @@ if (no) {
 
 
 $("#changeBtn").click(function(event) {
-	$.ajax("../ajax/board/update.do", {
+	$.ajax(contextRoot + "/ajax/board/update.do", {
 		method: "POST",
 	  dataType: "json",
 	  data: {
@@ -85,7 +86,7 @@ $("#changeBtn").click(function(event) {
 
 
 $("#deleteBtn").click(function(event) {
-  $.getJSON("../ajax/board/delete.do?no=" + no, function(result) {
+  $.getJSON(contextRoot + "/ajax/board/delete.do?no=" + no, function(result) {
       if (result.status == "success") {
         location.href = "board.html";
       } else {
@@ -96,7 +97,7 @@ $("#deleteBtn").click(function(event) {
 
 
 $("#addBtn").click(function(event) {
-  $.post("../ajax/board/add.do", {
+  $.post(contextRoot + "/ajax/board/add.do", {
       title: $("#fTitle").val(),
       content: $("#fContent").val()
     }, function(result) {
